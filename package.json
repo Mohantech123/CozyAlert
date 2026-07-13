@@ -1,0 +1,57 @@
+{
+  "name": "cozyalert",
+  "version": "0.1.0",
+  "description": "A cross-framework customizable alert library for React, Angular, Vue and Vanilla JavaScript.",
+  "author": "Mohan Kumar",
+  "license": "MIT",
+  "keywords": [
+    "alert",
+    "modal",
+    "dialog",
+    "popup",
+    "toast",
+    "offcanvas",
+    "notification",
+    "sweetalert-alternative",
+    "framework-agnostic",
+    "react",
+    "angular",
+    "vue",
+    "javascript",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "style": "./dist/index.css",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/index.css": "./dist/index.css"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs,iife --globalName CozyAlert --dts",
+    "dev": "tsup src/index.ts --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mohantech123/CozyAlert.git"
+  },
+  "homepage": "https://github.com/Mohantech123/CozyAlert",
+  "bugs": {
+    "url": "https://github.com/Mohantech123/CozyAlert/issues"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
