@@ -16,16 +16,15 @@ Because it manipulates the DOM directly, it perfectly supports **React, Vue, Ang
 ## 📦 Installation
 
 ```bash
-npm install cozyalert
+npm install cozy-alert
 # or
-yarn add cozyalert
+yarn add cozy-alert
 ```
 
 ## 🚀 Quick Start
 
 ```javascript
-import Alert from 'cozyalert';
-import 'cozyalert/dist/index.css';
+import Alert from 'cozy-alert';
 
 // Simple Success Alert
 Alert.success('Saved!', 'Your profile was successfully updated.');
@@ -39,7 +38,7 @@ CozyAlert is bundled in ESM and CJS formats and bypasses Virtual DOMs. This mean
 
 ### React & Next.js
 ```tsx
-import Alert from 'cozyalert';
+import Alert from 'cozy-alert';
 
 export default function Profile() {
   const handleSave = async () => {
@@ -53,7 +52,7 @@ export default function Profile() {
 ### Vue 3 & Nuxt
 ```vue
 <script setup>
-import Alert from 'cozyalert';
+import Alert from 'cozy-alert';
 
 const showDrawer = () => {
   Alert.offcanvas({ title: 'Settings', position: 'right' });
@@ -68,7 +67,7 @@ const showDrawer = () => {
 ### Angular
 ```typescript
 import { Component } from '@angular/core';
-import Alert from 'cozyalert';
+import Alert from 'cozy-alert';
 
 @Component({
   selector: 'app-root',
