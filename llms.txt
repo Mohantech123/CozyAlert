@@ -1,0 +1,51 @@
+# CozyAlert API Reference for LLMs
+
+## Overview
+CozyAlert is a framework-agnostic JavaScript popup, toast, and modal library. It manipulates the DOM directly and requires no Virtual DOM wrappers. It provides native support for React, Vue, Angular, Next.js, and Vanilla JS.
+
+## Core API Methods
+All core methods are available on the default export `Alert` and return a standard `Promise<AlertResult>`.
+
+1. `Alert.fire(options)`: Base method to create any popup.
+2. `Alert.toast(options)`: Shorthand for non-blocking notifications.
+3. `Alert.modal(options)`: Shorthand for centered popups with a backdrop.
+4. `Alert.offcanvas(options)`: Shorthand for sliding drawers from screen edges.
+5. `Alert.queue(optionsArray)`: Sequential wizard generator.
+
+## Basic Usage
+```javascript
+import Alert from '@mohan_tech/cozy-alert';
+
+Alert.success('Title', 'Message');
+Alert.error('Title', 'Message');
+Alert.warning('Title', 'Message');
+Alert.info('Title', 'Message');
+```
+
+## Form Generation
+CozyAlert natively parses the `fields` array to generate dynamic forms.
+```javascript
+Alert.fire({
+  title: 'Sign In',
+  fields: [
+    { id: 'username', type: 'text', required: true, pattern: '^[A-Za-z]+$' },
+    { id: 'role', type: 'select', options: [{label: 'Admin', value: 'admin'}] }
+  ]
+}).then(res => console.log(res.value.username));
+```
+
+## Configuration Options (`AlertOptions`)
+- `title` (string): Popup title.
+- `text` (string): Text content.
+- `html` (string): Custom HTML injection.
+- `icon` (string): 'success' | 'error' | 'warning' | 'info' | 'question'
+- `size` (string): 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+- `position` (string): For Toasts/Offcanvas ('top-right', 'center', 'left', 'right', etc.)
+- `timer` (number): Auto-close after milliseconds.
+- `showCancelButton`, `showConfirmButton`, `showCloseButton` (boolean): Button visibility.
+- `allowOutsideClick`, `allowEscapeKey` (boolean): Backdrop/ESC behavior.
+- `preConfirm` (function): Async callback before confirmation.
+
+## Theming
+CozyAlert uses CSS variables on `:root` for styling.
+Dark mode is activated automatically if the `<body>` has a `.dark` class, or by passing `theme: 'dark'` to the options.
