@@ -33,7 +33,9 @@
     "prompt",
     "confirm",
     "form",
-    "customizable"
+    "customizable",
+    "metadata driven ui",
+    "Dynamic Form"
   ],
   "type": "module",
   "main": "./dist/index.cjs",
