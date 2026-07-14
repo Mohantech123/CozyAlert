@@ -35,7 +35,9 @@
     "form",
     "customizable",
     "metadata driven ui",
-    "Dynamic Form"
+    "Dynamic Form",
+    "cozy-popup",
+    "cozypopup"
   ],
   "type": "module",
   "main": "./dist/index.cjs",
