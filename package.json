@@ -1,6 +1,6 @@
 {
   "name": "cozy-popup",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A cross-framework customizable alert library for React, Angular, Vue and Vanilla JavaScript.",
   "author": "Mohan Kumar",
   "license": "MIT",
@@ -43,7 +43,11 @@
     "metadata driven ui",
     "Dynamic Form",
     "cozy-popup",
-    "cozypopup"
+    "cozypopup",
+	"alert",
+    "modal",
+    "dialog",
+    "popup"
   ],
   "type": "module",
   "main": "./dist/index.cjs",
