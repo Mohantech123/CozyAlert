@@ -1,15 +1,15 @@
 <div align="center">
-  <h1>✨ CozyAlert</h1>
+  <h1>✨ CozyPopup (formerly CozyAlert)</h1>
   <p><strong>A beautifully designed, highly customizable, and 100% Framework Agnostic popup & toast library.</strong></p>
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+  [![NPM Version](https://img.shields.io/npm/v/cozy-popup.svg)](https://www.npmjs.com/package/cozy-popup)
   [![Framework Agnostic](https://img.shields.io/badge/Framework-Agnostic-ff69b4.svg)]()
 </div>
 
 ---
 
-CozyAlert is a modern replacement for standard JavaScript `alert()`, `confirm()`, and `prompt()`. It features smooth animations, metadata-driven forms, advanced regex validation, sizing presets, offcanvas drawers, and step-by-step queues.
+CozyPopup is a modern replacement for standard JavaScript `alert()`, `confirm()`, and `prompt()`. It features smooth animations, metadata-driven forms, advanced regex validation, sizing presets, offcanvas drawers, and step-by-step queues.
 
 Because it manipulates the DOM directly, it perfectly supports **React, Vue, Angular, Next.js, Svelte**, and Vanilla JS without any extra wrapper libraries.
 
@@ -19,6 +19,10 @@ Because it manipulates the DOM directly, it perfectly supports **React, Vue, Ang
 npm install cozy-popup
 # or
 yarn add cozy-popup
+# or
+pnpm add cozy-popup
+# or
+bun add cozy-popup
 ```
 
 ## 🚀 Quick Start
