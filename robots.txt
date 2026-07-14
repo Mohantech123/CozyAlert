@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mohantech123.github.io/CozyAlert/sitemap.xml
