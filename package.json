@@ -1,5 +1,5 @@
 {
-  "name": "@mohan_tech/cozy-alert",
+  "name": "cozy-popup",
   "version": "0.1.0",
   "description": "A cross-framework customizable alert library for React, Angular, Vue and Vanilla JavaScript.",
   "author": "Mohan Kumar",

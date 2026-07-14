@@ -14,7 +14,7 @@ All core methods are available on the default export `Alert` and return a standa
 
 ## Basic Usage
 ```javascript
-import Alert from '@mohan_tech/cozy-alert';
+import Alert from 'cozy-popup';
 
 Alert.success('Title', 'Message');
 Alert.error('Title', 'Message');
