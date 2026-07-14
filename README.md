@@ -5,6 +5,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
   [![NPM Version](https://img.shields.io/npm/v/cozy-popup.svg)](https://www.npmjs.com/package/cozy-popup)
   [![Framework Agnostic](https://img.shields.io/badge/Framework-Agnostic-ff69b4.svg)]()
+  [![Live Playground](https://img.shields.io/badge/Live-Playground-8b5cf6.svg?style=for-the-badge)](https://mohantech123.github.io/CozyAlert/)
 </div>
 
 ---
@@ -12,6 +13,10 @@
 CozyPopup is a modern replacement for standard JavaScript `alert()`, `confirm()`, and `prompt()`. It features smooth animations, metadata-driven forms, advanced regex validation, sizing presets, offcanvas drawers, and step-by-step queues.
 
 Because it manipulates the DOM directly, it perfectly supports **React, Vue, Angular, Next.js, Svelte**, and Vanilla JS without any extra wrapper libraries.
+
+## 🎮 Live Playground
+Want to see it in action before installing?
+👉 **[Try the Live Interactive Playground](https://mohantech123.github.io/CozyAlert/)**
 
 ## 📦 Installation
 
