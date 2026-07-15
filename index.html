@@ -30,6 +30,8 @@
 
   <meta name="geo.region" content="IN-KA">
   <meta name="geo.placename" content="Bengaluru">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
   <link rel="help" href="/llms.txt" title="LLM API Reference">
   <meta name="google-site-verification" content="googlefda5de54fd463dce" />
 
@@ -241,7 +243,7 @@
 
   </style>
   
-  <script src="https://cdn.jsdelivr.net/npm/cozy-popup@latest/dist/index.global.js"></script>
+  <script src="./dist/index.global.js"></script>
 </head>
 <body>
 
@@ -264,7 +266,7 @@
     <h1>A Framework Agnostic <br><span>Popup Library</span></h1>
     <p>Beautiful, fully customizable, zero-dependency alerts, toasts, and offcanvas drawers for modern web applications.</p>
     <div class="btn-row" style="justify-content: center;">
-      <button class="btn btn-primary" style="width: auto;" onclick="Alert.fire('Welcome to CozyPopup!', 'Enjoy the new premium design.')">Try it now</button>
+      <a href="https://www.npmjs.com/package/cozy-popup" class="btn btn-primary" style="width: auto; text-decoration: none; text-align: center; display: inline-block;">Try it now on NPM</a>
       <a href="https://github.com/Mohantech123/CozyAlert" class="btn btn-secondary" style="width: auto; text-decoration: none;">View Documentation</a>
     </div>
   </header>
@@ -314,12 +316,24 @@
         </div>
       </div>
 
+      <!-- Card 5 -->
+      <div class="card">
+        <h3>Design & Layout Examples</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Large Modal', text: 'This modal uses the lg size preset, which gives it a wider 512px width. Great for terms of service or long forms.', size: 'lg' })">Large Width (lg)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Extra Large Modal', html: '<h1>XL Modal</h1><p>Perfect for large data tables or media displays.</p>', size: 'xl' })">Extra Large (xl)</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Animations', text: 'Clean and instant display', customClass: { popup: 'no-animation' } })">No Animation Custom Class</button>
+        </div>
+      </div>
+
     </div>
   </main>
 
   <script>
     // Bind CozyAlert to global Alert for ease of use in playground
-    window.Alert = window.CozyAlert;
+    // Wait for DOM to ensure script is loaded, then bind. 
+    // tsup's globalName exports an object with the named and default exports.
+    window.Alert = window.CozyAlert.default || window.CozyAlert.CozyAlert || window.CozyAlert;
   </script>
 </body>
 </html>
