@@ -6,7 +6,7 @@ export type AlertType =
   | 'question'
   | 'confirm';
 
-export type FieldType = 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file' | 'date' | 'time' | 'color' | 'radio';
+export type FieldType = 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file' | 'date' | 'time' | 'datetime' | 'daterange' | 'month' | 'year' | 'color' | 'radio';
 
 // Expanded position type for Toasts and Off-Canvas
 export type Position = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top' | 'bottom' | 'center' | 'left' | 'right';
@@ -23,6 +23,26 @@ export interface FormField {
   accept?: string;
   pattern?: RegExp | string;
   validationMessage?: string;
+  datePickerConfig?: DatePickerConfig;
+  timePickerConfig?: TimePickerConfig;
+}
+
+export interface DatePickerConfig {
+  mode?: 'single' | 'multiple' | 'range';
+  minDate?: string | Date;
+  maxDate?: string | Date;
+  disabledDates?: (string | Date)[];
+  disableWeekends?: boolean;
+  locale?: string; // e.g. 'ta-IN', 'ar-SA', 'en-US'
+  timezone?: string; // e.g. 'America/New_York'
+  events?: { date: string | Date; type: 'holiday' | 'exam' | 'meeting' | 'birthday' | 'deadline'; color?: string }[];
+  inline?: boolean;
+}
+
+export interface TimePickerConfig {
+  format?: '12h' | '24h';
+  enableSeconds?: boolean;
+  bookingSlots?: string[]; // e.g. ['09:00 AM', '09:30 AM']
 }
 
 export interface AlertResult {

@@ -366,6 +366,52 @@ export const injectStyles = () => {
     .cozyalert-spinner-circle { opacity: 0.25; }
     .cozyalert-spinner-path { opacity: 0.75; }
     @keyframes cozyalert-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* Date & Time Pickers */
+    .cozyalert-input-group.has-picker { position: relative; }
+    .cozyalert-picker-icon { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--ca-text-muted); pointer-events: none; width: 1.25rem; height: 1.25rem; }
+    .cozyalert-datepicker-popup {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      z-index: 100;
+      background: var(--ca-bg);
+      border: 1px solid var(--ca-input-border);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      width: 300px;
+      animation: cozyalert-fade-in 0.2s ease-out;
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .cozyalert-datepicker-popup.active { display: flex; }
+    .cozyalert-datepicker-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .cozyalert-datepicker-month-year { font-weight: 600; font-size: 1rem; color: var(--ca-text); cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 6px; transition: background 0.2s; }
+    .cozyalert-datepicker-month-year:hover { background: var(--ca-cancel-bg); }
+    .cozyalert-datepicker-nav-btn { background: none; border: none; cursor: pointer; padding: 0.25rem; border-radius: 6px; color: var(--ca-text-muted); display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .cozyalert-datepicker-nav-btn:hover { background: var(--ca-cancel-bg); color: var(--ca-text); }
+    
+    .cozyalert-datepicker-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+    .cozyalert-datepicker-weekday { font-size: 0.75rem; font-weight: 600; color: var(--ca-text-muted); padding: 0.5rem 0; text-transform: uppercase; }
+    .cozyalert-datepicker-day { padding: 0.5rem 0; font-size: 0.875rem; cursor: pointer; border-radius: 8px; color: var(--ca-text); transition: all 0.2s; position: relative; user-select: none; }
+    .cozyalert-datepicker-day:hover:not(.disabled) { background: var(--ca-cancel-bg); }
+    .cozyalert-datepicker-day.other-month { color: var(--ca-text-muted); opacity: 0.5; }
+    .cozyalert-datepicker-day.today { font-weight: 700; color: var(--ca-primary); }
+    .cozyalert-datepicker-day.selected { background: var(--ca-primary) !important; color: white !important; font-weight: 600; }
+    .cozyalert-datepicker-day.in-range { background: var(--ca-primary-bg); color: var(--ca-primary); border-radius: 0; }
+    .cozyalert-datepicker-day.range-start { border-top-right-radius: 0; border-bottom-right-radius: 0; background: var(--ca-primary) !important; color: white !important; }
+    .cozyalert-datepicker-day.range-end { border-top-left-radius: 0; border-bottom-left-radius: 0; background: var(--ca-primary) !important; color: white !important; }
+    .cozyalert-datepicker-day.disabled { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+    
+    .cozyalert-event-dot { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--ca-primary); }
+    
+    /* Time Picker Slots */
+    .cozyalert-timepicker-slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 0.5rem; max-height: 200px; overflow-y: auto; padding-right: 0.25rem; }
+    .cozyalert-timepicker-slot { padding: 0.5rem; text-align: center; font-size: 0.875rem; font-weight: 500; color: var(--ca-text); background: var(--ca-cancel-bg); border-radius: 8px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+    .cozyalert-timepicker-slot:hover { border-color: var(--ca-primary); color: var(--ca-primary); }
+    .cozyalert-timepicker-slot.selected { background: var(--ca-primary); color: white; border-color: var(--ca-primary); }
   `;
   document.head.appendChild(style);
 };

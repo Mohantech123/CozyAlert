@@ -413,6 +413,25 @@
           <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Mandatory Survey', text: 'You cannot dismiss this form by clicking the background.', allowOutsideClick: false, showCloseButton: false, fields: [{ id: 'feedback', type: 'textarea', label: 'Feedback', required: true, placeholder: 'You must provide feedback...' }], confirmButtonText: 'Submit Feedback' }).then(r => r.isConfirmed && Alert.success('Thank You!'))" style="border-color: #f59e0b; color: #f59e0b;">Strict Form (No Click Outside)</button>
         </div>
       </div>
+      <!-- 15. Ultimate Date & Time Pickers -->
+      <div class="card">
+        <h3>15. Ultimate Date & Time Pickers</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Basic Date', size: 'sm', fields: [{ id: 'date', type: 'date', label: 'Select a Date' }], confirmButtonText: 'Select' }).then(r => r.isConfirmed && Alert.success('Date Selected!', r.value.date))">Single Date Picker</button>
+          
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Date Range', size: 'sm', fields: [{ id: 'range', type: 'daterange', label: 'Select Vacation Dates', datePickerConfig: { mode: 'range' } }], confirmButtonText: 'Book Range' }).then(r => r.isConfirmed && Alert.success('Range Selected!', r.value.range))">Date Range Picker</button>
+          
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'French Locale', size: 'sm', fields: [{ id: 'dateFr', type: 'date', label: 'Sélectionnez une date', datePickerConfig: { locale: 'fr-FR' } }], confirmButtonText: 'Confirmer' })">Localization (French)</button>
+
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Tamil Locale', size: 'sm', fields: [{ id: 'dateTa', type: 'date', label: 'தேதியைத் தேர்ந்தெடுக்கவும்', datePickerConfig: { locale: 'ta-IN' } }], confirmButtonText: 'சரி' })">Localization (Tamil)</button>
+          
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Event Calendar', size: 'sm', fields: [{ id: 'date', type: 'date', label: 'Pick an Event', datePickerConfig: { events: [{ date: new Date(), color: '#ef4444' }, { date: new Date(new Date().setDate(new Date().getDate() + 2)), color: '#3b82f6' }] } }], confirmButtonText: 'Confirm' })">Calendar with Events</button>
+          
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Booking Time', size: 'sm', fields: [{ id: 'slot', type: 'time', label: 'Available Slots', timePickerConfig: { bookingSlots: ['09:00 AM', '10:00 AM', '11:30 AM', '02:00 PM', '04:00 PM'] } }], confirmButtonText: 'Book Slot' }).then(r => r.isConfirmed && Alert.success('Slot Booked!', r.value.slot))">Time Slots (Booking Mode)</button>
+
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Complex Appointment', size: 'md', fields: [{ id: 'name', type: 'text', label: 'Patient Name' }, { id: 'date', type: 'date', label: 'Appointment Date', datePickerConfig: { locale: 'en-US' } }, { id: 'time', type: 'time', label: 'Appointment Time', timePickerConfig: { bookingSlots: ['10:00 AM', '01:00 PM', '03:30 PM'] } }], confirmButtonText: 'Schedule Appointment' }).then(r => r.isConfirmed && Alert.success('Scheduled!', `For ${r.value.name} on ${r.value.date} at ${r.value.time}`))">Full Appointment Form</button>
+        </div>
+      </div>
 
     </div>
   </main>
