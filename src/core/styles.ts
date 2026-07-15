@@ -368,13 +368,13 @@ export const injectStyles = () => {
     @keyframes cozyalert-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     /* Date & Time Pickers */
-    .cozyalert-input-group.has-picker { position: relative; }
+    .cozyalert-input-wrapper { position: relative; display: flex; width: 100%; }
     .cozyalert-picker-icon { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--ca-text-muted); pointer-events: none; width: 1.25rem; height: 1.25rem; }
     .cozyalert-datepicker-popup {
       position: absolute;
       top: calc(100% + 8px);
       left: 0;
-      z-index: 100;
+      z-index: 10005;
       background: var(--ca-bg);
       border: 1px solid var(--ca-input-border);
       border-radius: 12px;

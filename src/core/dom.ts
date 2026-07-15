@@ -386,13 +386,13 @@ export const createAlertDom = (
             input.readOnly = true; // Prevent keyboard typing to force popup
             input.placeholder = field.placeholder || 'Select Date';
             input.style.cursor = 'pointer';
-            group.classList.add('has-picker');
+            input.style.paddingRight = '2.5rem'; // Make room for icon
           } else if (field.type === 'time') {
             input.type = 'text';
             input.readOnly = true;
             input.placeholder = field.placeholder || 'Select Time';
             input.style.cursor = 'pointer';
-            group.classList.add('has-picker');
+            input.style.paddingRight = '2.5rem';
           }
 
           input.oninput = (e) => {
@@ -400,13 +400,18 @@ export const createAlertDom = (
             clearError();
           };
           inputEl = input;
-          group.appendChild(input);
 
           if (['date', 'datetime', 'daterange', 'month', 'year'].includes(field.type)) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'cozyalert-input-wrapper';
+            
             const icon = document.createElement('div');
             icon.className = 'cozyalert-picker-icon';
             icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>';
-            group.appendChild(icon);
+            
+            wrapper.appendChild(input);
+            wrapper.appendChild(icon);
+            group.appendChild(wrapper);
             
             // Re-assign form values when picker changes
             const originalOnInput = input.oninput;
@@ -433,10 +438,16 @@ export const createAlertDom = (
             }
 
           } else if (field.type === 'time') {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'cozyalert-input-wrapper';
+
             const icon = document.createElement('div');
             icon.className = 'cozyalert-picker-icon';
             icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
-            group.appendChild(icon);
+            
+            wrapper.appendChild(input);
+            wrapper.appendChild(icon);
+            group.appendChild(wrapper);
 
             input.oninput = null;
             const tp = new CozyTimePicker(input, field.timePickerConfig || {});
@@ -456,6 +467,8 @@ export const createAlertDom = (
                   }
               });
             }
+          } else {
+            group.appendChild(input);
           }
         }
       }
