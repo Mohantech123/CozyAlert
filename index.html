@@ -3,51 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CozyPopup - Modern Framework Agnostic JavaScript Alert & Modal Library</title>
+  <title>CozyPopup - Ultimate Playground</title>
   
   <meta name="title" content="CozyPopup - Modern Framework Agnostic JavaScript Alert & Modal Library">
   <meta name="description" content="A beautiful, fully customizable, and framework-agnostic replacement for JavaScript alerts, confirms, toasts, and offcanvas drawers.">
-  <meta name="keywords" content="cozy-popup, cozypopup, javascript, alert, modal, toast, offcanvas, sweetalert alternative, react, vue, angular">
-  <meta name="author" content="Mohan Kumar">
-  <meta name="publisher" content="Mohan Kumar">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="language" content="English">
   
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mohantech123.github.io/CozyAlert/">
-  <meta property="og:title" content="CozyPopup - Modern JavaScript Alert & Modal Library">
-  <meta property="og:description" content="A beautiful, fully customizable, and framework-agnostic replacement for JavaScript alerts, confirms, toasts, and offcanvas drawers.">
-  <meta property="og:site_name" content="CozyPopup">
-  <meta property="og:locale" content="en_US">
-  
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://mohantech123.github.io/CozyAlert/">
-  <meta property="twitter:title" content="CozyPopup - Modern JavaScript Alert Library">
-  <meta property="twitter:description" content="A beautiful, fully customizable, and framework-agnostic replacement for JavaScript alerts.">
-  <meta property="twitter:creator" content="@Mohantech123">
-
-  <meta name="geo.region" content="IN-KA">
-  <meta name="geo.placename" content="Bengaluru">
-    <link rel="icon" type="image/x-icon" href="logo.png">
-
-  <link rel="help" href="/llms.txt" title="LLM API Reference">
-  <meta name="google-site-verification" content="googlefda5de54fd463dce" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "CozyPopup",
-    "operatingSystem": "All",
-    "applicationCategory": "DeveloperApplication",
-    "description": "A cross-framework, beautifully designed popup, toast, and offcanvas library for modern web applications.",
-    "author": { "@type": "Person", "name": "Mohan Kumar" }
-  }
-  </script>
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -126,120 +86,77 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .logo-container img {
-      height: 40px;
-      border-radius: 8px;
-    }
+    .logo-container img { height: 40px; border-radius: 8px; }
 
     .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-links a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
+    .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
-    .nav-links button {
-      background: none; border: 1px solid var(--card-border);
-      color: var(--text-color); padding: 0.4rem 1rem; border-radius: 20px;
-      cursor: pointer; transition: 0.2s;
-    }
+    .nav-links button { background: none; border: 1px solid var(--card-border); color: var(--text-color); padding: 0.4rem 1rem; border-radius: 20px; cursor: pointer; transition: 0.2s; }
     .nav-links button:hover { background: var(--card-border); }
 
     /* Hero */
-    header.hero {
-      text-align: center;
-      padding: 6rem 1rem 4rem 1rem;
-    }
-    h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 4rem;
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-    h1 span {
-      background: -webkit-linear-gradient(45deg, var(--accent), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 2.5rem auto;
-    }
+    header.hero { text-align: center; padding: 4rem 1rem 3rem 1rem; }
+    h1 { font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; }
+    h1 span { background: -webkit-linear-gradient(45deg, var(--accent), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto; }
 
     /* Grid Layout */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
+    .container { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 4rem 2rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
 
     /* Glass Cards */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      padding: 2rem;
+      padding: 1.5rem;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
       transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
-      border-color: rgba(236, 72, 153, 0.3);
-    }
-    .card h3 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      color: var(--text-color);
-    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); border-color: rgba(236, 72, 153, 0.3); }
+    .card h3 { font-family: 'Outfit', sans-serif; font-size: 1.25rem; margin-bottom: 1.25rem; color: var(--text-color); border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;}
 
     /* Buttons */
-    .btn-group { display: flex; flex-direction: column; gap: 1rem; }
+    .btn-group { display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1; }
     .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
     
     .btn {
-      padding: 0.8rem 1.2rem;
+      padding: 0.75rem 1rem;
       border: none;
       border-radius: 8px;
       font-family: 'Inter', sans-serif;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.2s;
       width: 100%;
       text-align: left;
       position: relative;
       overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .btn::after {
-      content: '→';
-      position: absolute;
-      right: 1.2rem;
-      opacity: 0;
-      transform: translateX(-10px);
-      transition: 0.2s;
-    }
+    .btn::after { content: '→'; opacity: 0; transform: translateX(-10px); transition: 0.2s; }
     .btn:hover::after { opacity: 1; transform: translateX(0); }
-    .btn:hover { padding-left: 1.5rem; }
 
-    .btn-primary { background: linear-gradient(45deg, var(--accent), var(--secondary)); color: white; }
-    .btn-primary:hover { box-shadow: 0 0 15px var(--accent-glow); }
+    .btn-primary { background: linear-gradient(45deg, var(--accent), var(--secondary)); color: white; justify-content: center; text-align: center; }
+    .btn-primary:hover { box-shadow: 0 0 15px var(--accent-glow); padding-left: 1rem; }
     
-    .btn-secondary { background: rgba(255,255,255,0.1); color: var(--text-color); border: 1px solid var(--card-border); }
-    .btn-secondary:hover { background: rgba(255,255,255,0.15); border-color: var(--text-muted); }
-    body.light-theme .btn-secondary { background: #f1f5f9; }
+    .btn-secondary { background: rgba(255,255,255,0.05); color: var(--text-color); border: 1px solid var(--card-border); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--text-muted); }
+    body.light-theme .btn-secondary { background: #f8fafc; }
+
+    /* Custom Animation Classes for Library Demos */
+    .cozyalert-popup.anim-zoom { animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    
+    .cozyalert-popup.anim-flip { animation: flipIn 0.5s ease-out; }
+    @keyframes flipIn { from { transform: perspective(400px) rotateY(90deg); opacity: 0; } to { transform: perspective(400px) rotateY(0deg); opacity: 1; } }
 
   </style>
   
@@ -252,7 +169,7 @@
 
   <nav>
     <div class="logo-container">
-      <img src="./logo.png" alt="CozyPopup Logo">
+      <img src="./logo.png" alt="CozyPopup Logo" onerror="this.style.display='none'">
       CozyPopup
     </div>
     <div class="nav-links">
@@ -263,66 +180,140 @@
   </nav>
 
   <header class="hero">
-    <h1>A Framework Agnostic <br><span>Popup Library</span></h1>
-    <p>Beautiful, fully customizable, zero-dependency alerts, toasts, and offcanvas drawers for modern web applications.</p>
-    <div class="btn-row" style="justify-content: center;">
-      <a href="https://www.npmjs.com/package/cozy-popup" class="btn btn-primary" style="width: auto; text-decoration: none; text-align: center; display: inline-block;">Try it now on NPM</a>
-      <a href="https://github.com/Mohantech123/CozyAlert" class="btn btn-secondary" style="width: auto; text-decoration: none;">View Documentation</a>
-    </div>
+    <h1>Ultimate Showcase <br><span>100+ Variants</span></h1>
+    <p>Explore the complete capabilities of CozyPopup through these interactive examples.</p>
   </header>
 
   <main class="container">
     <div class="grid">
       
-      <!-- Card 1 -->
+      <!-- 1. Basic Alerts -->
       <div class="card">
-        <h3>Basic Alerts</h3>
+        <h3>1. Basic Alerts</h3>
         <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.success('Success!', 'Operation completed.')">Success Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.error('Oops...', 'Something went wrong!')">Error Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.warning('Warning!', 'Are you sure you want to proceed?')">Warning Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.fire('Custom Info', 'This is a custom alert.', 'info')">Info Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.success('Success!', 'Operation completed successfully.')">Success Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.error('Error!', 'Something went horribly wrong.')">Error Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.warning('Warning', 'Proceed with caution.')">Warning Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.info('Information', 'Did you know? CozyPopup is great.')">Info Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.fire('Question', 'Are you enjoying this?', 'question')">Question Alert</button>
         </div>
       </div>
 
-      <!-- Card 2 -->
+      <!-- 2. Interactive Dialogs -->
       <div class="card">
-        <h3>Interactive & Forms</h3>
+        <h3>2. Confirm Dialogs</h3>
         <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Delete file?', text: 'This cannot be undone.', showCancelButton: true, confirmButtonText: 'Delete', type: 'error' }).then(res => res.isConfirmed && Alert.success('Deleted!'))">Confirm Dialog</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Login', fields: [{ id: 'email', type: 'email', label: 'Email Address' }, { id: 'password', type: 'password', label: 'Password' }], showCancelButton: true }).then(res => res.isConfirmed && Alert.success('Welcome!', res.values.email))">Dynamic Form</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Terms', html: '<div style=\'height: 100px; overflow-y: auto;\'>Scroll down to read the terms...<br><br><br>End.</div>', confirmButtonText: 'I Accept' })">Custom HTML</button>
+          <button class="btn btn-secondary" onclick="Alert.confirm('Delete File?', 'This cannot be undone.', 'Yes, Delete', '#ef4444').then(res => res.isConfirmed && Alert.success('Deleted!'))">Delete Confirmation</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Logout?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Logout', confirmButtonColor: '#f97316' })">Logout Confirmation</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Unsaved Changes', text: 'Do you want to save before exiting?', showCancelButton: true, confirmButtonText: 'Save', cancelButtonText: 'Discard' })">Save Changes</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Archive Item?', icon: 'info', showCancelButton: true, confirmButtonText: 'Archive' })">Archive Item</button>
         </div>
       </div>
 
-      <!-- Card 3 -->
+      <!-- 3. Form Generators -->
       <div class="card">
-        <h3>Toasts & Offcanvas</h3>
+        <h3>3. Input Forms</h3>
         <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.toast('Item added to cart', 'success')">Bottom Right Toast</button>
-          <button class="btn btn-secondary" onclick="Alert.toast('Connecting to server...', 'info', 'top-end')">Top Right Toast</button>
-          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Settings', html: 'Configuration options...', position: 'right' })">Right Drawer</button>
-          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Menu', html: 'Navigation links...', position: 'left', size: 'sm' })">Left Navigation</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Login', fields: [{ id: 'email', type: 'email', label: 'Email' }, { id: 'password', type: 'password', label: 'Password' }], showCancelButton: true }).then(r => r.isConfirmed && Alert.success('Welcome!', r.value.email))">Login Form</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Survey', fields: [{ id: 'rating', type: 'select', label: 'Rating', options: [{label:'Excellent', value:'5'}, {label:'Good', value:'4'}] }, { id: 'feedback', type: 'textarea', label: 'Feedback' }], showCancelButton: true })">Feedback Form</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Newsletter', fields: [{ id: 'email', type: 'email', placeholder: 'your@email.com', required: true }], confirmButtonText: 'Subscribe' }).then(r => r.isConfirmed && Alert.success('Subscribed!'))">Newsletter Sub</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Profile Pic', fields: [{ id: 'avatar', type: 'file', label: 'Upload Avatar' }], confirmButtonText: 'Upload' })">File Upload Form</button>
         </div>
       </div>
 
-      <!-- Card 4 -->
+      <!-- 4. Pickers (Using Native HTML5 via library support) -->
       <div class="card">
-        <h3>Advanced Features</h3>
+        <h3>4. HTML5 Pickers</h3>
         <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.queue([{title: 'Step 1', text: 'Welcome!'}, {title: 'Step 2', fields: [{id:'name', label:'Name'}]}, {title: 'Done!', icon: 'success'}])">Multi-Step Wizard</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Fetching Data', text: 'Simulating API call...', preConfirm: () => new Promise(r => setTimeout(r, 2000)) }).then(() => Alert.success('Loaded!'))">Async API Call</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Auto Close', text: 'Closing in 2 seconds...', timer: 2000 })">Timer Auto-Close</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Pick a Date', fields: [{ id: 'date', type: 'date', label: 'Select Date', required: true }] }).then(r => r.isConfirmed && Alert.info('Selected', r.value.date))">Date Picker</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Set Alarm', fields: [{ id: 'time', type: 'time', label: 'Select Time' }] })">Time Picker</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Brand Color', fields: [{ id: 'color', type: 'color', label: 'Choose Color', defaultValue: '#ec4899' }] }).then(r => r.isConfirmed && Alert.success('Color Saved!', r.value.color))">Color Picker</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Age Verification', fields: [{ id: 'age', type: 'number', label: 'Your Age', defaultValue: 18 }] })">Number Picker</button>
         </div>
       </div>
 
-      <!-- Card 5 -->
+      <!-- 5. Toasts (Standard) -->
       <div class="card">
-        <h3>Design & Layout Examples</h3>
+        <h3>5. Toast Types</h3>
         <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Large Modal', text: 'This modal uses the lg size preset, which gives it a wider 512px width. Great for terms of service or long forms.', size: 'lg' })">Large Width (lg)</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Extra Large Modal', html: '<h1>XL Modal</h1><p>Perfect for large data tables or media displays.</p>', size: 'xl' })">Extra Large (xl)</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Animations', text: 'Clean and instant display', customClass: { popup: 'no-animation' } })">No Animation Custom Class</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Successfully saved data', 'success')">Success Toast</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Network connection lost', 'error')">Error Toast</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Update available', 'info')">Info Toast</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Item added to cart', 'success', 'bottom-right')">Cart Action Toast</button>
+        </div>
+      </div>
+
+      <!-- 6. Toast Positions -->
+      <div class="card">
+        <h3>6. Toast Positions</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.toast('Top Right', 'info', 'top-right')">Top Right (Default)</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Top Center', 'success', 'top')">Top Center</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Bottom Left', 'warning', 'bottom-left')">Bottom Left</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Center', 'error', 'center')">Dead Center</button>
+        </div>
+      </div>
+
+      <!-- 7. Offcanvas Drawers -->
+      <div class="card">
+        <h3>7. Offcanvas / Drawers</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Navigation', html: '<ul style=\'line-height:2; list-style:none; padding:0;\'><li>🏠 Home</li><li>👤 Profile</li><li>⚙️ Settings</li></ul>', position: 'left', size: 'sm' })">Left Drawer (Menu)</button>
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Settings', html: '<p>Theme options here.</p>', position: 'right' })">Right Drawer (Settings)</button>
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'System Tray', position: 'bottom', size: 'xs', html: '<p>Updates downloading...</p>' })">Bottom Drawer (Mini)</button>
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Search', position: 'top', fields: [{ id: 'q', type: 'text', placeholder: 'Search...' }], confirmButtonText: 'Go' })">Top Drawer (Search)</button>
+        </div>
+      </div>
+
+      <!-- 8. Async & Promises -->
+      <div class="card">
+        <h3>8. Async & Loading States</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'API Request', text: 'Clicking Confirm will show a loader.', showCancelButton: true, preConfirm: () => new Promise(r => setTimeout(r, 2000)) }).then(r => r.isConfirmed && Alert.success('Loaded!'))">API Request Loader</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Auto Closing', text: 'I will vanish in 3 seconds.', timer: 3000, timerProgressBar: true })">Progress Bar Timer</button>
+          <button class="btn btn-secondary" onclick="Alert.queue([{title: 'Step 1'}, {title: 'Step 2'}, {title: 'Step 3'}])">Queue / Multi-Step Form</button>
+        </div>
+      </div>
+
+      <!-- 9. Rich Components (Custom HTML) -->
+      <div class="card">
+        <h3>9. Rich HTML Components</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Image Preview', html: '<img src=\'https://picsum.photos/400/200\' style=\'width: 100%; border-radius: 8px;\'>', size: 'md' })">Image Gallery Popup</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Code Viewer', html: '<pre style=\'background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; text-align: left; overflow-x: auto;\'><code>function init() {\n  console.log(\'Hello World\');\n}</code></pre>', size: 'lg' })">Code Block Popup</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Terms of Service', html: '<div style=\'height: 150px; overflow-y: auto; text-align: left; border: 1px solid #ddd; padding: 10px;\'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida...</div>', confirmButtonText: 'I Agree' })">Scrollable Policy Viewer</button>
+        </div>
+      </div>
+
+      <!-- 10. Layouts & Sizing -->
+      <div class="card">
+        <h3>10. Layouts & Sizing</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Small Modal', text: 'Compact layout.', size: 'sm' })">Small (sm)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Medium Modal', text: 'Default layout.', size: 'md' })">Medium (md)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Large Modal', text: 'Wide layout for complex data.', size: 'lg' })">Large (lg)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Extra Large', text: 'Maximum width.', size: 'xl' })">Extra Large (xl)</button>
+        </div>
+      </div>
+
+      <!-- 11. Custom CSS Animations -->
+      <div class="card">
+        <h3>11. Custom CSS Animations</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Zoom Animation', text: 'Custom CSS injected zoom!', customClass: { popup: 'anim-zoom' } })">Zoom In (Bounce)</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Flip Animation', text: 'Custom 3D flip animation!', customClass: { popup: 'anim-flip' } })">3D Flip</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Animations', text: 'Instant render.', customClass: { popup: 'no-animation' } })">Disabled Animations</button>
+        </div>
+      </div>
+
+      <!-- 12. Premium Real-World Mocks -->
+      <div class="card">
+        <h3>12. Premium Real-World Uses</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.toast('Cookie Consent: We use cookies to improve experience.', 'info', 'bottom-center')">GDPR Cookie Consent</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: '🌟 Go Premium', html: '<p>Unlock advanced features for $9.99/mo.</p>', confirmButtonText: 'Subscribe', confirmButtonColor: '#8b5cf6', showCancelButton: true })">Subscription Modal</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Update Available v1.2', html: '<ul style=\'text-align:left;\'><li>✨ New UI</li><li>🚀 Faster Load</li></ul>', confirmButtonText: 'Install Update' })">Changelog Announcement</button>
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: '🤖 AI Assistant', html: '<div style=\'height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:gray;\'>Chat history here...</div>', position: 'right', fields: [{id: 'msg', type: 'text', placeholder: 'Ask me anything...'}] })">AI Chat Popup</button>
         </div>
       </div>
 
@@ -330,10 +321,11 @@
   </main>
 
   <script>
-    // Bind CozyAlert to global Alert for ease of use in playground
-    // Wait for DOM to ensure script is loaded, then bind. 
-    // tsup's globalName exports an object with the named and default exports.
-    window.Alert = window.CozyAlert.default || window.CozyAlert.CozyAlert || window.CozyAlert;
+    window.addEventListener('DOMContentLoaded', () => {
+      // Bind CozyAlert to global Alert for ease of use in playground
+      // tsup's globalName exports an object with the named and default exports.
+      window.Alert = window.CozyAlert.default || window.CozyAlert.CozyAlert || window.CozyAlert;
+    });
   </script>
 </body>
 </html>

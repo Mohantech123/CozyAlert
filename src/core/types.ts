@@ -6,14 +6,14 @@ export type AlertType =
   | 'question'
   | 'confirm';
 
-export type FieldType = 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file';
+export type FieldType = 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file' | 'date' | 'time' | 'color' | 'radio';
 
 // Expanded position type for Toasts and Off-Canvas
 export type Position = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top' | 'bottom' | 'center' | 'left' | 'right';
 
 export interface FormField {
   id: string;
-  type: 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file';
+  type: FieldType;
   label?: string;
   placeholder?: string;
   defaultValue?: any;
