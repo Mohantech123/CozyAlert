@@ -121,11 +121,11 @@
     .card h3 { font-family: 'Outfit', sans-serif; font-size: 1.25rem; margin-bottom: 1.25rem; color: var(--text-color); border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;}
 
     /* Buttons */
-    .btn-group { display: flex; flex-direction: column; gap: 0.75rem; flex-grow: 1; }
+    .btn-group { display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.75rem; flex-grow: 1; align-items: flex-start; align-content: flex-start; }
     .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
     
     .btn {
-      padding: 0.75rem 1rem;
+      padding: 0.75rem 1.2rem;
       border: none;
       border-radius: 8px;
       font-family: 'Inter', sans-serif;
@@ -133,13 +133,15 @@
       font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.2s;
-      width: 100%;
-      text-align: left;
+      width: auto;
+      flex: 1 1 auto;
+      text-align: center;
       position: relative;
       overflow: hidden;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      gap: 0.5rem;
     }
     .btn::after { content: '→'; opacity: 0; transform: translateX(-10px); transition: 0.2s; }
     .btn:hover::after { opacity: 1; transform: translateX(0); }
@@ -216,7 +218,7 @@
   
   <script src="./dist/index.global.js"></script>
 </head>
-<body>
+<body class="light-theme">
 
   <div class="bg-glow"></div>
   <div class="bg-glow right"></div>
