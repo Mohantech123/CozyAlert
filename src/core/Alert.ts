@@ -1,4 +1,4 @@
-import { AlertOptions, AlertResult } from './types';
+import { AlertOptions, AlertResult, AlertType, Position } from './types';
 import { injectStyles } from './styles';
 import { createAlertDom, closeAllAlerts } from './dom';
 
@@ -79,7 +79,17 @@ export class CozyAlert {
     });
   }
 
-  static toast(options: AlertOptions): Promise<AlertResult> {
+  static toast(options: AlertOptions | string, type?: AlertType, position?: Position): Promise<AlertResult> {
+    if (typeof options === 'string') {
+      return CozyAlert.fire({
+        title: options,
+        icon: type,
+        toast: true,
+        position: position || 'top-right',
+        showConfirmButton: false,
+        timer: 3000
+      });
+    }
     return CozyAlert.fire({
       ...options,
       toast: true,
@@ -93,7 +103,7 @@ export class CozyAlert {
     return CozyAlert.fire({
       showCloseButton: true,
       showIcon: false,
-      width: '32rem', // Wider default
+      size: 'lg', // Use size instead of width
       ...options
     });
   }

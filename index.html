@@ -158,6 +158,17 @@
     .cozyalert-popup.anim-flip { animation: flipIn 0.5s ease-out; }
     @keyframes flipIn { from { transform: perspective(400px) rotateY(90deg); opacity: 0; } to { transform: perspective(400px) rotateY(0deg); opacity: 1; } }
 
+    /* Custom Pink Theme Demo */
+    .theme-pink {
+      --ca-bg: #fce7f3 !important;
+      --ca-text: #831843 !important;
+      --ca-text-muted: #9d174d !important;
+      --ca-input-bg: #fbcfe8 !important;
+      --ca-border: #f9a8d4 !important;
+      --ca-confirm-bg: #db2777 !important;
+      --ca-confirm-hover: #be185d !important;
+    }
+
   </style>
   
   <script src="./dist/index.global.js"></script>
@@ -196,6 +207,7 @@
           <button class="btn btn-secondary" onclick="Alert.warning('Warning', 'Proceed with caution.')">Warning Alert</button>
           <button class="btn btn-secondary" onclick="Alert.info('Information', 'Did you know? CozyPopup is great.')">Info Alert</button>
           <button class="btn btn-secondary" onclick="Alert.fire('Question', 'Are you enjoying this?', 'question')">Question Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Icon Alert', text: 'This alert has no icon.', showIcon: false })">Iconless Alert</button>
         </div>
       </div>
 
@@ -240,6 +252,7 @@
           <button class="btn btn-secondary" onclick="Alert.toast('Network connection lost', 'error')">Error Toast</button>
           <button class="btn btn-secondary" onclick="Alert.toast('Update available', 'info')">Info Toast</button>
           <button class="btn btn-secondary" onclick="Alert.toast('Item added to cart', 'success', 'bottom-right')">Cart Action Toast</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Plain Message', toast: true, position: 'top-right', showIcon: false, showConfirmButton: false, timer: 3000 })">Iconless Toast</button>
         </div>
       </div>
 
@@ -314,6 +327,16 @@
           <button class="btn btn-secondary" onclick="Alert.modal({ title: '🌟 Go Premium', html: '<p>Unlock advanced features for $9.99/mo.</p>', confirmButtonText: 'Subscribe', confirmButtonColor: '#8b5cf6', showCancelButton: true })">Subscription Modal</button>
           <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Update Available v1.2', html: '<ul style=\'text-align:left;\'><li>✨ New UI</li><li>🚀 Faster Load</li></ul>', confirmButtonText: 'Install Update' })">Changelog Announcement</button>
           <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: '🤖 AI Assistant', html: '<div style=\'height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:gray;\'>Chat history here...</div>', position: 'right', fields: [{id: 'msg', type: 'text', placeholder: 'Ask me anything...'}] })">AI Chat Popup</button>
+        </div>
+      </div>
+
+      <!-- 13. Theme Variants -->
+      <div class="card">
+        <h3>13. Theme Variants</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Dark Theme', text: 'Forced dark mode regardless of OS.', theme: 'dark' })">Dark Theme</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Light Theme', text: 'Forced light mode regardless of OS.', theme: 'light' })">Light Theme</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Pink Theme', text: 'Custom CSS variable injection.', customClass: { popup: 'theme-pink' } })">Custom Pink Theme</button>
         </div>
       </div>
 
