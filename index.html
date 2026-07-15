@@ -251,6 +251,7 @@
           <button class="btn btn-secondary" onclick="Alert.info('Information', 'Did you know? CozyPopup is great.')">Info Alert</button>
           <button class="btn btn-secondary" onclick="Alert.fire('Question', 'Are you enjoying this?', 'question')">Question Alert</button>
           <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Icon Alert', text: 'This alert has no icon.', showIcon: false })">Iconless Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Critical Error', text: 'You MUST click OK. Clicking outside will not close this popup!', icon: 'error', allowOutsideClick: false })" style="color: #ef4444; border-color: #ef4444;">Non-Dismissible Alert</button>
         </div>
       </div>
 
@@ -392,6 +393,24 @@
           <button class="btn btn-secondary" onclick="setGlobalTheme('theme-forest')">Forest Eco</button>
           <button class="btn btn-secondary" onclick="setGlobalTheme('theme-highcontrast')">High Contrast</button>
           <button class="btn btn-secondary" onclick="setGlobalTheme('theme-glass')">Glassmorphism</button>
+        </div>
+      </div>
+
+      <!-- 14. Advanced Dynamic Forms -->
+      <div class="card">
+        <h3>14. Advanced Dynamic Forms</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Register Account', fields: [{ id: 'username', type: 'text', label: 'Username', required: true, pattern: '^[a-zA-Z0-9_]{4,15}$', validationMessage: '4-15 alphanumeric chars.' }, { id: 'email', type: 'email', label: 'Email', required: true }, { id: 'password', type: 'password', label: 'Password', required: true, pattern: '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$', validationMessage: 'Min 8 chars, at least 1 letter and 1 number.' }], showCancelButton: true, confirmButtonText: 'Sign Up' }).then(r => r.isConfirmed && Alert.success('Registered!', `Welcome ${r.value.username}`))">Secure Registration Form</button>
+          
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Payment Details', icon: 'info', fields: [{ id: 'card', type: 'text', label: 'Card Number', required: true, pattern: '^\\d{16}$', validationMessage: 'Must be exactly 16 digits.' }, { id: 'expiry', type: 'text', label: 'Expiry (MM/YY)', required: true, pattern: '^(0[1-9]|1[0-2])\\/\\d{2}$', validationMessage: 'Format MM/YY' }, { id: 'cvv', type: 'password', label: 'CVV', required: true, pattern: '^\\d{3,4}$', validationMessage: '3 or 4 digits' }], showCancelButton: true, confirmButtonText: 'Pay Now' }).then(r => r.isConfirmed && Alert.success('Payment Successful!'))">Payment Gateway Form</button>
+          
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Book a Table', fields: [{ id: 'date', type: 'date', label: 'Date', required: true }, { id: 'time', type: 'time', label: 'Time', required: true }, { id: 'guests', type: 'number', label: 'Number of Guests', required: true, defaultValue: 2 }, { id: 'requests', type: 'textarea', label: 'Special Requests' }], confirmButtonText: 'Confirm Booking' }).then(r => r.isConfirmed && Alert.success('Booked!', `Table for ${r.value.guests} on ${r.value.date}`))">Complex Booking Form</button>
+          
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Activate Software', fields: [{ id: 'license', type: 'text', label: 'License Key (XXXX-XXXX-XXXX)', required: true, pattern: '^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$', validationMessage: 'Invalid format. Use XXXX-XXXX-XXXX.' }], confirmButtonText: 'Activate' }).then(r => r.isConfirmed && Alert.success('Activated!'))">License Key Input</button>
+
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Shipping Address', size: 'md', fields: [{ id: 'street', type: 'text', label: 'Street Address', required: true }, { id: 'city', type: 'text', label: 'City', required: true }, { id: 'state', type: 'select', label: 'State', options: [{label:'CA', value:'CA'}, {label:'NY', value:'NY'}, {label:'TX', value:'TX'}, {label:'FL', value:'FL'}] }, { id: 'zip', type: 'text', label: 'Zip Code', required: true, pattern: '^\\d{5}$', validationMessage: 'Must be 5 digits.' }], confirmButtonText: 'Save Address' }).then(r => r.isConfirmed && Alert.success('Saved!'))">Multi-Field Address Form</button>
+
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Mandatory Survey', text: 'You cannot dismiss this form by clicking the background.', allowOutsideClick: false, showCloseButton: false, fields: [{ id: 'feedback', type: 'textarea', label: 'Feedback', required: true, placeholder: 'You must provide feedback...' }], confirmButtonText: 'Submit Feedback' }).then(r => r.isConfirmed && Alert.success('Thank You!'))" style="border-color: #f59e0b; color: #f59e0b;">Strict Form (No Click Outside)</button>
         </div>
       </div>
 
