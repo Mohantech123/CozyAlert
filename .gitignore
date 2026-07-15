@@ -2,7 +2,7 @@
 node_modules/
 
 # Production build artifacts
-dist/
+# dist/ (Removed so GitHub Pages can serve the showcase)
 
 # Logs
 logs
