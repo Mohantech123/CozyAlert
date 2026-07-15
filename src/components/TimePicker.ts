@@ -15,7 +15,7 @@ export class CozyTimePicker {
     
     this.popup = document.createElement('div');
     this.popup.className = 'cozyalert-datepicker-popup'; // reuse popup container
-    document.body.appendChild(this.popup);
+    this.input.parentNode?.appendChild(this.popup);
 
     this.initEvents();
   }
@@ -34,9 +34,6 @@ export class CozyTimePicker {
   }
 
   private open() {
-    const rect = this.input.getBoundingClientRect();
-    this.popup.style.top = `${rect.bottom + window.scrollY + 8}px`;
-    this.popup.style.left = `${rect.left + window.scrollX}px`;
     this.popup.classList.add('active');
     this.render();
   }
