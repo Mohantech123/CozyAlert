@@ -241,146 +241,9 @@
   <main class="container">
     <div class="grid">
       
-      <!-- 1. Basic Alerts -->
+      <!-- 1. Global Themes Engine -->
       <div class="card">
-        <h3>1. Basic Alerts</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.success('Success!', 'Operation completed successfully.')">Success Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.error('Error!', 'Something went horribly wrong.')">Error Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.warning('Warning', 'Proceed with caution.')">Warning Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.info('Information', 'Did you know? CozyPopup is great.')">Info Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.fire('Question', 'Are you enjoying this?', 'question')">Question Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Icon Alert', text: 'This alert has no icon.', showIcon: false })">Iconless Alert</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Critical Error', text: 'You MUST click OK. Clicking outside will not close this popup!', icon: 'error', allowOutsideClick: false })" style="color: #ef4444; border-color: #ef4444;">Non-Dismissible Alert</button>
-        </div>
-      </div>
-
-      <!-- 2. Interactive Dialogs -->
-      <div class="card">
-        <h3>2. Confirm Dialogs</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.confirm('Delete File?', 'This cannot be undone.', 'Yes, Delete', '#ef4444').then(res => res.isConfirmed && Alert.success('Deleted!'))">Delete Confirmation</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Logout?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Logout', confirmButtonColor: '#f97316' })">Logout Confirmation</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Unsaved Changes', text: 'Do you want to save before exiting?', showCancelButton: true, confirmButtonText: 'Save', cancelButtonText: 'Discard' })">Save Changes</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Archive Item?', icon: 'info', showCancelButton: true, confirmButtonText: 'Archive' })">Archive Item</button>
-        </div>
-      </div>
-
-      <!-- 3. Form Generators -->
-      <div class="card">
-        <h3>3. Input Forms</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Login', fields: [{ id: 'email', type: 'email', label: 'Email' }, { id: 'password', type: 'password', label: 'Password' }], showCancelButton: true }).then(r => r.isConfirmed && Alert.success('Welcome!', r.value.email))">Login Form</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Survey', fields: [{ id: 'rating', type: 'select', label: 'Rating', options: [{label:'Excellent', value:'5'}, {label:'Good', value:'4'}] }, { id: 'feedback', type: 'textarea', label: 'Feedback' }], showCancelButton: true })">Feedback Form</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Newsletter', fields: [{ id: 'email', type: 'email', placeholder: 'your@email.com', required: true }], confirmButtonText: 'Subscribe' }).then(r => r.isConfirmed && Alert.success('Subscribed!'))">Newsletter Sub</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Profile Pic', fields: [{ id: 'avatar', type: 'file', label: 'Upload Avatar' }], confirmButtonText: 'Upload' })">File Upload Form</button>
-        </div>
-      </div>
-
-      <!-- 4. Pickers (Using Native HTML5 via library support) -->
-      <div class="card">
-        <h3>4. HTML5 Pickers</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Pick a Date', fields: [{ id: 'date', type: 'date', label: 'Select Date', required: true }] }).then(r => r.isConfirmed && Alert.info('Selected', r.value.date))">Date Picker</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Set Alarm', fields: [{ id: 'time', type: 'time', label: 'Select Time' }] })">Time Picker</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Brand Color', fields: [{ id: 'color', type: 'color', label: 'Choose Color', defaultValue: '#ec4899' }] }).then(r => r.isConfirmed && Alert.success('Color Saved!', r.value.color))">Color Picker</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Age Verification', fields: [{ id: 'age', type: 'number', label: 'Your Age', defaultValue: 18 }] })">Number Picker</button>
-        </div>
-      </div>
-
-      <!-- 5. Toasts (Standard) -->
-      <div class="card">
-        <h3>5. Toast Types</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.toast('Successfully saved data', 'success')">Success Toast</button>
-          <button class="btn btn-secondary" onclick="Alert.toast('Network connection lost', 'error')">Error Toast</button>
-          <button class="btn btn-secondary" onclick="Alert.toast('Update available', 'info')">Info Toast</button>
-          <button class="btn btn-secondary" onclick="Alert.toast('Item added to cart', 'success', 'bottom-right')">Cart Action Toast</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Plain Message', toast: true, position: 'top-right', showIcon: false, showConfirmButton: false, timer: 3000 })">Iconless Toast</button>
-        </div>
-      </div>
-
-      <!-- 6. Toast Positions -->
-      <div class="card">
-        <h3>6. Toast Positions</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.toast('Top Right', 'info', 'top-right')">Top Right (Default)</button>
-          <button class="btn btn-secondary" onclick="Alert.toast('Top Center', 'success', 'top')">Top Center</button>
-          <button class="btn btn-secondary" onclick="Alert.toast('Bottom Left', 'warning', 'bottom-left')">Bottom Left</button>
-          <button class="btn btn-secondary" onclick="Alert.toast('Center', 'error', 'center')">Dead Center</button>
-        </div>
-      </div>
-
-      <!-- 7. Offcanvas Drawers -->
-      <div class="card">
-        <h3>7. Offcanvas / Drawers</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Navigation', html: '<ul style=\'line-height:2; list-style:none; padding:0;\'><li>🏠 Home</li><li>👤 Profile</li><li>⚙️ Settings</li></ul>', position: 'left', size: 'sm' })">Left Drawer (Menu)</button>
-          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Settings', html: '<p>Theme options here.</p>', position: 'right' })">Right Drawer (Settings)</button>
-          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'System Tray', position: 'bottom', size: 'xs', html: '<p>Updates downloading...</p>' })">Bottom Drawer (Mini)</button>
-          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Search', position: 'top', fields: [{ id: 'q', type: 'text', placeholder: 'Search...' }], confirmButtonText: 'Go' })">Top Drawer (Search)</button>
-        </div>
-      </div>
-
-      <!-- 8. Async & Promises -->
-      <div class="card">
-        <h3>8. Async & Loading States</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'API Request', text: 'Clicking Confirm will show a loader.', showCancelButton: true, preConfirm: () => new Promise(r => setTimeout(r, 2000)) }).then(r => r.isConfirmed && Alert.success('Loaded!'))">API Request Loader</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Auto Closing', text: 'I will vanish in 3 seconds.', timer: 3000, timerProgressBar: true })">Progress Bar Timer</button>
-          <button class="btn btn-secondary" onclick="Alert.queue([{title: 'Step 1'}, {title: 'Step 2'}, {title: 'Step 3'}])">Queue / Multi-Step Form</button>
-        </div>
-      </div>
-
-      <!-- 9. Rich Components (Custom HTML) -->
-      <div class="card">
-        <h3>9. Rich HTML Components</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Image Preview', html: '<img src=\'https://picsum.photos/400/200\' style=\'width: 100%; border-radius: 8px;\'>', size: 'md' })">Image Gallery Popup</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Code Viewer', html: '<pre style=\'background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; text-align: left; overflow-x: auto;\'><code>function init() {\n  console.log(\'Hello World\');\n}</code></pre>', size: 'lg' })">Code Block Popup</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Terms of Service', html: '<div style=\'height: 150px; overflow-y: auto; text-align: left; border: 1px solid #ddd; padding: 10px;\'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida...</div>', confirmButtonText: 'I Agree' })">Scrollable Policy Viewer</button>
-        </div>
-      </div>
-
-      <!-- 10. Layouts & Sizing -->
-      <div class="card">
-        <h3>10. Layouts & Sizing</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Small Modal', text: 'Compact layout.', size: 'sm' })">Small (sm)</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Medium Modal', text: 'Default layout.', size: 'md' })">Medium (md)</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Large Modal', text: 'Wide layout for complex data.', size: 'lg' })">Large (lg)</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Extra Large', text: 'Maximum width.', size: 'xl' })">Extra Large (xl)</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: '2XL Modal', text: '48rem width.', size: '2xl' })">2XL (48rem)</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: '3XL Modal', text: '56rem width.', size: '3xl' })">3XL (56rem)</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Full Width', text: '100% width of container.', size: 'full' })">Full Width</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Full Screen', text: '100vw x 100vh', size: 'screen' })">Full Screen Takeover</button>
-        </div>
-      </div>
-
-      <!-- 11. Custom CSS Animations -->
-      <div class="card">
-        <h3>11. Custom CSS Animations</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Zoom Animation', text: 'Custom CSS injected zoom!', customClass: { popup: 'anim-zoom' } })">Zoom In (Bounce)</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Flip Animation', text: 'Custom 3D flip animation!', customClass: { popup: 'anim-flip' } })">3D Flip</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Animations', text: 'Instant render.', customClass: { popup: 'no-animation' } })">Disabled Animations</button>
-        </div>
-      </div>
-
-      <!-- 12. Premium Real-World Mocks -->
-      <div class="card">
-        <h3>12. Premium Real-World Uses</h3>
-        <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: '🍪 Cookie Consent', text: 'We use cookies to improve your experience. By continuing, you agree to our policy.', toast: true, position: 'bottom', showConfirmButton: true, confirmButtonText: 'Accept', timer: 10000 })">GDPR Cookie Consent</button>
-          <button class="btn btn-secondary" onclick="Alert.modal({ title: '🌟 Go Premium', html: '<p>Unlock advanced features for $9.99/mo.</p>', confirmButtonText: 'Subscribe', confirmButtonColor: '#8b5cf6', showCancelButton: true })">Subscription Modal</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Update Available v1.2', html: '<ul style=\'text-align:left;\'><li>✨ New UI</li><li>🚀 Faster Load</li></ul>', confirmButtonText: 'Install Update' })">Changelog Announcement</button>
-          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: '🤖 AI Assistant', html: '<div style=\'height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:gray;\'>Chat history here...</div>', position: 'right', fields: [{id: 'msg', type: 'text', placeholder: 'Ask me anything...'}] })">AI Chat Popup</button>
-        </div>
-      </div>
-
-      <!-- 13. Global Themes Engine -->
-      <div class="card">
-        <h3>13. Global Themes</h3>
+        <h3>1. Global Themes</h3>
         <div class="btn-group">
           <button class="btn btn-secondary" onclick="setGlobalTheme('light-theme')">Light Theme (Default)</button>
           <button class="btn btn-secondary" onclick="setGlobalTheme('theme-cyberpunk')">Cyberpunk</button>
@@ -394,9 +257,133 @@
           <button class="btn btn-secondary" onclick="setGlobalTheme('theme-highcontrast')">High Contrast</button>
           <button class="btn btn-secondary" onclick="setGlobalTheme('theme-glass')">Glassmorphism</button>
         </div>
-      </div>
 
-      <!-- 14. Advanced Dynamic Forms -->
+<!-- 2. Basic Alerts -->
+      <div class="card">
+        <h3>2. Basic Alerts</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.success('Success!', 'Operation completed successfully.')">Success Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.error('Error!', 'Something went horribly wrong.')">Error Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.warning('Warning', 'Proceed with caution.')">Warning Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.info('Information', 'Did you know? CozyPopup is great.')">Info Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.fire('Question', 'Are you enjoying this?', 'question')">Question Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Icon Alert', text: 'This alert has no icon.', showIcon: false })">Iconless Alert</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Critical Error', text: 'You MUST click OK. Clicking outside will not close this popup!', icon: 'error', allowOutsideClick: false })" style="color: #ef4444; border-color: #ef4444;">Non-Dismissible Alert</button>
+        </div>
+
+<!-- 3. Interactive Dialogs -->
+      <div class="card">
+        <h3>3. Confirm Dialogs</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.confirm('Delete File?', 'This cannot be undone.', 'Yes, Delete', '#ef4444').then(res => res.isConfirmed && Alert.success('Deleted!'))">Delete Confirmation</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Logout?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Logout', confirmButtonColor: '#f97316' })">Logout Confirmation</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Unsaved Changes', text: 'Do you want to save before exiting?', showCancelButton: true, confirmButtonText: 'Save', cancelButtonText: 'Discard' })">Save Changes</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Archive Item?', icon: 'info', showCancelButton: true, confirmButtonText: 'Archive' })">Archive Item</button>
+        </div>
+
+<!-- 4. Form Generators -->
+      <div class="card">
+        <h3>4. Input Forms</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Login', fields: [{ id: 'email', type: 'email', label: 'Email' }, { id: 'password', type: 'password', label: 'Password' }], showCancelButton: true }).then(r => r.isConfirmed && Alert.success('Welcome!', r.value.email))">Login Form</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Survey', fields: [{ id: 'rating', type: 'select', label: 'Rating', options: [{label:'Excellent', value:'5'}, {label:'Good', value:'4'}] }, { id: 'feedback', type: 'textarea', label: 'Feedback' }], showCancelButton: true })">Feedback Form</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Newsletter', fields: [{ id: 'email', type: 'email', placeholder: 'your@email.com', required: true }], confirmButtonText: 'Subscribe' }).then(r => r.isConfirmed && Alert.success('Subscribed!'))">Newsletter Sub</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Profile Pic', fields: [{ id: 'avatar', type: 'file', label: 'Upload Avatar' }], confirmButtonText: 'Upload' })">File Upload Form</button>
+        </div>
+
+<!-- 5. Pickers (Using Native HTML5 via library support) -->
+      <div class="card">
+        <h3>5. HTML5 Pickers</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Pick a Date', fields: [{ id: 'date', type: 'date', label: 'Select Date', required: true }] }).then(r => r.isConfirmed && Alert.info('Selected', r.value.date))">Date Picker</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Set Alarm', fields: [{ id: 'time', type: 'time', label: 'Select Time' }] })">Time Picker</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Brand Color', fields: [{ id: 'color', type: 'color', label: 'Choose Color', defaultValue: '#ec4899' }] }).then(r => r.isConfirmed && Alert.success('Color Saved!', r.value.color))">Color Picker</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Age Verification', fields: [{ id: 'age', type: 'number', label: 'Your Age', defaultValue: 18 }] })">Number Picker</button>
+        </div>
+
+<!-- 6. Toasts (Standard) -->
+      <div class="card">
+        <h3>6. Toast Types</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.toast('Successfully saved data', 'success')">Success Toast</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Network connection lost', 'error')">Error Toast</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Update available', 'info')">Info Toast</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Item added to cart', 'success', 'bottom-right')">Cart Action Toast</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Plain Message', toast: true, position: 'top-right', showIcon: false, showConfirmButton: false, timer: 3000 })">Iconless Toast</button>
+        </div>
+
+<!-- 7. Toast Positions -->
+      <div class="card">
+        <h3>7. Toast Positions</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.toast('Top Right', 'info', 'top-right')">Top Right (Default)</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Top Center', 'success', 'top')">Top Center</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Bottom Left', 'warning', 'bottom-left')">Bottom Left</button>
+          <button class="btn btn-secondary" onclick="Alert.toast('Center', 'error', 'center')">Dead Center</button>
+        </div>
+
+<!-- 8. Offcanvas Drawers -->
+      <div class="card">
+        <h3>8. Offcanvas / Drawers</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Navigation', html: '<ul style=\'line-height:2; list-style:none; padding:0;\'><li>🏠 Home</li><li>👤 Profile</li><li>⚙️ Settings</li></ul>', position: 'left', size: 'sm' })">Left Drawer (Menu)</button>
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Settings', html: '<p>Theme options here.</p>', position: 'right' })">Right Drawer (Settings)</button>
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'System Tray', position: 'bottom', size: 'xs', html: '<p>Updates downloading...</p>' })">Bottom Drawer (Mini)</button>
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: 'Search', position: 'top', fields: [{ id: 'q', type: 'text', placeholder: 'Search...' }], confirmButtonText: 'Go' })">Top Drawer (Search)</button>
+        </div>
+
+<!-- 9. Async & Promises -->
+      <div class="card">
+        <h3>9. Async & Loading States</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'API Request', text: 'Clicking Confirm will show a loader.', showCancelButton: true, preConfirm: () => new Promise(r => setTimeout(r, 2000)) }).then(r => r.isConfirmed && Alert.success('Loaded!'))">API Request Loader</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Auto Closing', text: 'I will vanish in 3 seconds.', timer: 3000, timerProgressBar: true })">Progress Bar Timer</button>
+          <button class="btn btn-secondary" onclick="Alert.queue([{title: 'Step 1'}, {title: 'Step 2'}, {title: 'Step 3'}])">Queue / Multi-Step Form</button>
+        </div>
+
+<!-- 10. Rich Components (Custom HTML) -->
+      <div class="card">
+        <h3>10. Rich HTML Components</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Image Preview', html: '<img src=\'https://picsum.photos/400/200\' style=\'width: 100%; border-radius: 8px;\'>', size: 'md' })">Image Gallery Popup</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Code Viewer', html: '<pre style=\'background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; text-align: left; overflow-x: auto;\'><code>function init() {\n  console.log(\'Hello World\');\n}</code></pre>', size: 'lg' })">Code Block Popup</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Terms of Service', html: '<div style=\'height: 150px; overflow-y: auto; text-align: left; border: 1px solid #ddd; padding: 10px;\'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida...</div>', confirmButtonText: 'I Agree' })">Scrollable Policy Viewer</button>
+        </div>
+
+<!-- 11. Layouts & Sizing -->
+      <div class="card">
+        <h3>11. Layouts & Sizing</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Small Modal', text: 'Compact layout.', size: 'sm' })">Small (sm)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Medium Modal', text: 'Default layout.', size: 'md' })">Medium (md)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Large Modal', text: 'Wide layout for complex data.', size: 'lg' })">Large (lg)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Extra Large', text: 'Maximum width.', size: 'xl' })">Extra Large (xl)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: '2XL Modal', text: '48rem width.', size: '2xl' })">2XL (48rem)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: '3XL Modal', text: '56rem width.', size: '3xl' })">3XL (56rem)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Full Width', text: '100% width of container.', size: 'full' })">Full Width</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Full Screen', text: '100vw x 100vh', size: 'screen' })">Full Screen Takeover</button>
+        </div>
+
+<!-- 12. Custom CSS Animations -->
+      <div class="card">
+        <h3>12. Custom CSS Animations</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Zoom Animation', text: 'Custom CSS injected zoom!', customClass: { popup: 'anim-zoom' } })">Zoom In (Bounce)</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Flip Animation', text: 'Custom 3D flip animation!', customClass: { popup: 'anim-flip' } })">3D Flip</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'No Animations', text: 'Instant render.', customClass: { popup: 'no-animation' } })">Disabled Animations</button>
+        </div>
+
+<!-- 13. Premium Real-World Mocks -->
+      <div class="card">
+        <h3>13. Premium Real-World Uses</h3>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: '🍪 Cookie Consent', text: 'We use cookies to improve your experience. By continuing, you agree to our policy.', toast: true, position: 'bottom', showConfirmButton: true, confirmButtonText: 'Accept', timer: 10000 })">GDPR Cookie Consent</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: '🌟 Go Premium', html: '<p>Unlock advanced features for $9.99/mo.</p>', confirmButtonText: 'Subscribe', confirmButtonColor: '#8b5cf6', showCancelButton: true })">Subscription Modal</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Update Available v1.2', html: '<ul style=\'text-align:left;\'><li>✨ New UI</li><li>🚀 Faster Load</li></ul>', confirmButtonText: 'Install Update' })">Changelog Announcement</button>
+          <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: '🤖 AI Assistant', html: '<div style=\'height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:gray;\'>Chat history here...</div>', position: 'right', fields: [{id: 'msg', type: 'text', placeholder: 'Ask me anything...'}] })">AI Chat Popup</button>
+        </div>
+
+<!-- 14. Advanced Dynamic Forms -->
       <div class="card">
         <h3>14. Advanced Dynamic Forms</h3>
         <div class="btn-group">
@@ -412,8 +399,6 @@
 
           <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Mandatory Survey', text: 'You cannot dismiss this form by clicking the background.', allowOutsideClick: false, showCloseButton: false, fields: [{ id: 'feedback', type: 'textarea', label: 'Feedback', required: true, placeholder: 'You must provide feedback...' }], confirmButtonText: 'Submit Feedback' }).then(r => r.isConfirmed && Alert.success('Thank You!'))" style="border-color: #f59e0b; color: #f59e0b;">Strict Form (No Click Outside)</button>
         </div>
-      </div>
-
     </div>
   </main>
 
