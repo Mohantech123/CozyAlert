@@ -28,7 +28,7 @@ export interface FormField {
 }
 
 export interface DatePickerConfig {
-  mode?: 'single' | 'multiple' | 'range';
+  mode?: 'single' | 'multiple' | 'range' | 'month' | 'year';
   minDate?: string | Date;
   maxDate?: string | Date;
   disabledDates?: (string | Date)[];
@@ -41,6 +41,7 @@ export interface DatePickerConfig {
 
 export interface TimePickerConfig {
   format?: '12h' | '24h';
+  style?: 'default' | 'clock';
   enableSeconds?: boolean;
   bookingSlots?: string[]; // e.g. ['09:00 AM', '09:30 AM']
 }

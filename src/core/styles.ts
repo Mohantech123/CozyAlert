@@ -412,6 +412,36 @@ export const injectStyles = () => {
     .cozyalert-timepicker-slot { padding: 0.5rem; text-align: center; font-size: 0.875rem; font-weight: 500; color: var(--ca-text); background: var(--ca-cancel-bg); border-radius: 8px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
     .cozyalert-timepicker-slot:hover { border-color: var(--ca-primary); color: var(--ca-primary); }
     .cozyalert-timepicker-slot.selected { background: var(--ca-primary); color: white; border-color: var(--ca-primary); }
+
+    /* DatePicker Year/Month Grids */
+    .cozyalert-datepicker-grid.year-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .cozyalert-datepicker-grid.month-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .cozyalert-datepicker-day.month-year-cell { padding: 1.25rem 0.5rem; font-weight: 500; border-radius: 12px; font-size: 0.95rem; }
+
+    /* TimePicker Default Spinner UI */
+    .cozyalert-time-default-container { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1rem 0; }
+    .cozyalert-time-spinner { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .cozyalert-time-spinner button { background: none; border: none; cursor: pointer; color: var(--ca-text-muted); padding: 0.25rem; transition: color 0.2s; display: flex; }
+    .cozyalert-time-spinner button:hover { color: var(--ca-primary); }
+    .cozyalert-time-spinner-val { font-size: 2rem; font-weight: 700; color: var(--ca-text); width: 3.5rem; text-align: center; font-variant-numeric: tabular-nums; }
+    .cozyalert-time-separator { font-size: 2rem; font-weight: 700; color: var(--ca-text-muted); margin-bottom: 0.25rem; }
+    .cozyalert-time-period-wrap { display: flex; flex-direction: column; gap: 0.25rem; margin-left: 0.5rem; }
+    .cozyalert-time-period-wrap button { background: var(--ca-input-bg); border: 1px solid var(--ca-input-border); color: var(--ca-text-muted); font-size: 0.75rem; font-weight: 700; border-radius: 6px; padding: 0.375rem 0.75rem; cursor: pointer; transition: all 0.2s; }
+    .cozyalert-time-period-wrap button.active { background: var(--ca-primary); color: white; border-color: var(--ca-primary); }
+
+    /* TimePicker Clock UI */
+    .cozyalert-clock-header { display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; gap: 0.25rem; color: var(--ca-text-muted); margin-bottom: 1.5rem; font-variant-numeric: tabular-nums; }
+    .cozyalert-clock-header span { cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 8px; transition: all 0.2s; }
+    .cozyalert-clock-header span.active { color: var(--ca-primary); background: var(--ca-primary-bg); }
+    .cozyalert-clock-header span.period-toggle { font-size: 1rem; margin-left: 0.5rem; background: var(--ca-input-bg); border: 1px solid var(--ca-input-border); padding: 0.375rem 0.75rem; color: var(--ca-text); }
+    .cozyalert-clock-header span.period-toggle:hover { border-color: var(--ca-primary); }
+    
+    .cozyalert-clock-dial { position: relative; width: 220px; height: 220px; border-radius: 50%; background: var(--ca-cancel-bg); margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; }
+    .cozyalert-clock-center { position: absolute; width: 8px; height: 8px; background: var(--ca-primary); border-radius: 50%; z-index: 10; }
+    .cozyalert-clock-node { position: absolute; width: 32px; height: 32px; margin-left: -16px; margin-top: -16px; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 500; color: var(--ca-text); cursor: pointer; border-radius: 50%; transition: background 0.2s, color 0.2s; z-index: 2; }
+    .cozyalert-clock-node:hover { background: var(--ca-input-border); }
+    .cozyalert-clock-node.active { background: var(--ca-primary); color: white; }
+    .cozyalert-clock-hand { position: absolute; width: 50%; height: 2px; background: var(--ca-primary); transform-origin: 100% 50%; left: 0; top: calc(50% - 1px); z-index: 1; pointer-events: none; }
   `;
   document.head.appendChild(style);
 };

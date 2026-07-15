@@ -8,16 +8,28 @@ export class CozyDatePicker {
   private selectedDates: Date[];
   private rangeStart: Date | null = null;
   private rangeEnd: Date | null = null;
+  
+  // View mode states: 'date', 'month', 'year'
+  private viewMode: 'date' | 'month' | 'year';
 
   constructor(input: HTMLInputElement, config: DatePickerConfig = {}) {
     this.input = input;
     this.config = {
-      mode: 'single',
+      mode: 'single', // 'single' | 'range' | 'month' | 'year'
       locale: navigator.language || 'en-US',
       ...config,
     };
     this.currentDate = new Date();
     this.selectedDates = [];
+    
+    // If input specifies 'month' or 'year' natively, or config overrides it
+    if (this.config.mode === 'month') {
+      this.viewMode = 'month';
+    } else if (this.config.mode === 'year') {
+      this.viewMode = 'year';
+    } else {
+      this.viewMode = 'date';
+    }
     
     this.popup = document.createElement('div');
     this.popup.className = 'cozyalert-datepicker-popup';
@@ -41,6 +53,9 @@ export class CozyDatePicker {
 
   private open() {
     this.popup.classList.add('active');
+    // Ensure we start on the correct view based on mode
+    if (this.config.mode === 'month') this.viewMode = 'month';
+    if (this.config.mode === 'year') this.viewMode = 'year';
     this.render();
   }
 
@@ -69,40 +84,156 @@ export class CozyDatePicker {
       const s = this.formatLocal(this.rangeStart, { year: 'numeric', month: 'short', day: 'numeric' });
       const e = this.formatLocal(this.rangeEnd, { year: 'numeric', month: 'short', day: 'numeric' });
       this.input.value = `${s} - ${e}`;
+    } else if (this.config.mode === 'month' && this.selectedDates.length > 0) {
+      this.input.value = this.formatLocal(this.selectedDates[0], { year: 'numeric', month: 'long' });
+    } else if (this.config.mode === 'year' && this.selectedDates.length > 0) {
+      this.input.value = this.formatLocal(this.selectedDates[0], { year: 'numeric' });
     }
+    
+    // Dispatch native input event so form tracking picks it up reliably
+    this.input.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
   private render() {
     this.popup.innerHTML = '';
     
-    const year = this.currentDate.getFullYear();
-    const month = this.currentDate.getMonth();
-    const monthName = this.formatLocal(this.currentDate, { month: 'long', year: 'numeric' });
+    if (this.viewMode === 'year') {
+      this.renderYearView();
+    } else if (this.viewMode === 'month') {
+      this.renderMonthView();
+    } else {
+      this.renderDateView();
+    }
+  }
 
-    // Header
+  private renderHeader(titleText: string, onPrev: (e: MouseEvent) => void, onNext: (e: MouseEvent) => void, onTitleClick?: (e: MouseEvent) => void) {
     const header = document.createElement('div');
     header.className = 'cozyalert-datepicker-header';
     
     const prevBtn = document.createElement('button');
     prevBtn.className = 'cozyalert-datepicker-nav-btn';
     prevBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>';
-    prevBtn.onclick = () => { this.currentDate.setMonth(month - 1); this.render(); };
+    prevBtn.onclick = (e) => { e.stopPropagation(); e.preventDefault(); onPrev(e); };
 
     const title = document.createElement('div');
     title.className = 'cozyalert-datepicker-month-year';
-    title.textContent = monthName;
+    title.textContent = titleText;
+    if (onTitleClick) {
+      title.style.cursor = 'pointer';
+      title.onclick = (e) => { e.stopPropagation(); onTitleClick(e); };
+    } else {
+      title.style.cursor = 'default';
+    }
 
     const nextBtn = document.createElement('button');
     nextBtn.className = 'cozyalert-datepicker-nav-btn';
     nextBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>';
-    nextBtn.onclick = () => { this.currentDate.setMonth(month + 1); this.render(); };
+    nextBtn.onclick = (e) => { e.stopPropagation(); e.preventDefault(); onNext(e); };
 
     header.appendChild(prevBtn);
     header.appendChild(title);
     header.appendChild(nextBtn);
     this.popup.appendChild(header);
+  }
 
-    // Grid
+  private renderYearView() {
+    const startYear = Math.floor(this.currentDate.getFullYear() / 12) * 12;
+    
+    this.renderHeader(
+      `${startYear} - ${startYear + 11}`,
+      () => { this.currentDate.setFullYear(startYear - 12); this.render(); },
+      () => { this.currentDate.setFullYear(startYear + 12); this.render(); }
+    );
+
+    const grid = document.createElement('div');
+    grid.className = 'cozyalert-datepicker-grid year-grid';
+
+    for (let i = 0; i < 12; i++) {
+      const yearStr = (startYear + i).toString();
+      const cell = document.createElement('div');
+      cell.className = 'cozyalert-datepicker-day month-year-cell';
+      cell.textContent = yearStr;
+
+      if (this.selectedDates[0] && this.selectedDates[0].getFullYear().toString() === yearStr) {
+        cell.classList.add('selected');
+      }
+
+      cell.onclick = (e) => {
+        e.stopPropagation();
+        this.currentDate.setFullYear(startYear + i);
+        if (this.config.mode === 'year') {
+          this.selectedDates = [new Date(startYear + i, 0, 1)];
+          this.updateInputValue();
+          this.close();
+        } else {
+          this.viewMode = 'month';
+          this.render();
+        }
+      };
+      grid.appendChild(cell);
+    }
+    this.popup.appendChild(grid);
+  }
+
+  private renderMonthView() {
+    const year = this.currentDate.getFullYear();
+    
+    this.renderHeader(
+      year.toString(),
+      () => { this.currentDate.setFullYear(year - 1); this.render(); },
+      () => { this.currentDate.setFullYear(year + 1); this.render(); },
+      () => { 
+        if (this.config.mode !== 'month') {
+          this.viewMode = 'year'; 
+          this.render(); 
+        }
+      }
+    );
+
+    const grid = document.createElement('div');
+    grid.className = 'cozyalert-datepicker-grid month-grid';
+
+    for (let i = 0; i < 12; i++) {
+      const d = new Date(year, i, 1);
+      const monthStr = this.formatLocal(d, { month: 'short' });
+      
+      const cell = document.createElement('div');
+      cell.className = 'cozyalert-datepicker-day month-year-cell';
+      cell.textContent = monthStr;
+
+      if (this.selectedDates[0] && this.selectedDates[0].getMonth() === i && this.selectedDates[0].getFullYear() === year) {
+        cell.classList.add('selected');
+      }
+
+      cell.onclick = (e) => {
+        e.stopPropagation();
+        this.currentDate.setMonth(i);
+        if (this.config.mode === 'month') {
+          this.selectedDates = [new Date(year, i, 1)];
+          this.updateInputValue();
+          this.close();
+        } else {
+          this.viewMode = 'date';
+          this.render();
+        }
+      };
+      grid.appendChild(cell);
+    }
+    this.popup.appendChild(grid);
+  }
+
+  private renderDateView() {
+    const year = this.currentDate.getFullYear();
+    const month = this.currentDate.getMonth();
+    const monthName = this.formatLocal(this.currentDate, { month: 'long', year: 'numeric' });
+
+    this.renderHeader(
+      monthName,
+      () => { this.currentDate.setMonth(month - 1); this.render(); },
+      () => { this.currentDate.setMonth(month + 1); this.render(); },
+      () => { this.viewMode = 'month'; this.render(); }
+    );
+
     const grid = document.createElement('div');
     grid.className = 'cozyalert-datepicker-grid';
 
@@ -121,7 +252,6 @@ export class CozyDatePicker {
 
     const { firstDay, daysInMonth, daysInPrevMonth } = this.getMonthDays(year, month);
     const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
-
     const todayStr = new Date().toDateString();
 
     for (let i = 0; i < totalCells; i++) {

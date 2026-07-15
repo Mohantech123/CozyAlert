@@ -413,29 +413,8 @@ export const createAlertDom = (
             wrapper.appendChild(icon);
             group.appendChild(wrapper);
             
-            // Re-assign form values when picker changes
-            const originalOnInput = input.oninput;
-            input.oninput = null; // Remove native oninput since it's readonly
-            
+            // We rely on the picker calling dispatchEvent(new Event('input')) to trigger the native oninput listener
             const dp = new CozyDatePicker(input, field.datePickerConfig || { mode: field.type === 'daterange' ? 'range' : 'single' });
-            
-            // Create a MutationObserver to listen for value changes since readonly input doesn't fire 'input' event when updated via JS
-            const observer = new MutationObserver(() => {
-                formValues[field.id] = input.value;
-                clearError();
-            });
-            observer.observe(input, { attributes: true, attributeFilter: ['value'] });
-
-            // Override input value setter to trigger observer
-            const originalSet = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
-            if(originalSet) {
-              Object.defineProperty(input, 'value', {
-                  set(val) {
-                      originalSet.call(this, val);
-                      input.setAttribute('value', val); // Triggers MutationObserver
-                  }
-              });
-            }
 
           } else if (field.type === 'time') {
             const wrapper = document.createElement('div');
@@ -449,24 +428,7 @@ export const createAlertDom = (
             wrapper.appendChild(icon);
             group.appendChild(wrapper);
 
-            input.oninput = null;
             const tp = new CozyTimePicker(input, field.timePickerConfig || {});
-            
-            const observer = new MutationObserver(() => {
-                formValues[field.id] = input.value;
-                clearError();
-            });
-            observer.observe(input, { attributes: true, attributeFilter: ['value'] });
-
-            const originalSet = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
-            if(originalSet) {
-              Object.defineProperty(input, 'value', {
-                  set(val) {
-                      originalSet.call(this, val);
-                      input.setAttribute('value', val);
-                  }
-              });
-            }
           } else {
             group.appendChild(input);
           }
