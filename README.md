@@ -267,7 +267,7 @@ Alert.fire({
 | Property | Type | Description |
 |---|---|---|
 | `id` | `string` | **Required.** The key that will be returned in the resulting JSON object. |
-| `type` | `enum` | `'text'`, `'email'`, `'password'`, `'number'`, `'textarea'`, `'select'`, `'checkbox'`, `'file'` |
+| `type` | `enum` | `'text'`, `'email'`, `'password'`, `'number'`, `'textarea'`, `'select'`, `'checkbox'`, `'file'`, `'date'`, `'time'`, `'color'`, `'radio'` |
 | `label` | `string` | The label text displayed above the input field. |
 | `placeholder` | `string` | Placeholder text inside the input. |
 | `defaultValue` | `any` | Initial value of the field. |
@@ -288,7 +288,7 @@ Here are the global properties you can pass into `Alert.fire()`, `Alert.modal()`
 | `text` | `string` | `undefined` | The paragraph text below the title. |
 | `html` | `string \| HTMLElement` | `undefined` | Custom HTML payload (overrides `text`). |
 | `icon` / `type` | `string` | `undefined` | Built-in icons: `'success'`, `'error'`, `'warning'`, `'info'`, `'question'`. |
-| `size` | `string` | `'md'` | Presets: `'xs'`, `'sm'`, `'md'`, `'lg'`, `'xl'`. Applies to Modals and Offcanvas. |
+| `size` | `string` | `'md'` | Presets: `'xs'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'2xl'`, `'3xl'`, `'4xl'`, `'full'`, `'screen'`. Applies to Modals and Offcanvas. |
 | `showConfirmButton` | `boolean` | `true` | Show/hide the main Confirm button. |
 | `showCancelButton` | `boolean` | `false` | Show/hide the Cancel button. |
 | `showCloseButton` | `boolean` | `true` | Show/hide the 'X' icon in the top right. |
@@ -321,5 +321,22 @@ CozyAlert is 100% styled using CSS Variables on the `:root`. This means you can 
 }
 ```
 
+### Global Theming
+Because CozyPopup inherits CSS variables from its parent, you can apply a theme **globally** to your entire app simply by scoping the variables to a class on the `<body>` tag.
+
+**Example: Global Pink Theme**
+```css
+body.theme-pink {
+  --ca-bg: #fce7f3;
+  --ca-text: #831843;
+  --ca-text-muted: #9d174d;
+  --ca-input-bg: #fbcfe8;
+  --ca-border: #f9a8d4;
+  --ca-confirm-bg: #db2777;
+  --ca-confirm-hover: #be185d;
+}
+```
+Now, by running `document.body.className = 'theme-pink'`, every single alert, modal, and toast triggered by CozyPopup will instantly adopt the Pink Theme! Check out our [Live Playground](https://mohantech123.github.io/CozyAlert/) to try out 10+ global themes like Cyberpunk, Hacker, and Glassmorphism!
+
 ### Dark Mode
-CozyAlert natively ships with a `.cozyalert-theme-dark` class. To force dark mode, you can pass `theme: 'dark'` into any alert, OR simply add `<body class="dark">` to your HTML, and CozyAlert will automatically switch to dark mode aesthetics!
+CozyAlert natively ships with a `.cozyalert-theme-dark` class. To force dark mode on a specific alert, pass `theme: 'dark'`. To enable it globally, simply add `<body class="dark">` to your HTML.

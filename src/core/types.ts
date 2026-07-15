@@ -37,7 +37,7 @@ export interface AlertOptions {
   text?: string;
   type?: AlertType;
   icon?: AlertType;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | 'full' | 'screen';
   showCancelButton?: boolean;
   showConfirmButton?: boolean;
   showCloseButton?: boolean;

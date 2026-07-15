@@ -158,16 +158,59 @@
     .cozyalert-popup.anim-flip { animation: flipIn 0.5s ease-out; }
     @keyframes flipIn { from { transform: perspective(400px) rotateY(90deg); opacity: 0; } to { transform: perspective(400px) rotateY(0deg); opacity: 1; } }
 
-    /* Custom Pink Theme Demo */
-    .theme-pink {
-      --ca-bg: #fce7f3 !important;
-      --ca-text: #831843 !important;
-      --ca-text-muted: #9d174d !important;
-      --ca-input-bg: #fbcfe8 !important;
-      --ca-border: #f9a8d4 !important;
-      --ca-confirm-bg: #db2777 !important;
-      --ca-confirm-hover: #be185d !important;
+    /* GLOBAL THEMES */
+    body.theme-cyberpunk {
+      --bg-color: #050505; --text-color: #fdf2f8; --card-bg: #171717; --card-border: #db2777;
+      --ca-bg: #111; --ca-text: #fdf2f8; --ca-text-muted: #fbcfe8; --ca-input-bg: #222; --ca-border: #db2777;
+      --ca-confirm-bg: #e11d48; --ca-confirm-hover: #be123c; --ca-font: 'Courier New', monospace;
     }
+    body.theme-hacker {
+      --bg-color: #000; --text-color: #0f0; --card-bg: #000; --card-border: #0f0;
+      --ca-bg: #000; --ca-text: #0f0; --ca-text-muted: #0a0; --ca-input-bg: #111; --ca-border: #0f0;
+      --ca-confirm-bg: #0a0; --ca-confirm-hover: #0f0; --ca-font: 'Courier New', monospace;
+    }
+    body.theme-ocean {
+      --bg-color: #083344; --text-color: #cffafe; --card-bg: #164e63; --card-border: #06b6d4;
+      --ca-bg: #082f49; --ca-text: #cffafe; --ca-text-muted: #a5f3fc; --ca-input-bg: #0c4a6e; --ca-border: #06b6d4;
+      --ca-confirm-bg: #0284c7; --ca-confirm-hover: #0369a1; --ca-font: 'Inter', sans-serif;
+    }
+    body.theme-dracula {
+      --bg-color: #282a36; --text-color: #f8f8f2; --card-bg: #44475a; --card-border: #bd93f9;
+      --ca-bg: #282a36; --ca-text: #f8f8f2; --ca-text-muted: #6272a4; --ca-input-bg: #44475a; --ca-border: #bd93f9;
+      --ca-confirm-bg: #ff79c6; --ca-confirm-hover: #ff92df; --ca-font: 'Outfit', sans-serif;
+    }
+    body.theme-sunset {
+      --bg-color: #450a0a; --text-color: #ffedd5; --card-bg: #7f1d1d; --card-border: #f97316;
+      --ca-bg: #450a0a; --ca-text: #ffedd5; --ca-text-muted: #fdba74; --ca-input-bg: #7f1d1d; --ca-border: #f97316;
+      --ca-confirm-bg: #ea580c; --ca-confirm-hover: #c2410c; --ca-font: 'Inter', sans-serif;
+    }
+    body.theme-minimalist {
+      --bg-color: #fff; --text-color: #000; --card-bg: #fff; --card-border: #000;
+      --ca-bg: #fff; --ca-text: #000; --ca-text-muted: #555; --ca-input-bg: #f5f5f5; --ca-border: #000;
+      --ca-confirm-bg: #000; --ca-confirm-hover: #333; --ca-font: 'Inter', sans-serif;
+      --ca-radius-popup: 0px; --ca-radius-btn: 0px; --ca-radius-input: 0px;
+    }
+    body.theme-retro {
+      --bg-color: #2e003e; --text-color: #0ff; --card-bg: #3d005e; --card-border: #f0f;
+      --ca-bg: #2e003e; --ca-text: #0ff; --ca-text-muted: #fff; --ca-input-bg: #3d005e; --ca-border: #f0f;
+      --ca-confirm-bg: #f0f; --ca-confirm-hover: #c0c; --ca-font: 'Courier New', monospace;
+    }
+    body.theme-forest {
+      --bg-color: #14532d; --text-color: #dcfce7; --card-bg: #166534; --card-border: #4ade80;
+      --ca-bg: #14532d; --ca-text: #dcfce7; --ca-text-muted: #bbf7d0; --ca-input-bg: #166534; --ca-border: #4ade80;
+      --ca-confirm-bg: #16a34a; --ca-confirm-hover: #15803d; --ca-font: 'Outfit', sans-serif;
+    }
+    body.theme-highcontrast {
+      --bg-color: #000; --text-color: #ff0; --card-bg: #000; --card-border: #ff0;
+      --ca-bg: #000; --ca-text: #ff0; --ca-text-muted: #fff; --ca-input-bg: #000; --ca-border: #ff0;
+      --ca-confirm-bg: #ff0; --ca-confirm-hover: #cc0; --ca-font: 'Inter', sans-serif;
+    }
+    body.theme-glass {
+      --bg-color: #64748b; --text-color: #fff; --card-bg: rgba(255,255,255,0.1); --card-border: rgba(255,255,255,0.2);
+      --ca-bg: rgba(255,255,255,0.1); --ca-text: #fff; --ca-text-muted: #eee; --ca-input-bg: rgba(255,255,255,0.2); --ca-border: rgba(255,255,255,0.3);
+      --ca-confirm-bg: rgba(255,255,255,0.3); --ca-confirm-hover: rgba(255,255,255,0.5); --ca-font: 'Outfit', sans-serif;
+    }
+    body.theme-glass .cozyalert-popup { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 
   </style>
   
@@ -184,7 +227,7 @@
       CozyPopup
     </div>
     <div class="nav-links">
-      <button onclick="document.body.classList.toggle('light-theme')">☀️ Theme</button>
+      <button onclick="setGlobalTheme('')">Reset Theme</button>
       <a href="https://github.com/Mohantech123/CozyAlert" target="_blank">GitHub Docs</a>
       <a href="https://www.npmjs.com/package/cozy-popup" target="_blank" style="color: var(--accent);">NPM Package</a>
     </div>
@@ -306,6 +349,10 @@
           <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Medium Modal', text: 'Default layout.', size: 'md' })">Medium (md)</button>
           <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Large Modal', text: 'Wide layout for complex data.', size: 'lg' })">Large (lg)</button>
           <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Extra Large', text: 'Maximum width.', size: 'xl' })">Extra Large (xl)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: '2XL Modal', text: '48rem width.', size: '2xl' })">2XL (48rem)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: '3XL Modal', text: '56rem width.', size: '3xl' })">3XL (56rem)</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Full Width', text: '100% width of container.', size: 'full' })">Full Width</button>
+          <button class="btn btn-secondary" onclick="Alert.modal({ title: 'Full Screen', text: '100vw x 100vh', size: 'screen' })">Full Screen Takeover</button>
         </div>
       </div>
 
@@ -330,13 +377,21 @@
         </div>
       </div>
 
-      <!-- 13. Theme Variants -->
+      <!-- 13. Global Themes Engine -->
       <div class="card">
-        <h3>13. Theme Variants</h3>
+        <h3>13. Global Themes</h3>
         <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Dark Theme', text: 'Forced dark mode regardless of OS.', theme: 'dark' })">Dark Theme</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Light Theme', text: 'Forced light mode regardless of OS.', theme: 'light' })">Light Theme</button>
-          <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Pink Theme', text: 'Custom CSS variable injection.', customClass: { popup: 'theme-pink' } })">Custom Pink Theme</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('light-theme')">Light Theme (Default)</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-cyberpunk')">Cyberpunk</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-hacker')">Hacker Terminal</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-ocean')">Ocean Aqua</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-dracula')">Dracula</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-sunset')">Sunset</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-minimalist')">Minimalist Sharp</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-retro')">Retro 80s</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-forest')">Forest Eco</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-highcontrast')">High Contrast</button>
+          <button class="btn btn-secondary" onclick="setGlobalTheme('theme-glass')">Glassmorphism</button>
         </div>
       </div>
 
@@ -344,6 +399,11 @@
   </main>
 
   <script>
+    function setGlobalTheme(themeClass) {
+      document.body.className = themeClass;
+      Alert.success('Theme Applied', 'All new popups and forms will use this theme globally!');
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       // Bind CozyAlert to global Alert for ease of use in playground
       // tsup's globalName exports an object with the named and default exports.

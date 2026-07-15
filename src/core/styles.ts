@@ -197,6 +197,11 @@ export const injectStyles = () => {
     .cozyalert-popup.cozyalert-size-md { max-width: 28rem; }
     .cozyalert-popup.cozyalert-size-lg { max-width: 32rem; }
     .cozyalert-popup.cozyalert-size-xl { max-width: 42rem; }
+    .cozyalert-popup.cozyalert-size-2xl { max-width: 48rem; }
+    .cozyalert-popup.cozyalert-size-3xl { max-width: 56rem; }
+    .cozyalert-popup.cozyalert-size-4xl { max-width: 64rem; }
+    .cozyalert-popup.cozyalert-size-full { max-width: 100%; border-radius: 0; }
+    .cozyalert-popup.cozyalert-size-screen { width: 100vw; height: 100vh; max-width: 100vw; border-radius: 0; margin: 0; }
 
     @media (max-width: 640px) {
       .cozyalert-overlay { padding: 1rem; }
@@ -224,6 +229,11 @@ export const injectStyles = () => {
     .cozyalert-popup.cozyalert-offcanvas-popup.position-left.cozyalert-size-md, .cozyalert-popup.cozyalert-offcanvas-popup.position-right.cozyalert-size-md { max-width: 24rem; }
     .cozyalert-popup.cozyalert-offcanvas-popup.position-left.cozyalert-size-lg, .cozyalert-popup.cozyalert-offcanvas-popup.position-right.cozyalert-size-lg { max-width: 30rem; }
     .cozyalert-popup.cozyalert-offcanvas-popup.position-left.cozyalert-size-xl, .cozyalert-popup.cozyalert-offcanvas-popup.position-right.cozyalert-size-xl { max-width: 36rem; }
+    .cozyalert-popup.cozyalert-offcanvas-popup.position-left.cozyalert-size-2xl, .cozyalert-popup.cozyalert-offcanvas-popup.position-right.cozyalert-size-2xl { max-width: 42rem; }
+    .cozyalert-popup.cozyalert-offcanvas-popup.position-left.cozyalert-size-3xl, .cozyalert-popup.cozyalert-offcanvas-popup.position-right.cozyalert-size-3xl { max-width: 48rem; }
+    .cozyalert-popup.cozyalert-offcanvas-popup.position-left.cozyalert-size-4xl, .cozyalert-popup.cozyalert-offcanvas-popup.position-right.cozyalert-size-4xl { max-width: 56rem; }
+    .cozyalert-popup.cozyalert-offcanvas-popup.position-left.cozyalert-size-full, .cozyalert-popup.cozyalert-offcanvas-popup.position-right.cozyalert-size-full { max-width: 100vw; width: 100vw; }
+    .cozyalert-popup.cozyalert-offcanvas-popup.position-left.cozyalert-size-screen, .cozyalert-popup.cozyalert-offcanvas-popup.position-right.cozyalert-size-screen { max-width: 100vw; width: 100vw; }
 
     .cozyalert-popup.cozyalert-offcanvas-popup.position-right { right: 0; top: 0; bottom: 0; height: 100%; max-height: 100%; overflow-y: auto; }
     .cozyalert-popup.cozyalert-offcanvas-popup.position-left { left: 0; top: 0; bottom: 0; height: 100%; max-height: 100%; overflow-y: auto; }
