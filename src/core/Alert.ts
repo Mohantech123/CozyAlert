@@ -4,6 +4,9 @@ import { createAlertDom } from './dom';
 
 export class CozyAlert {
   static fire(options: AlertOptions | string, text?: string, icon?: AlertOptions['icon']): Promise<AlertResult> {
+    if (typeof document === 'undefined') {
+      return Promise.resolve({ isConfirmed: false, isDenied: false, isDismissed: true });
+    }
     injectStyles();
 
     let parsedOptions: AlertOptions;
