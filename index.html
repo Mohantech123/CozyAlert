@@ -370,7 +370,7 @@
       <div class="card">
         <h3>12. Premium Real-World Uses</h3>
         <div class="btn-group">
-          <button class="btn btn-secondary" onclick="Alert.toast('Cookie Consent: We use cookies to improve experience.', 'info', 'bottom-center')">GDPR Cookie Consent</button>
+          <button class="btn btn-secondary" onclick="Alert.fire({ title: '🍪 Cookie Consent', text: 'We use cookies to improve your experience. By continuing, you agree to our policy.', toast: true, position: 'bottom', showConfirmButton: true, confirmButtonText: 'Accept', timer: 10000 })">GDPR Cookie Consent</button>
           <button class="btn btn-secondary" onclick="Alert.modal({ title: '🌟 Go Premium', html: '<p>Unlock advanced features for $9.99/mo.</p>', confirmButtonText: 'Subscribe', confirmButtonColor: '#8b5cf6', showCancelButton: true })">Subscription Modal</button>
           <button class="btn btn-secondary" onclick="Alert.fire({ title: 'Update Available v1.2', html: '<ul style=\'text-align:left;\'><li>✨ New UI</li><li>🚀 Faster Load</li></ul>', confirmButtonText: 'Install Update' })">Changelog Announcement</button>
           <button class="btn btn-secondary" onclick="Alert.offcanvas({ title: '🤖 AI Assistant', html: '<div style=\'height: 200px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px; display:flex; align-items:center; justify-content:center; color:gray;\'>Chat history here...</div>', position: 'right', fields: [{id: 'msg', type: 'text', placeholder: 'Ask me anything...'}] })">AI Chat Popup</button>
