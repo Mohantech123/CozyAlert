@@ -438,6 +438,12 @@
           <button class="btn btn-secondary" style="border-color: #8b5cf6; color: #8b5cf6;" onclick="Alert.fire({ title: 'Spinner Time Picker', size: 'sm', fields: [{ id: 'time', type: 'time', label: 'Select Time', timePickerConfig: { style: 'default' } }], confirmButtonText: 'Set Time' }).then(r => r.isConfirmed && Alert.success('Time Set!', r.value.time))">Basic Spinner Time</button>
           
           <button class="btn btn-secondary" style="border-color: #8b5cf6; color: #8b5cf6;" onclick="Alert.fire({ title: 'Premium Clock', size: 'sm', fields: [{ id: 'time', type: 'time', label: 'Select Time', timePickerConfig: { style: 'clock' } }], confirmButtonText: 'Set Time' }).then(r => r.isConfirmed && Alert.success('Time Set!', r.value.time))">Premium Clock Dial</button>
+
+          <button class="btn btn-secondary" style="border-color: #10b981; color: #10b981;" onclick="Alert.fire({ title: 'Mobile Date Picker', size: 'sm', fields: [{ id: 'date', type: 'date', label: 'Select Date', datePickerConfig: { mobileLayout: true } }], confirmButtonText: 'Submit Form' }).then(r => r.isConfirmed && Alert.success('Date Selected!', r.value.date))">Mobile Date View</button>
+
+          <button class="btn btn-secondary" style="border-color: #10b981; color: #10b981;" onclick="Alert.fire({ title: 'Mobile Scroll Time', size: 'sm', fields: [{ id: 'time', type: 'time', label: 'Select Time', timePickerConfig: { style: 'scroll', mobileLayout: true } }], confirmButtonText: 'Submit Form' }).then(r => r.isConfirmed && Alert.success('Time Set!', r.value.time))">Mobile Scroll Time</button>
+
+          <button class="btn btn-secondary" style="border-color: #f43f5e; color: #f43f5e;" onclick="Alert.fire({ title: 'Disabled Dates', size: 'sm', fields: [{ id: 'date', type: 'date', label: 'Pick a weekday', datePickerConfig: { disableWeekends: true, minDate: new Date() } }], confirmButtonText: 'Confirm' })">No Weekends / Past</button>
         </div>
       </div>
 

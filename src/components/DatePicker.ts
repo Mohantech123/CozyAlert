@@ -24,7 +24,7 @@ export class CozyDatePicker {
     
     // If input specifies 'month' or 'year' natively, or config overrides it
     if (this.config.mode === 'month') {
-      this.viewMode = 'month';
+      this.viewMode = 'year'; // Request: open year picker first
     } else if (this.config.mode === 'year') {
       this.viewMode = 'year';
     } else {
@@ -33,6 +33,9 @@ export class CozyDatePicker {
     
     this.popup = document.createElement('div');
     this.popup.className = 'cozyalert-datepicker-popup';
+    if (this.config.mobileLayout) {
+      this.popup.classList.add('mobile-layout');
+    }
     this.input.parentNode?.appendChild(this.popup);
 
     this.initEvents();
@@ -53,10 +56,24 @@ export class CozyDatePicker {
 
   private open() {
     this.popup.classList.add('active');
-    // Ensure we start on the correct view based on mode
-    if (this.config.mode === 'month') this.viewMode = 'month';
+    if (this.config.mode === 'month') this.viewMode = 'year';
     if (this.config.mode === 'year') this.viewMode = 'year';
     this.render();
+  }
+
+  private isDateDisabled(date: Date): boolean {
+    if (this.config.disableWeekends) {
+      const day = date.getDay();
+      if (day === 0 || day === 6) return true;
+    }
+    if (this.config.minDate && date < new Date(this.config.minDate)) return true;
+    if (this.config.maxDate && date > new Date(this.config.maxDate)) return true;
+    
+    if (this.config.disabledDates) {
+      const dateStr = date.toDateString();
+      return this.config.disabledDates.some(d => new Date(d).toDateString() === dateStr);
+    }
+    return false;
   }
 
   public close() {
@@ -97,6 +114,10 @@ export class CozyDatePicker {
   private render() {
     this.popup.innerHTML = '';
     
+    if (this.config.mobileLayout) {
+      this.renderMobileHeader();
+    }
+
     if (this.viewMode === 'year') {
       this.renderYearView();
     } else if (this.viewMode === 'month') {
@@ -133,6 +154,34 @@ export class CozyDatePicker {
     header.appendChild(prevBtn);
     header.appendChild(title);
     header.appendChild(nextBtn);
+    this.popup.appendChild(header);
+  }
+
+  private renderMobileHeader() {
+    const header = document.createElement('div');
+    header.className = 'cozyalert-mobile-header';
+    
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'cozyalert-mobile-cancel';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = (e) => { e.stopPropagation(); this.close(); };
+
+    const title = document.createElement('div');
+    title.className = 'cozyalert-mobile-title';
+    title.textContent = 'Choose Date';
+
+    const doneBtn = document.createElement('button');
+    doneBtn.className = 'cozyalert-mobile-done';
+    doneBtn.textContent = 'Done';
+    doneBtn.onclick = (e) => { 
+      e.stopPropagation(); 
+      this.updateInputValue(); 
+      this.close(); 
+    };
+
+    header.appendChild(cancelBtn);
+    header.appendChild(title);
+    header.appendChild(doneBtn);
     this.popup.appendChild(header);
   }
 
@@ -311,26 +360,30 @@ export class CozyDatePicker {
         }
       }
 
-      cell.onclick = (e) => {
-        e.stopPropagation();
-        if (this.config.mode === 'single') {
-          this.selectedDates = [dayDate];
-          this.updateInputValue();
-          this.close();
-        } else if (this.config.mode === 'range') {
-          if (!this.rangeStart || (this.rangeStart && this.rangeEnd)) {
-            this.rangeStart = dayDate;
-            this.rangeEnd = null;
-          } else if (dayDate < this.rangeStart) {
-            this.rangeStart = dayDate;
-          } else {
-            this.rangeEnd = dayDate;
+      if (this.isDateDisabled(dayDate)) {
+        cell.classList.add('disabled');
+      } else {
+        cell.onclick = (e) => {
+          e.stopPropagation();
+          if (this.config.mode === 'single') {
+            this.selectedDates = [dayDate];
             this.updateInputValue();
             this.close();
+          } else if (this.config.mode === 'range') {
+            if (!this.rangeStart || (this.rangeStart && this.rangeEnd)) {
+              this.rangeStart = dayDate;
+              this.rangeEnd = null;
+            } else if (dayDate < this.rangeStart) {
+              this.rangeStart = dayDate;
+            } else {
+              this.rangeEnd = dayDate;
+              this.updateInputValue();
+              this.close();
+            }
+            this.render();
           }
-          this.render();
-        }
-      };
+        };
+      }
 
       grid.appendChild(cell);
     }

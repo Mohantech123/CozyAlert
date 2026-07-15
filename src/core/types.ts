@@ -37,13 +37,15 @@ export interface DatePickerConfig {
   timezone?: string; // e.g. 'America/New_York'
   events?: { date: string | Date; type: 'holiday' | 'exam' | 'meeting' | 'birthday' | 'deadline'; color?: string }[];
   inline?: boolean;
+  mobileLayout?: boolean;
 }
 
 export interface TimePickerConfig {
   format?: '12h' | '24h';
-  style?: 'default' | 'clock';
+  style?: 'default' | 'clock' | 'scroll';
   enableSeconds?: boolean;
   bookingSlots?: string[]; // e.g. ['09:00 AM', '09:30 AM']
+  mobileLayout?: boolean;
 }
 
 export interface AlertResult {

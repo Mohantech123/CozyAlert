@@ -32,7 +32,10 @@ export class CozyTimePicker {
     }
 
     this.popup = document.createElement('div');
-    this.popup.className = 'cozyalert-datepicker-popup'; // reuse popup container
+    this.popup.className = 'cozyalert-datepicker-popup';
+    if (this.config.mobileLayout) {
+      this.popup.classList.add('mobile-layout');
+    }
     this.input.parentNode?.appendChild(this.popup);
 
     this.initEvents();
@@ -79,13 +82,47 @@ export class CozyTimePicker {
   private render() {
     this.popup.innerHTML = '';
     
+    if (this.config.mobileLayout) {
+      this.renderMobileHeader();
+    }
+
     if (this.config.bookingSlots && this.config.bookingSlots.length > 0) {
       this.renderBookingSlots();
     } else if (this.config.style === 'clock') {
       this.renderClockStyle();
+    } else if (this.config.style === 'scroll') {
+      this.renderScrollStyle();
     } else {
       this.renderDefaultStyle();
     }
+  }
+
+  private renderMobileHeader() {
+    const header = document.createElement('div');
+    header.className = 'cozyalert-mobile-header';
+    
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'cozyalert-mobile-cancel';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = (e) => { e.stopPropagation(); this.close(); };
+
+    const title = document.createElement('div');
+    title.className = 'cozyalert-mobile-title';
+    title.textContent = 'Choose Time';
+
+    const doneBtn = document.createElement('button');
+    doneBtn.className = 'cozyalert-mobile-done';
+    doneBtn.textContent = 'Done';
+    doneBtn.onclick = (e) => { 
+      e.stopPropagation(); 
+      this.updateInputValue(); 
+      this.close(); 
+    };
+
+    header.appendChild(cancelBtn);
+    header.appendChild(title);
+    header.appendChild(doneBtn);
+    this.popup.appendChild(header);
   }
 
   private renderBookingSlots() {
@@ -264,5 +301,72 @@ export class CozyTimePicker {
     clockWrap.appendChild(centerDot);
 
     this.popup.appendChild(clockWrap);
+  }
+
+  private renderScrollStyle() {
+    const container = document.createElement('div');
+    container.className = 'cozyalert-time-scroll-container';
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'cozyalert-time-scroll-overlay';
+    container.appendChild(overlay);
+
+    const createCol = (items: (string|number)[], currentVal: string|number, onSelect: (v: any) => void) => {
+      const col = document.createElement('div');
+      col.className = 'cozyalert-scroll-col';
+      
+      const updateActive = () => {
+        const scrollTop = col.scrollTop;
+        const index = Math.round(scrollTop / 40);
+        if (items[index] !== undefined) {
+          Array.from(col.children).forEach(c => c.classList.remove('active'));
+          col.children[index]?.classList.add('active');
+          onSelect(items[index]);
+        }
+      };
+
+      let isScrolling: any;
+      col.addEventListener('scroll', () => {
+        clearTimeout(isScrolling);
+        isScrolling = setTimeout(() => {
+          updateActive();
+          if (!this.config.mobileLayout) this.updateInputValue();
+        }, 100);
+      });
+
+      items.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.className = 'cozyalert-scroll-item';
+        if (item === currentVal) div.classList.add('active');
+        div.textContent = typeof item === 'number' ? item.toString().padStart(2, '0') : item;
+        div.onclick = (e) => {
+          e.stopPropagation();
+          col.scrollTo({ top: i * 40, behavior: 'smooth' });
+        };
+        col.appendChild(div);
+      });
+
+      // Initial scroll position
+      setTimeout(() => {
+        const initIndex = items.indexOf(currentVal);
+        if (initIndex > -1) col.scrollTop = initIndex * 40;
+      }, 10);
+
+      return col;
+    };
+
+    const maxH = this.config.format === '24h' ? 23 : 12;
+    const minH = this.config.format === '24h' ? 0 : 1;
+    const hours = Array.from({length: maxH - minH + 1}, (_, i) => i + minH);
+    const minutes = Array.from({length: 60}, (_, i) => i);
+
+    container.appendChild(createCol(hours, this.currentHour, (v) => this.currentHour = v));
+    container.appendChild(createCol(minutes, this.currentMinute, (v) => this.currentMinute = v));
+    
+    if (this.config.format !== '24h') {
+      container.appendChild(createCol(['AM', 'PM'], this.currentPeriod, (v) => this.currentPeriod = v));
+    }
+
+    this.popup.appendChild(container);
   }
 }

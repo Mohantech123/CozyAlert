@@ -42,9 +42,17 @@ Alert.success('Saved!', 'Your profile was successfully updated.');
 
 ---
 
-## ⚛️ Framework Integration
+## ⚛️ Framework Integration (100% Agnostic)
 
 CozyAlert is bundled in ESM and CJS formats and bypasses Virtual DOMs. This means it works instantly inside your favorite framework components without wrappers!
+
+### Supported Versions:
+- **React**: 16.8+ (Hooks compatible)
+- **Vue**: 2.x & 3.x (Composition & Options API)
+- **Angular**: 12+ (Ivy and legacy compatible)
+- **Svelte**: v3, v4, v5+
+- **Next.js & Nuxt**: Fully SSR safe (executes only on client via lazy hydration)
+- **Vanilla JS**: ES6+ modules or IIFE scripts
 
 ### React & Next.js
 ```tsx

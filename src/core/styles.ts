@@ -431,17 +431,34 @@ export const injectStyles = () => {
 
     /* TimePicker Clock UI */
     .cozyalert-clock-header { display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; gap: 0.25rem; color: var(--ca-text-muted); margin-bottom: 1.5rem; font-variant-numeric: tabular-nums; }
-    .cozyalert-clock-header span { cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 8px; transition: all 0.2s; }
+    .cozyalert-clock-header span { cursor: pointer; padding: 0.35rem 0.75rem; border-radius: 8px; transition: all 0.2s; background: transparent; }
     .cozyalert-clock-header span.active { color: var(--ca-primary); background: var(--ca-primary-bg); }
     .cozyalert-clock-header span.period-toggle { font-size: 1rem; margin-left: 0.5rem; background: var(--ca-input-bg); border: 1px solid var(--ca-input-border); padding: 0.375rem 0.75rem; color: var(--ca-text); }
     .cozyalert-clock-header span.period-toggle:hover { border-color: var(--ca-primary); }
     
-    .cozyalert-clock-dial { position: relative; width: 220px; height: 220px; border-radius: 50%; background: var(--ca-cancel-bg); margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; }
+    .cozyalert-clock-dial { position: relative; width: 260px; height: 260px; border-radius: 50%; background: #f8fafc; box-shadow: inset 0 2px 10px rgba(0,0,0,0.03); margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; border: 1px solid #f1f5f9; }
     .cozyalert-clock-center { position: absolute; width: 8px; height: 8px; background: var(--ca-primary); border-radius: 50%; z-index: 10; }
     .cozyalert-clock-node { position: absolute; width: 32px; height: 32px; margin-left: -16px; margin-top: -16px; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 500; color: var(--ca-text); cursor: pointer; border-radius: 50%; transition: background 0.2s, color 0.2s; z-index: 2; }
     .cozyalert-clock-node:hover { background: var(--ca-input-border); }
     .cozyalert-clock-node.active { background: var(--ca-primary); color: white; }
     .cozyalert-clock-hand { position: absolute; width: 50%; height: 2px; background: var(--ca-primary); transform-origin: 100% 50%; left: 0; top: calc(50% - 1px); z-index: 1; pointer-events: none; }
+    
+    /* TimePicker Mobile Scroll UI */
+    .cozyalert-time-scroll-container { display: flex; height: 200px; justify-content: center; gap: 1rem; position: relative; margin-top: 1rem; }
+    .cozyalert-time-scroll-overlay { position: absolute; top: 50%; left: 0; right: 0; height: 40px; margin-top: -20px; background: var(--ca-primary-bg); border-radius: 8px; z-index: 0; pointer-events: none; }
+    .cozyalert-scroll-col { flex: 1; max-width: 60px; height: 100%; overflow-y: auto; scroll-snap-type: y mandatory; scrollbar-width: none; z-index: 1; padding: 80px 0; }
+    .cozyalert-scroll-col::-webkit-scrollbar { display: none; }
+    .cozyalert-scroll-item { height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 500; color: var(--ca-text-muted); scroll-snap-align: center; cursor: pointer; transition: color 0.2s, font-size 0.2s; }
+    .cozyalert-scroll-item.active { color: var(--ca-primary); font-weight: 700; font-size: 1.4rem; }
+    
+    /* Mobile Layout Overrides */
+    @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .cozyalert-datepicker-popup.mobile-layout { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; border-radius: 20px 20px 0 0; animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 -10px 40px rgba(0,0,0,0.15); padding: 1.5rem; z-index: 100000; }
+    .cozyalert-mobile-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--ca-input-border); }
+    .cozyalert-mobile-header button { background: none; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; }
+    .cozyalert-mobile-cancel { color: var(--ca-text-muted); }
+    .cozyalert-mobile-done { color: var(--ca-primary); }
+    .cozyalert-mobile-title { font-weight: 700; font-size: 1.1rem; color: var(--ca-text); }
   `;
   document.head.appendChild(style);
 };
