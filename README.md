@@ -161,8 +161,36 @@ const runFlow = async () => {
 };
 runFlow();
 ```
+```
 
-### 4. Offcanvas Drawers
+### 4. Framework Integrations (React, Vue, Angular) & Programmatic Closing
+When building Single Page Applications (SPAs) with modern routers, you may want to forcefully close any open popups when the user navigates to a new page, or clean them up in React's `useEffect`. Use the `CozyAlert.closeAll()` method to instantly destroy all active alerts and clean up memory.
+
+**React Example:**
+```jsx
+import { useEffect } from 'react';
+import CozyAlert from 'cozy-popup';
+
+export function MyComponent() {
+  useEffect(() => {
+    CozyAlert.fire('Welcome to this page!');
+    
+    // Clean up the alert if the user immediately leaves the page
+    return () => CozyAlert.closeAll();
+  }, []);
+}
+```
+
+**Vue/Next/Angular Router Example:**
+```javascript
+// Clean up any stray popups before changing pages
+router.beforeEach((to, from, next) => {
+  CozyAlert.closeAll();
+  next();
+});
+```
+
+### 5. Offcanvas Drawers
 Slide-in panels from the edge of the screen. Perfect for forms and settings menus.
 
 ```javascript

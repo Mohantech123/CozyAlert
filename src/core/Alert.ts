@@ -1,8 +1,14 @@
 import { AlertOptions, AlertResult } from './types';
 import { injectStyles } from './styles';
-import { createAlertDom } from './dom';
+import { createAlertDom, closeAllAlerts } from './dom';
 
 export class CozyAlert {
+  static closeAll(): void {
+    if (typeof document !== 'undefined') {
+      closeAllAlerts();
+    }
+  }
+
   static fire(options: AlertOptions | string, text?: string, icon?: AlertOptions['icon']): Promise<AlertResult> {
     if (typeof document === 'undefined') {
       return Promise.resolve({ isConfirmed: false, isDenied: false, isDismissed: true });

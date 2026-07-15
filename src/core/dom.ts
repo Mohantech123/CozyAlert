@@ -4,6 +4,13 @@ import { getIconSvg, getCloudUploadSvg, getLoaderSvg, getCloseSvg } from './icon
 // Keep track of toast containers by position
 const toastContainers: Record<string, HTMLElement> = {};
 
+// Keep track of all active close functions for closeAll()
+const activeAlerts: Array<() => void> = [];
+
+export const closeAllAlerts = () => {
+  [...activeAlerts].forEach(closeFn => closeFn());
+};
+
 export const createAlertDom = (
   options: AlertOptions,
   resolve: (value: AlertResult | PromiseLike<AlertResult>) => void
@@ -86,6 +93,10 @@ export const createAlertDom = (
     if (isClosed) return;
     isClosed = true;
     if (timerTimeout) clearTimeout(timerTimeout);
+
+    // Remove from active alerts array
+    const idx = activeAlerts.indexOf(forceClose);
+    if (idx > -1) activeAlerts.splice(idx, 1);
 
     // Cleanup listeners
     document.removeEventListener('keydown', handleKeydown);
@@ -524,6 +535,9 @@ export const createAlertDom = (
       setTimeout(() => firstInput.focus(), 10);
     }
   }
+
+  const forceClose = () => closeAlert({ isConfirmed: false, isDenied: false, isDismissed: true });
+  activeAlerts.push(forceClose);
 
   return { closeAlert };
 };
