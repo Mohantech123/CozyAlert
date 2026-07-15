@@ -16,7 +16,7 @@ export class CozyDatePicker {
     this.input = input;
     this.config = {
       mode: 'single', // 'single' | 'range' | 'month' | 'year'
-      locale: navigator.language || 'en-US',
+      locale: typeof navigator !== 'undefined' ? navigator.language : 'en-US',
       ...config,
     };
     this.currentDate = new Date();

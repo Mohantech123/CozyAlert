@@ -4,13 +4,13 @@ import { createAlertDom, closeAllAlerts } from './dom';
 
 export class CozyAlert {
   static closeAll(): void {
-    if (typeof document !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof window.document !== 'undefined') {
       closeAllAlerts();
     }
   }
 
   static fire(options: AlertOptions | string, text?: string, icon?: AlertOptions['icon']): Promise<AlertResult> {
-    if (typeof document === 'undefined') {
+    if (typeof window === 'undefined' || typeof window.document === 'undefined') {
       return Promise.resolve({ isConfirmed: false, isDenied: false, isDismissed: true });
     }
     injectStyles();

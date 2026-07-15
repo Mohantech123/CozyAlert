@@ -550,7 +550,7 @@ var CozyDatePicker = class {
     this.config = {
       mode: "single",
       // 'single' | 'range' | 'month' | 'year'
-      locale: navigator.language || "en-US",
+      locale: typeof navigator !== "undefined" ? navigator.language : "en-US",
       ...config
     };
     this.currentDate = /* @__PURE__ */ new Date();
@@ -1726,12 +1726,12 @@ var createAlertDom = (options, resolve) => {
 // src/core/Alert.ts
 var CozyAlert = class _CozyAlert {
   static closeAll() {
-    if (typeof document !== "undefined") {
+    if (typeof window !== "undefined" && typeof window.document !== "undefined") {
       closeAllAlerts();
     }
   }
   static fire(options, text, icon) {
-    if (typeof document === "undefined") {
+    if (typeof window === "undefined" || typeof window.document === "undefined") {
       return Promise.resolve({ isConfirmed: false, isDenied: false, isDismissed: true });
     }
     injectStyles();
