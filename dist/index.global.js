@@ -1784,14 +1784,15 @@ var CozyAlert = (() => {
         icon: "info"
       });
     }
-    static confirm(title, text, confirmButtonText = "Confirm") {
+    static confirm(title, text, confirmButtonText = "Confirm", confirmButtonColor) {
       return _CozyAlert.fire({
         title,
         text,
         type: "question",
         icon: "question",
         showCancelButton: true,
-        confirmButtonText
+        confirmButtonText,
+        confirmButtonColor
       });
     }
     static toast(options, type, position) {

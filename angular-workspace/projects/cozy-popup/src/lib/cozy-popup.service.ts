@@ -48,9 +48,9 @@ export class CozyPopupService {
     );
   }
 
-  public confirm(title: string, text?: string, confirmButtonText: string = 'Confirm'): Promise<AlertResult> {
+  public confirm(title: string, text?: string, confirmButtonText: string = 'Confirm', confirmButtonColor?: string): Promise<AlertResult> {
     return this.ngZone.runOutsideAngular(() => 
-      Alert.confirm(title, text, confirmButtonText).then(result => this.ngZone.run(() => result))
+      Alert.confirm(title, text, confirmButtonText, confirmButtonColor).then(result => this.ngZone.run(() => result))
     );
   }
 

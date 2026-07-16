@@ -68,14 +68,15 @@ export class CozyAlert {
     });
   }
 
-  static confirm(title: string, text?: string, confirmButtonText: string = 'Confirm'): Promise<AlertResult> {
+  static confirm(title: string, text?: string, confirmButtonText: string = 'Confirm', confirmButtonColor?: string): Promise<AlertResult> {
     return CozyAlert.fire({
       title,
       text,
       type: 'question',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText
+      confirmButtonText,
+      confirmButtonColor
     });
   }
 

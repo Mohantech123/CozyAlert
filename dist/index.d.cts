@@ -106,7 +106,7 @@ declare class CozyAlert {
     static error(title: string, text?: string): Promise<AlertResult>;
     static warning(title: string, text?: string): Promise<AlertResult>;
     static info(title: string, text?: string): Promise<AlertResult>;
-    static confirm(title: string, text?: string, confirmButtonText?: string): Promise<AlertResult>;
+    static confirm(title: string, text?: string, confirmButtonText?: string, confirmButtonColor?: string): Promise<AlertResult>;
     static toast(options: AlertOptions | string, type?: AlertType, position?: Position): Promise<AlertResult>;
     static modal(options: AlertOptions): Promise<AlertResult>;
     static offcanvas(options: AlertOptions): Promise<AlertResult>;
