@@ -121,6 +121,22 @@ export class AppComponent {
 }
 ```
 
+**Troubleshooting Angular SSR (NG0401: Missing Platform)**
+If you are installing `ngx-cozy-popup` into a fresh Angular 19 SSR application and encounter the `NG0401: Missing Platform` error during build or serve, it is likely because `bootstrapApplication` is missing the `context` argument in your server setup. 
+
+To fix this, update your `src/main.server.ts` to properly pass the `BootstrapContext`:
+
+```typescript
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { config } from './app/app.config.server';
+
+// Fix: Accept the context and pass it into bootstrapApplication
+const bootstrap = (context: any) => bootstrapApplication(AppComponent, config, context);
+
+export default bootstrap;
+```
+
 ---
 
 ## 📖 Component Reference
