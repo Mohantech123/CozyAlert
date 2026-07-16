@@ -242,8 +242,8 @@ export class CozyTimePicker {
     const clockWrap = document.createElement('div');
     clockWrap.className = 'cozyalert-clock-dial';
 
-    const radius = 90;
-    const center = 100;
+    const radius = 100;
+    const center = 130;
 
     const createNode = (val: number, angleDeg: number, isActive: boolean, isMinute: boolean) => {
       const node = document.createElement('div');

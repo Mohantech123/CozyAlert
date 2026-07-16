@@ -413,8 +413,8 @@ export const createAlertDom = (
             wrapper.appendChild(icon);
             group.appendChild(wrapper);
             
-            // We rely on the picker calling dispatchEvent(new Event('input')) to trigger the native oninput listener
-            const dp = new CozyDatePicker(input, field.datePickerConfig || { mode: field.type === 'daterange' ? 'range' : 'single' });
+            const mode = field.type === 'daterange' ? 'range' : (['month', 'year'].includes(field.type) ? field.type : 'single');
+            const dp = new CozyDatePicker(input, field.datePickerConfig || { mode: mode as any });
 
           } else if (field.type === 'time') {
             const wrapper = document.createElement('div');

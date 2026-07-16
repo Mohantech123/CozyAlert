@@ -82,18 +82,41 @@ const showDrawer = () => {
 </template>
 ```
 
-### Angular
+### Angular (`ngx-cozy-popup`)
+For Angular projects, we highly recommend using our officially supported wrapper package: **[`ngx-cozy-popup`](https://www.npmjs.com/package/ngx-cozy-popup)**. 
+
+Unlike typical wrappers that require you to install the core library as a peer dependency, `ngx-cozy-popup` **natively embeds the entire `cozy-popup` core logic** directly into its FESM bundles. This guarantees zero version conflicts and provides a flawless Angular-native experience.
+
+**Key Angular Benefits:**
+- **Zero Peer Dependencies**: You do not need to install `cozy-popup` alongside it. Everything is self-contained.
+- **Strictly Typed Service**: `CozyPopupService` maps 1:1 with the main library's API, giving you full IntelliSense.
+- **Seamless Dependency Injection**: Injected cleanly into your components and services.
+- **RxJS / Promise Support**: Fully compatible with Angular's asynchronous workflows.
+
+```bash
+npm install ngx-cozy-popup
+```
+
+**Compatible Angular Versions**: `^19.1.0` (v19.x)
+
+**Example Implementation:**
 ```typescript
 import { Component } from '@angular/core';
-import Alert from 'cozy-popup';
+import { CozyPopupService } from 'ngx-cozy-popup';
 
 @Component({
   selector: 'app-root',
   template: `<button (click)="warn()">Delete</button>`
 })
 export class AppComponent {
+  constructor(private alert: CozyPopupService) {}
+
   warn() {
-    Alert.warning('Are you sure?');
+    // Uses the exact same API signature as the Vanilla version!
+    this.alert.confirm('Are you sure?', 'This cannot be undone.', 'Yes, Delete', '#ef4444')
+      .then(res => {
+        if (res.isConfirmed) this.alert.success('Deleted!');
+      });
   }
 }
 ```
@@ -283,6 +306,33 @@ Alert.fire({
 | `options` | `Array` | Dropdown options for `'select'` types. Format: `[{label: 'A', value: 'a'}]`. |
 | `pattern` | `string` | Regex string for advanced validation (e.g. `^\\d+$`). |
 | `validationMessage`| `string` | Custom error message shown if `pattern` fails. |
+
+### Advanced Date & Time Pickers
+CozyAlert includes a powerful, natively-rendered Date and Time picker system that bypasses the ugly browser default inputs. It works flawlessly across desktop and mobile, with full support for Custom Theming.
+
+**Supported Date/Time Types:**
+- `'date'`: Standard calendar picker.
+- `'daterange'`: Select a start and end date.
+- `'month'`: Skips the calendar grid and allows selecting a Month and Year (e.g., `July 2026`).
+- `'year'`: Select only a year.
+- `'time'`: A beautiful radial clock/scroll picker for selecting hours, minutes, and AM/PM.
+
+**Example Usage:**
+```javascript
+Alert.fire({
+  title: 'Schedule Appointment',
+  fields: [
+    { id: 'date', type: 'date', label: 'Select Date', placeholder: 'Choose a date...' },
+    { id: 'time', type: 'time', label: 'Select Time', placeholder: 'Choose time...' },
+    { id: 'vacation', type: 'daterange', label: 'Vacation Period' },
+    { id: 'expiry', type: 'month', label: 'Credit Card Expiry' }
+  ]
+}).then(res => {
+  if (res.isConfirmed) {
+    console.log(res.value); // { date: 'Jul 15, 2026', time: '10:30 AM', vacation: 'Jul 1 - Jul 10', expiry: 'July 2026' }
+  }
+});
+```
 
 ---
 

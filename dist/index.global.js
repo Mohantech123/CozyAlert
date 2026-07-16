@@ -402,6 +402,8 @@ var CozyAlert = (() => {
       left: 0;
       z-index: 10005;
       background: var(--ca-bg);
+      color: var(--ca-text);
+      font-family: var(--ca-font);
       border: 1px solid var(--ca-input-border);
       border-radius: 12px;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
@@ -456,18 +458,18 @@ var CozyAlert = (() => {
     .cozyalert-time-period-wrap button.active { background: var(--ca-primary); color: white; border-color: var(--ca-primary); }
 
     /* TimePicker Clock UI */
-    .cozyalert-clock-header { display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; gap: 0.25rem; color: var(--ca-text-muted); margin-bottom: 1.5rem; font-variant-numeric: tabular-nums; }
-    .cozyalert-clock-header span { cursor: pointer; padding: 0.35rem 0.75rem; border-radius: 8px; transition: all 0.2s; background: transparent; }
+    .cozyalert-clock-header { display: flex; align-items: baseline; justify-content: center; font-size: 3rem; font-weight: 800; gap: 0.25rem; color: var(--ca-text-muted); margin-bottom: 1.5rem; font-variant-numeric: tabular-nums; line-height: 1; }
+    .cozyalert-clock-header span { cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 12px; transition: all 0.2s; background: transparent; }
     .cozyalert-clock-header span.active { color: var(--ca-primary); background: var(--ca-primary-bg); }
-    .cozyalert-clock-header span.period-toggle { font-size: 1rem; margin-left: 0.5rem; background: var(--ca-input-bg); border: 1px solid var(--ca-input-border); padding: 0.375rem 0.75rem; color: var(--ca-text); }
-    .cozyalert-clock-header span.period-toggle:hover { border-color: var(--ca-primary); }
+    .cozyalert-clock-header span.period-toggle { font-size: 1rem; margin-left: 0.5rem; background: var(--ca-cancel-bg); border: none; padding: 0.5rem 0.75rem; color: var(--ca-text); font-weight: 700; text-transform: uppercase; border-radius: 8px; align-self: center; transition: background 0.2s; }
+    .cozyalert-clock-header span.period-toggle:hover { background: var(--ca-cancel-hover); }
     
     .cozyalert-clock-dial { position: relative; width: 260px; height: 260px; border-radius: 50%; background: #f8fafc; box-shadow: inset 0 2px 10px rgba(0,0,0,0.03); margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; border: 1px solid #f1f5f9; }
-    .cozyalert-clock-center { position: absolute; width: 8px; height: 8px; background: var(--ca-primary); border-radius: 50%; z-index: 10; }
+    .cozyalert-clock-center { position: absolute; width: 8px; height: 8px; background: var(--ca-primary); border-radius: 50%; z-index: 10; top: calc(50% - 4px); left: calc(50% - 4px); }
     .cozyalert-clock-node { position: absolute; width: 32px; height: 32px; margin-left: -16px; margin-top: -16px; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 500; color: var(--ca-text); cursor: pointer; border-radius: 50%; transition: background 0.2s, color 0.2s; z-index: 2; }
     .cozyalert-clock-node:hover { background: var(--ca-input-border); }
     .cozyalert-clock-node.active { background: var(--ca-primary); color: white; }
-    .cozyalert-clock-hand { position: absolute; width: 50%; height: 2px; background: var(--ca-primary); transform-origin: 100% 50%; left: 0; top: calc(50% - 1px); z-index: 1; pointer-events: none; }
+    .cozyalert-clock-hand { position: absolute; width: 100px; height: 2px; background: var(--ca-primary); transform-origin: 0% 50%; left: 50%; top: calc(50% - 1px); z-index: 1; pointer-events: none; }
     
     /* TimePicker Mobile Scroll UI */
     .cozyalert-time-scroll-container { display: flex; height: 200px; justify-content: center; gap: 1rem; position: relative; margin-top: 1rem; }
@@ -481,10 +483,10 @@ var CozyAlert = (() => {
     @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
     .cozyalert-datepicker-popup.mobile-layout { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; border-radius: 20px 20px 0 0; animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 -10px 40px rgba(0,0,0,0.15); padding: 1.5rem; z-index: 100000; }
     .cozyalert-mobile-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--ca-input-border); }
-    .cozyalert-mobile-header button { background: none; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; }
+    .cozyalert-mobile-header button { background: none; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; font-family: var(--ca-font); }
     .cozyalert-mobile-cancel { color: var(--ca-text-muted); }
     .cozyalert-mobile-done { color: var(--ca-primary); }
-    .cozyalert-mobile-title { font-weight: 700; font-size: 1.1rem; color: var(--ca-text); }
+    .cozyalert-mobile-title { font-weight: 700; font-size: 1.1rem; color: var(--ca-text); font-family: var(--ca-font); }
   `;
     document.head.appendChild(style);
   };
@@ -1145,8 +1147,8 @@ var CozyAlert = (() => {
       this.popup.appendChild(header);
       const clockWrap = document.createElement("div");
       clockWrap.className = "cozyalert-clock-dial";
-      const radius = 90;
-      const center = 100;
+      const radius = 100;
+      const center = 130;
       const createNode = (val, angleDeg, isActive, isMinute) => {
         const node = document.createElement("div");
         node.className = "cozyalert-clock-node" + (isActive ? " active" : "");
@@ -1585,7 +1587,8 @@ var CozyAlert = (() => {
               wrapper.appendChild(input);
               wrapper.appendChild(icon);
               group.appendChild(wrapper);
-              const dp = new CozyDatePicker(input, field.datePickerConfig || { mode: field.type === "daterange" ? "range" : "single" });
+              const mode = field.type === "daterange" ? "range" : ["month", "year"].includes(field.type) ? field.type : "single";
+              const dp = new CozyDatePicker(input, field.datePickerConfig || { mode });
             } else if (field.type === "time") {
               const wrapper = document.createElement("div");
               wrapper.className = "cozyalert-input-wrapper";
