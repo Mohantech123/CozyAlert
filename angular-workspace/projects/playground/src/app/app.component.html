@@ -1,0 +1,214 @@
+<div class="bg-glow"></div>
+<div class="bg-glow right"></div>
+
+<nav>
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/Mohantech123/CozyAlert/main/logo.png" alt="CozyPopup Logo" onerror="this.style.display='none'">
+    CozyPopup Angular
+  </div>
+  <div class="nav-links">
+    <button (click)="setGlobalTheme('')">Reset Theme</button>
+    <a href="https://github.com/Mohantech123/CozyAlert" target="_blank">GitHub Docs</a>
+    <a href="https://www.npmjs.com/package/ngx-cozy-popup" target="_blank" style="color: var(--accent);">NPM Package</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>Angular Showcase <br><span>100+ Variants</span></h1>
+  <p>Explore the complete capabilities of ngx-cozy-popup natively in Angular.</p>
+</header>
+
+<main class="container">
+  <div class="grid">
+    
+    <!-- 1. Global Themes Engine -->
+    <div class="card">
+      <h3>1. Global Themes</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="setGlobalTheme('light-theme')">Light Theme (Default)</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-cyberpunk')">Cyberpunk</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-hacker')">Hacker Terminal</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-ocean')">Ocean Aqua</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-dracula')">Dracula</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-sunset')">Sunset</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-minimalist')">Minimalist Sharp</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-retro')">Retro 80s</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-forest')">Forest Eco</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-highcontrast')">High Contrast</button>
+        <button class="btn btn-secondary" (click)="setGlobalTheme('theme-glass')">Glassmorphism</button>
+      </div>
+    </div>
+
+    <!-- 2. Basic Alerts -->
+    <div class="card">
+      <h3>2. Basic Alerts</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="alert.success('Success!', 'Operation completed successfully.')">Success Alert</button>
+        <button class="btn btn-secondary" (click)="alert.error('Error!', 'Something went horribly wrong.')">Error Alert</button>
+        <button class="btn btn-secondary" (click)="alert.warning('Warning', 'Proceed with caution.')">Warning Alert</button>
+        <button class="btn btn-secondary" (click)="alert.info('Information', 'Did you know? CozyPopup is great.')">Info Alert</button>
+        <button class="btn btn-secondary" (click)="alert.fire('Question', 'Are you enjoying this?', 'question')">Question Alert</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'No Icon Alert', text: 'This alert has no icon.', showIcon: false })">Iconless Alert</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Critical Error', text: 'You MUST click OK. Clicking outside will not close this popup!', icon: 'error', allowOutsideClick: false })" style="color: #ef4444; border-color: #ef4444;">Non-Dismissible Alert</button>
+      </div>
+    </div>
+
+    <!-- 3. Interactive Dialogs -->
+    <div class="card">
+      <h3>3. Confirm Dialogs</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="confirmDelete()">Delete Confirmation</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Logout?', icon: 'warning', showCancelButton: true, confirmButtonText: 'Logout', confirmButtonColor: '#f97316' })">Logout Confirmation</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Unsaved Changes', text: 'Do you want to save before exiting?', showCancelButton: true, confirmButtonText: 'Save', cancelButtonText: 'Discard' })">Save Changes</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Archive Item?', icon: 'info', showCancelButton: true, confirmButtonText: 'Archive' })">Archive Item</button>
+      </div>
+    </div>
+
+    <!-- 4. Form Generators -->
+    <div class="card">
+      <h3>4. Input Forms</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="loginForm()">Login Form</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Survey', fields: [{ id: 'rating', type: 'select', label: 'Rating', options: [{label:'Excellent', value:'5'}, {label:'Good', value:'4'}] }, { id: 'feedback', type: 'textarea', label: 'Feedback' }], showCancelButton: true })">Feedback Form</button>
+        <button class="btn btn-secondary" (click)="newsletterSub()">Newsletter Sub</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Profile Pic', fields: [{ id: 'avatar', type: 'file', label: 'Upload Avatar' }], confirmButtonText: 'Upload' })">File Upload Form</button>
+      </div>
+    </div>
+
+    <!-- 5. Pickers -->
+    <div class="card">
+      <h3>5. HTML5 Pickers</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="pickDate()">Date Picker</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Set Alarm', fields: [{ id: 'time', type: 'time', label: 'Select Time' }] })">Time Picker</button>
+        <button class="btn btn-secondary" (click)="pickColor()">Color Picker</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Age Verification', fields: [{ id: 'age', type: 'number', label: 'Your Age', defaultValue: 18 }] })">Number Picker</button>
+      </div>
+    </div>
+
+    <!-- 6. Toasts (Standard) -->
+    <div class="card">
+      <h3>6. Toast Types</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="alert.toast('Successfully saved data', 'success')">Success Toast</button>
+        <button class="btn btn-secondary" (click)="alert.toast('Network connection lost', 'error')">Error Toast</button>
+        <button class="btn btn-secondary" (click)="alert.toast('Update available', 'info')">Info Toast</button>
+        <button class="btn btn-secondary" (click)="alert.toast('Item added to cart', 'success', 'bottom-right')">Cart Action Toast</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Plain Message', toast: true, position: 'top-right', showIcon: false, showConfirmButton: false, timer: 3000 })">Iconless Toast</button>
+      </div>
+    </div>
+
+    <!-- 7. Toast Positions -->
+    <div class="card">
+      <h3>7. Toast Positions</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="alert.toast('Top Right', 'info', 'top-right')">Top Right (Default)</button>
+        <button class="btn btn-secondary" (click)="alert.toast('Top Center', 'success', 'top')">Top Center</button>
+        <button class="btn btn-secondary" (click)="alert.toast('Bottom Left', 'warning', 'bottom-left')">Bottom Left</button>
+        <button class="btn btn-secondary" (click)="alert.toast('Center', 'error', 'center')">Dead Center</button>
+      </div>
+    </div>
+
+    <!-- 8. Offcanvas Drawers -->
+    <div class="card">
+      <h3>8. Offcanvas / Drawers</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="leftDrawer()">Left Drawer (Menu)</button>
+        <button class="btn btn-secondary" (click)="rightDrawer()">Right Drawer (Settings)</button>
+        <button class="btn btn-secondary" (click)="bottomDrawer()">Bottom Drawer (Mini)</button>
+        <button class="btn btn-secondary" (click)="topDrawer()">Top Drawer (Search)</button>
+      </div>
+    </div>
+
+    <!-- 9. Async & Promises -->
+    <div class="card">
+      <h3>9. Async & Loading States</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="apiRequest()">API Request Loader</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Auto Closing', text: 'I will vanish in 3 seconds.', timer: 3000, timerProgressBar: true })">Progress Bar Timer</button>
+        <button class="btn btn-secondary" (click)="alert.queue([{title: 'Step 1'}, {title: 'Step 2'}, {title: 'Step 3'}])">Queue / Multi-Step Form</button>
+      </div>
+    </div>
+
+    <!-- 10. Rich Components -->
+    <div class="card">
+      <h3>10. Rich HTML Components</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="imagePreview()">Image Gallery Popup</button>
+        <button class="btn btn-secondary" (click)="codeViewer()">Code Block Popup</button>
+        <button class="btn btn-secondary" (click)="termsOfService()">Scrollable Policy Viewer</button>
+      </div>
+    </div>
+
+    <!-- 11. Layouts & Sizing -->
+    <div class="card">
+      <h3>11. Layouts & Sizing</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="alert.modal({ title: 'Small Modal', text: 'Compact layout.', size: 'sm' })">Small (sm)</button>
+        <button class="btn btn-secondary" (click)="alert.modal({ title: 'Medium Modal', text: 'Default layout.', size: 'md' })">Medium (md)</button>
+        <button class="btn btn-secondary" (click)="alert.modal({ title: 'Large Modal', text: 'Wide layout for complex data.', size: 'lg' })">Large (lg)</button>
+        <button class="btn btn-secondary" (click)="alert.modal({ title: 'Extra Large', text: 'Maximum width.', size: 'xl' })">Extra Large (xl)</button>
+        <button class="btn btn-secondary" (click)="alert.modal({ title: '2XL Modal', text: '48rem width.', size: '2xl' })">2XL (48rem)</button>
+        <button class="btn btn-secondary" (click)="alert.modal({ title: '3XL Modal', text: '56rem width.', size: '3xl' })">3XL (56rem)</button>
+        <button class="btn btn-secondary" (click)="alert.modal({ title: 'Full Width', text: '100% width of container.', size: 'full' })">Full Width</button>
+        <button class="btn btn-secondary" (click)="alert.modal({ title: 'Full Screen', text: '100vw x 100vh', size: 'screen' })">Full Screen Takeover</button>
+      </div>
+    </div>
+
+    <!-- 12. Custom CSS Animations -->
+    <div class="card">
+      <h3>12. Custom CSS Animations</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Zoom Animation', text: 'Custom CSS injected zoom!', customClass: { popup: 'anim-zoom' } })">Zoom In (Bounce)</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Flip Animation', text: 'Custom 3D flip animation!', customClass: { popup: 'anim-flip' } })">3D Flip</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'No Animations', text: 'Instant render.', customClass: { popup: 'no-animation' } })">Disabled Animations</button>
+      </div>
+    </div>
+
+    <!-- 13. Premium Real-World Mocks -->
+    <div class="card">
+      <h3>13. Premium Real-World Uses</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="cookieConsent()">GDPR Cookie Consent</button>
+        <button class="btn btn-secondary" (click)="goPremium()">Subscription Modal</button>
+        <button class="btn btn-secondary" (click)="updateAvailable()">Changelog Announcement</button>
+        <button class="btn btn-secondary" (click)="aiAssistant()">AI Chat Popup</button>
+      </div>
+    </div>
+
+    <!-- 14. Advanced Dynamic Forms -->
+    <div class="card">
+      <h3>14. Advanced Dynamic Forms</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="registerAccount()">Secure Registration Form</button>
+        <button class="btn btn-secondary" (click)="paymentGateway()">Payment Gateway Form</button>
+        <button class="btn btn-secondary" (click)="bookTable()">Complex Booking Form</button>
+        <button class="btn btn-secondary" (click)="activateSoftware()">License Key Input</button>
+        <button class="btn btn-secondary" (click)="addressForm()">Multi-Field Address Form</button>
+        <button class="btn btn-secondary" (click)="mandatorySurvey()" style="border-color: #f59e0b; color: #f59e0b;">Strict Form (No Click Outside)</button>
+      </div>
+    </div>
+
+    <!-- 15. Ultimate Date & Time Pickers -->
+    <div class="card">
+      <h3>15. Ultimate Pickers</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="singleDatePicker()">Single Date Picker</button>
+        <button class="btn btn-secondary" (click)="dateRangePicker()">Date Range Picker</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'French Locale', size: 'sm', fields: [{ id: 'dateFr', type: 'date', label: 'Sélectionnez une date', datePickerConfig: { locale: 'fr-FR' } }], confirmButtonText: 'Confirmer' })">Localization (French)</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Tamil Locale', size: 'sm', fields: [{ id: 'dateTa', type: 'date', label: 'தேதியைத் தேர்ந்தெடுக்கவும்', datePickerConfig: { locale: 'ta-IN' } }], confirmButtonText: 'சரி' })">Localization (Tamil)</button>
+        <button class="btn btn-secondary" (click)="eventCalendar()">Calendar with Events</button>
+        <button class="btn btn-secondary" (click)="bookingTimeSlots()">Time Slots (Booking Mode)</button>
+        <button class="btn btn-secondary" (click)="fullAppointment()">Full Appointment Form</button>
+        <button class="btn btn-secondary" (click)="monthPicker()" style="border-color: #8b5cf6; color: #8b5cf6;">Month Only Picker</button>
+        <button class="btn btn-secondary" (click)="yearPicker()" style="border-color: #8b5cf6; color: #8b5cf6;">Year Only Picker</button>
+        <button class="btn btn-secondary" (click)="spinnerTimePicker()" style="border-color: #8b5cf6; color: #8b5cf6;">Basic Spinner Time</button>
+        <button class="btn btn-secondary" (click)="premiumClock()" style="border-color: #8b5cf6; color: #8b5cf6;">Premium Clock Dial</button>
+        <button class="btn btn-secondary" (click)="mobileDateView()" style="border-color: #10b981; color: #10b981;">Mobile Date View</button>
+        <button class="btn btn-secondary" (click)="mobileScrollTime()" style="border-color: #10b981; color: #10b981;">Mobile Scroll Time</button>
+        <button class="btn btn-secondary" (click)="alert.fire({ title: 'Disabled Dates', size: 'sm', fields: [{ id: 'date', type: 'date', label: 'Pick a weekday', datePickerConfig: { disableWeekends: true } }], confirmButtonText: 'Confirm' })" style="border-color: #f43f5e; color: #f43f5e;">No Weekends / Past</button>
+      </div>
+    </div>
+
+  </div>
+</main>
