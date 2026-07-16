@@ -64,7 +64,10 @@
     }
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs,iife --globalName CozyAlert --dts",
+    "build": "npm run build:vanilla",
+    "build:vanilla": "tsup src/index.ts --format esm,cjs,iife --globalName CozyAlert --dts",
+    "build:angular": "node scripts/sync-core.cjs && cd angular-workspace && npm run build CozyPopup",
+    "build:all": "npm run build:vanilla && npm run build:angular",
     "dev": "tsup src/index.ts --watch",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run build"
