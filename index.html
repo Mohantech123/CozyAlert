@@ -237,6 +237,9 @@
   <header class="hero">
     <h1>Ultimate Showcase <br><span>100+ Variants</span></h1>
     <p>Explore the complete capabilities of CozyPopup through these interactive examples.</p>
+    <div style="margin-top: 1.5rem;">
+      <button class="btn btn-primary" style="display: inline-flex; width: auto; padding: 1rem 2rem; font-size: 1.1rem; border-radius: 50px; box-shadow: 0 0 25px var(--accent-glow);" onclick="startDemoTour()">🎬 Start Automated Demo Tour (For Video Recording)</button>
+    </div>
   </header>
 
   <main class="container">
@@ -455,6 +458,60 @@
     function setGlobalTheme(themeClass) {
       document.body.className = themeClass;
       Alert.success('Theme Applied', 'All new popups and forms will use this theme globally!');
+    }
+
+    async function startDemoTour() {
+      // 1. Welcome Toast
+      Alert.fire({
+        title: 'Welcome to CozyPopup! 🚀',
+        text: 'A framework-agnostic replacement for alerts, confirms & forms.',
+        toast: true,
+        position: 'top-right',
+        timer: 2500,
+        showConfirmButton: false,
+        icon: 'info'
+      });
+
+      await new Promise(r => setTimeout(r, 2700));
+
+      // 2. Custom Confirm Dialog
+      await Alert.fire({
+        title: 'Delete Bloated Libraries?',
+        text: 'CozyPopup weighs a fraction of traditional alert tools with zero dependencies!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Delete Them! 🔥',
+        confirmButtonColor: '#ef4444',
+        cancelButtonText: 'Keep old stuff',
+        timer: 3000
+      });
+
+      await new Promise(r => setTimeout(r, 500));
+
+      // 3. Date & Time Picker Showcase
+      await Alert.fire({
+        title: 'Schedule Appointment',
+        text: 'Built-in interactive Date & Time pickers!',
+        size: 'md',
+        fields: [
+          { id: 'name', type: 'text', label: 'Your Name', defaultValue: 'Alex Developer' },
+          { id: 'date', type: 'date', label: 'Select Date', datePickerConfig: { inline: true } },
+          { id: 'time', type: 'time', label: 'Select Time', timePickerConfig: { bookingSlots: ['10:00 AM', '01:00 PM', '04:30 PM'] } }
+        ],
+        confirmButtonText: 'Confirm Booking',
+        timer: 4000
+      });
+
+      await new Promise(r => setTimeout(r, 500));
+
+      // 4. Grand Finale
+      Alert.fire({
+        title: 'Ready for Your Project! 🎉',
+        text: 'Install now with: npm install cozy-popup (Vanilla) or ngx-cozy-popup (Angular)',
+        icon: 'success',
+        confirmButtonText: 'Get Started 🚀',
+        confirmButtonColor: '#10b981'
+      });
     }
 
     window.addEventListener('DOMContentLoaded', () => {

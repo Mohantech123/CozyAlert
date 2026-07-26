@@ -4,8 +4,10 @@
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
   [![NPM Version](https://img.shields.io/npm/v/cozy-popup.svg)](https://www.npmjs.com/package/cozy-popup)
-  [![NPM Downloads](https://img.shields.io/npm/dm/cozy-popup.svg?label=Downloads&color=blue)](https://npm-stat.com/charts.html?package=cozy-popup)
-  [![Framework Agnostic](https://img.shields.io/badge/Framework-Agnostic-ff69b4.svg)]()
+  [![NPM Total Downloads](https://img.shields.io/npm/dt/cozy-popup?color=success&label=Total%20Downloads)](https://www.npmjs.com/package/cozy-popup)
+  [![Angular Total Downloads](https://img.shields.io/npm/dt/ngx-cozy-popup?color=success&label=Angular%20Downloads)](https://www.npmjs.com/package/ngx-cozy-popup)
+  [![GitHub Stars](https://img.shields.io/github/stars/Mohantech123/CozyAlert?style=social)](https://github.com/Mohantech123/CozyAlert/stargazers)
+  <br>
   [![Live Playground](https://img.shields.io/badge/Live-Playground-8b5cf6.svg?style=for-the-badge)](https://mohantech123.github.io/CozyAlert/)
 </div>
 

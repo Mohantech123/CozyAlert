@@ -521,7 +521,6 @@ var CozyDatePicker = class {
   // View mode states: 'date', 'month', 'year'
   viewMode;
   constructor(input, config = {}) {
-    var _a;
     this.input = input;
     this.config = {
       mode: "single",
@@ -543,7 +542,7 @@ var CozyDatePicker = class {
     if (this.config.mobileLayout) {
       this.popup.classList.add("mobile-layout");
     }
-    (_a = this.input.parentNode) == null ? void 0 : _a.appendChild(this.popup);
+    this.input.parentNode?.appendChild(this.popup);
     this.initEvents();
   }
   initEvents() {
@@ -888,7 +887,6 @@ var CozyTimePicker = class {
   // For clock mode
   clockView = "hours";
   constructor(input, config = {}) {
-    var _a;
     this.input = input;
     this.config = {
       format: "12h",
@@ -908,7 +906,7 @@ var CozyTimePicker = class {
     if (this.config.mobileLayout) {
       this.popup.classList.add("mobile-layout");
     }
-    (_a = this.input.parentNode) == null ? void 0 : _a.appendChild(this.popup);
+    this.input.parentNode?.appendChild(this.popup);
     this.initEvents();
   }
   initEvents() {
@@ -1181,12 +1179,11 @@ var CozyTimePicker = class {
       const col = document.createElement("div");
       col.className = "cozyalert-scroll-col";
       const updateActive = () => {
-        var _a;
         const scrollTop = col.scrollTop;
         const index = Math.round(scrollTop / 40);
         if (items[index] !== void 0) {
           Array.from(col.children).forEach((c) => c.classList.remove("active"));
-          (_a = col.children[index]) == null ? void 0 : _a.classList.add("active");
+          col.children[index]?.classList.add("active");
           onSelect(items[index]);
         }
       };
@@ -1478,10 +1475,9 @@ var createAlertDom = (options, resolve) => {
           dropzone.classList.remove("dragover");
         };
         dropzone.ondrop = (e) => {
-          var _a;
           e.preventDefault();
           dropzone.classList.remove("dragover");
-          handleFiles(((_a = e.dataTransfer) == null ? void 0 : _a.files) || null);
+          handleFiles(e.dataTransfer?.files || null);
         };
         dropzone.appendChild(hiddenInput);
         inputEl = dropzone;
