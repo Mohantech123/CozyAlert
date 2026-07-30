@@ -448,6 +448,13 @@
           <button class="btn btn-secondary" style="border-color: #10b981; color: #10b981;" onclick="Alert.fire({ title: 'Mobile Scroll Time', size: 'sm', fields: [{ id: 'time', type: 'time', label: 'Select Time', timePickerConfig: { style: 'scroll', mobileLayout: true } }], confirmButtonText: 'Submit Form' }).then(r => r.isConfirmed && Alert.success('Time Set!', r.value.time))">Mobile Scroll Time</button>
 
           <button class="btn btn-secondary" style="border-color: #f43f5e; color: #f43f5e;" onclick="Alert.fire({ title: 'Disabled Dates', size: 'sm', fields: [{ id: 'date', type: 'date', label: 'Pick a weekday', datePickerConfig: { disableWeekends: true, minDate: new Date() } }], confirmButtonText: 'Confirm' })">No Weekends / Past</button>
+      </div>
+
+      <!-- 5. Advanced Components -->
+      <div class="card">
+        <h3>5. Advanced Components</h3>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="manageCampuses()">Interactive List (CRUD Flow)</button>
         </div>
       </div>
 
@@ -512,6 +519,83 @@
         confirmButtonText: 'Get Started 🚀',
         confirmButtonColor: '#10b981'
       });
+    }
+
+    let campuses = [
+      { id: 1, label: 'Main Campus', icon: '🏛️' },
+      { id: 2, label: 'North Campus', icon: '🏛️' },
+      { id: 3, label: 'West Campus', icon: '🏛️' },
+      { id: 4, label: 'City Campus', icon: '🏛️' }
+    ];
+
+    async function manageCampuses() {
+      const res = await Alert.fire({
+        title: 'Search campus',
+        size: 'sm',
+        showCancelButton: true,
+        cancelButtonText: 'Close',
+        confirmButtonText: '+ Add New Campus',
+        confirmButtonColor: '#4f46e5',
+        fields: [{
+          id: 'campus',
+          type: 'list',
+          listConfig: {
+            searchable: true,
+            searchPlaceholder: 'Search capacity',
+            items: campuses.map(c => ({
+              ...c,
+              actions: ['edit', 'delete']
+            })),
+            onAction: async (action, item) => {
+              if (action === 'delete') {
+                const conf = await Alert.confirm('Delete Campus?', `Are you sure you want to delete ${item.label}?`, 'Delete', '#ef4444');
+                if (conf.isConfirmed) {
+                  campuses = campuses.filter(c => c.id !== item.id);
+                  // Refresh list
+                  manageCampuses();
+                }
+              } else if (action === 'edit') {
+                const editRes = await Alert.fire({
+                  title: 'Edit Campus',
+                  size: 'sm',
+                  fields: [
+                    { id: 'name', type: 'text', label: 'Campus Name', defaultValue: item.label, required: true }
+                  ],
+                  showCancelButton: true,
+                  confirmButtonText: 'Save',
+                  confirmButtonColor: '#4f46e5'
+                });
+                if (editRes.isConfirmed) {
+                  const idx = campuses.findIndex(c => c.id === item.id);
+                  if (idx > -1) campuses[idx].label = editRes.value.name;
+                  manageCampuses();
+                }
+              }
+            }
+          }
+        }]
+      });
+
+      if (res.isConfirmed) {
+        const addRes = await Alert.fire({
+          title: 'Add New Campus',
+          size: 'sm',
+          fields: [
+            { id: 'name', type: 'text', placeholder: 'Enter capacity', required: true }
+          ],
+          showCancelButton: true,
+          confirmButtonText: 'Add',
+          confirmButtonColor: '#4f46e5'
+        });
+        if (addRes.isConfirmed) {
+          campuses.push({
+            id: Date.now(),
+            label: addRes.value.name,
+            icon: '🏛️'
+          });
+        }
+        manageCampuses();
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {

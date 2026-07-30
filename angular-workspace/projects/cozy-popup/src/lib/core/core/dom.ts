@@ -1,5 +1,5 @@
 import { AlertOptions, AlertResult, FormField } from './types';
-import { getIconSvg, getCloudUploadSvg, getLoaderSvg, getCloseSvg } from './icons';
+import { getIconSvg, getLoaderSvg, getCloudUploadSvg, getCloseSvg, getSearchSvg, getEditSvg, getDeleteSvg } from './icons';
 import { CozyDatePicker } from '../components/DatePicker';
 import { CozyTimePicker } from '../components/TimePicker';
 
@@ -249,6 +249,8 @@ export const createAlertDom = (
         formValues[field.id] = false;
       } else if (field.type === 'file') {
         formValues[field.id] = null;
+      } else if (field.type === 'list') {
+        formValues[field.id] = null;
       } else {
         formValues[field.id] = '';
       }
@@ -331,6 +333,121 @@ export const createAlertDom = (
         dropzone.appendChild(hiddenInput);
         inputEl = dropzone;
         group.appendChild(dropzone);
+      } else if (field.type === 'list') {
+        if (field.label) {
+          const label = document.createElement('label');
+          label.className = 'cozyalert-label';
+          label.innerText = field.label;
+          group.appendChild(label);
+        }
+
+        const listContainer = document.createElement('div');
+        listContainer.className = 'cozyalert-list-container';
+        
+        let searchInput: HTMLInputElement | null = null;
+        const conf = field.listConfig;
+        
+        if (conf?.searchable) {
+          const searchWrapper = document.createElement('div');
+          searchWrapper.className = 'cozyalert-list-search-wrapper';
+          
+          searchInput = document.createElement('input');
+          searchInput.type = 'text';
+          searchInput.className = 'cozyalert-input cozyalert-list-search';
+          searchInput.placeholder = conf.searchPlaceholder || 'Search...';
+          
+          const searchIcon = document.createElement('div');
+          searchIcon.className = 'cozyalert-list-search-icon';
+          searchIcon.innerHTML = getSearchSvg();
+
+          searchWrapper.appendChild(searchInput);
+          searchWrapper.appendChild(searchIcon);
+          listContainer.appendChild(searchWrapper);
+        }
+
+        const itemsWrapper = document.createElement('div');
+        itemsWrapper.className = 'cozyalert-list-items';
+
+        const renderItems = (filterText: string = '') => {
+          itemsWrapper.innerHTML = '';
+          const items = conf?.items || [];
+          const filtered = items.filter(item => item.label.toLowerCase().includes(filterText.toLowerCase()));
+          
+          if (filtered.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'cozyalert-list-empty';
+            empty.innerText = 'No items found';
+            itemsWrapper.appendChild(empty);
+            return;
+          }
+
+          filtered.forEach(item => {
+            const itemEl = document.createElement('div');
+            itemEl.className = 'cozyalert-list-item';
+            
+            const contentEl = document.createElement('div');
+            contentEl.className = 'cozyalert-list-item-content';
+            if (item.icon) {
+              const iconEl = document.createElement('span');
+              iconEl.className = 'cozyalert-list-item-icon';
+              iconEl.innerHTML = item.icon;
+              contentEl.appendChild(iconEl);
+            }
+            const labelEl = document.createElement('span');
+            labelEl.className = 'cozyalert-list-item-label';
+            labelEl.innerText = item.label;
+            contentEl.appendChild(labelEl);
+            
+            itemEl.appendChild(contentEl);
+
+            itemEl.onclick = (e) => {
+              if ((e.target as HTMLElement).closest('.cozyalert-list-action')) return;
+              formValues[field.id] = item.id;
+              Array.from(itemsWrapper.children).forEach(c => c.classList.remove('selected'));
+              itemEl.classList.add('selected');
+              clearError();
+              if (conf?.onAction) conf.onAction('select', item);
+            };
+
+            if (item.actions && item.actions.length > 0) {
+              const actionsEl = document.createElement('div');
+              actionsEl.className = 'cozyalert-list-actions';
+              
+              if (item.actions.includes('edit')) {
+                const editBtn = document.createElement('button');
+                editBtn.className = 'cozyalert-list-action edit';
+                editBtn.innerHTML = getEditSvg();
+                editBtn.onclick = (e) => {
+                  e.stopPropagation();
+                  if (conf?.onAction) conf.onAction('edit', item);
+                };
+                actionsEl.appendChild(editBtn);
+              }
+              if (item.actions.includes('delete')) {
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'cozyalert-list-action delete';
+                deleteBtn.innerHTML = getDeleteSvg();
+                deleteBtn.onclick = (e) => {
+                  e.stopPropagation();
+                  if (conf?.onAction) conf.onAction('delete', item);
+                };
+                actionsEl.appendChild(deleteBtn);
+              }
+              itemEl.appendChild(actionsEl);
+            }
+            itemsWrapper.appendChild(itemEl);
+          });
+        };
+
+        renderItems();
+        
+        if (searchInput) {
+          searchInput.oninput = (e) => renderItems((e.target as HTMLInputElement).value);
+        }
+
+        listContainer.appendChild(itemsWrapper);
+        inputEl = listContainer;
+        group.appendChild(listContainer);
       } else {
         if (field.label) {
           const label = document.createElement('label');

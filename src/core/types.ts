@@ -6,7 +6,7 @@ export type AlertType =
   | 'question'
   | 'confirm';
 
-export type FieldType = 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file' | 'date' | 'time' | 'datetime' | 'daterange' | 'month' | 'year' | 'color' | 'radio';
+export type FieldType = 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file' | 'date' | 'time' | 'datetime' | 'daterange' | 'month' | 'year' | 'color' | 'radio' | 'list';
 
 // Expanded position type for Toasts and Off-Canvas
 export type Position = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top' | 'bottom' | 'center' | 'left' | 'right';
@@ -25,6 +25,19 @@ export interface FormField {
   validationMessage?: string;
   datePickerConfig?: DatePickerConfig;
   timePickerConfig?: TimePickerConfig;
+  listConfig?: ListConfig;
+}
+
+export interface ListConfig {
+  searchable?: boolean;
+  searchPlaceholder?: string;
+  items: {
+    id: string | number;
+    label: string;
+    icon?: string;
+    actions?: ('edit' | 'delete')[];
+  }[];
+  onAction?: (action: 'edit' | 'delete' | 'select', item: any) => void;
 }
 
 export interface DatePickerConfig {

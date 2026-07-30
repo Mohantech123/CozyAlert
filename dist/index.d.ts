@@ -1,5 +1,5 @@
 type AlertType = 'success' | 'error' | 'warning' | 'info' | 'question' | 'confirm';
-type FieldType = 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file' | 'date' | 'time' | 'datetime' | 'daterange' | 'month' | 'year' | 'color' | 'radio';
+type FieldType = 'text' | 'email' | 'password' | 'number' | 'textarea' | 'select' | 'checkbox' | 'file' | 'date' | 'time' | 'datetime' | 'daterange' | 'month' | 'year' | 'color' | 'radio' | 'list';
 type Position = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top' | 'bottom' | 'center' | 'left' | 'right';
 interface FormField {
     id: string;
@@ -18,6 +18,18 @@ interface FormField {
     validationMessage?: string;
     datePickerConfig?: DatePickerConfig;
     timePickerConfig?: TimePickerConfig;
+    listConfig?: ListConfig;
+}
+interface ListConfig {
+    searchable?: boolean;
+    searchPlaceholder?: string;
+    items: {
+        id: string | number;
+        label: string;
+        icon?: string;
+        actions?: ('edit' | 'delete')[];
+    }[];
+    onAction?: (action: 'edit' | 'delete' | 'select', item: any) => void;
 }
 interface DatePickerConfig {
     mode?: 'single' | 'multiple' | 'range' | 'month' | 'year';
@@ -116,4 +128,4 @@ declare class CozyAlert {
     }>;
 }
 
-export { type AlertOptions, type AlertResult, type AlertType, CozyAlert, type DatePickerConfig, type FieldType, type FormField, type Position, type TimePickerConfig, CozyAlert as default };
+export { type AlertOptions, type AlertResult, type AlertType, CozyAlert, type DatePickerConfig, type FieldType, type FormField, type ListConfig, type Position, type TimePickerConfig, CozyAlert as default };

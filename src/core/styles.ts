@@ -164,7 +164,136 @@ export const injectStyles = () => {
     .cozyalert-toast-container.toast-top-right { top: 0; right: 1rem; align-items: flex-end; }
     .cozyalert-toast-container.toast-top-left { top: 0; left: 1rem; align-items: flex-start; }
     .cozyalert-toast-container.toast-bottom-right { bottom: 0; right: 1rem; align-items: flex-end; flex-direction: column-reverse; }
-    .cozyalert-toast-container.toast-bottom-left { bottom: 0; left: 1rem; align-items: flex-start; flex-direction: column-reverse; }
+    .cozyalert-toast-container.toast-bottom-left { bottom: 1rem; left: 1rem; }
+
+    /* List Component Styles */
+    .cozyalert-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    .cozyalert-list-search-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    .cozyalert-list-search-wrapper .cozyalert-input {
+      padding-left: 2.5rem;
+    }
+    .cozyalert-list-search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--ca-text-muted, #94a3b8);
+      pointer-events: none;
+    }
+    .cozyalert-list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 300px;
+      overflow-y: auto;
+      border-radius: 8px;
+    }
+    .cozyalert-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--ca-border, #e2e8f0);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .theme-cyberpunk .cozyalert-list-item, .theme-ocean .cozyalert-list-item, .theme-dracula .cozyalert-list-item, .theme-sunset .cozyalert-list-item, .theme-retro .cozyalert-list-item, .theme-forest .cozyalert-list-item, .theme-highcontrast .cozyalert-list-item, .theme-glass .cozyalert-list-item {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .cozyalert-list-item:hover {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: var(--ca-confirm-bg, #3b82f6);
+    }
+    .theme-cyberpunk .cozyalert-list-item:hover, .theme-ocean .cozyalert-list-item:hover, .theme-dracula .cozyalert-list-item:hover, .theme-sunset .cozyalert-list-item:hover, .theme-retro .cozyalert-list-item:hover, .theme-forest .cozyalert-list-item:hover, .theme-highcontrast .cozyalert-list-item:hover, .theme-glass .cozyalert-list-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .cozyalert-list-item.selected {
+      border-color: var(--ca-confirm-bg, #3b82f6);
+      background: var(--ca-confirm-bg, #3b82f6);
+      color: white;
+    }
+    .cozyalert-list-item.selected .cozyalert-list-item-icon svg {
+      color: white;
+    }
+    .cozyalert-list-item-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cozyalert-list-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--ca-text-muted, #94a3b8);
+    }
+    .cozyalert-list-item.selected .cozyalert-list-item-icon {
+      color: white;
+    }
+    .cozyalert-list-item-label {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .cozyalert-list-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cozyalert-list-action {
+      background: none;
+      border: none;
+      padding: 0.4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      color: var(--ca-text-muted, #94a3b8);
+    }
+    .cozyalert-list-item.selected .cozyalert-list-action {
+      color: rgba(255,255,255,0.7);
+    }
+    .cozyalert-list-action:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    .theme-cyberpunk .cozyalert-list-action:hover, .theme-ocean .cozyalert-list-action:hover, .theme-dracula .cozyalert-list-action:hover, .theme-sunset .cozyalert-list-action:hover, .theme-retro .cozyalert-list-action:hover, .theme-forest .cozyalert-list-action:hover, .theme-highcontrast .cozyalert-list-action:hover, .theme-glass .cozyalert-list-action:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .cozyalert-list-action.edit:hover {
+      color: #3b82f6;
+    }
+    .cozyalert-list-action.delete:hover {
+      color: #ef4444;
+    }
+    .cozyalert-list-item.selected .cozyalert-list-action.edit:hover, .cozyalert-list-item.selected .cozyalert-list-action.delete:hover {
+      color: white;
+      background: rgba(255,255,255,0.2);
+    }
+    .cozyalert-list-action svg {
+      width: 1rem;
+      height: 1rem;
+    }
+    .cozyalert-list-empty {
+      padding: 1rem;
+      text-align: center;
+      color: var(--ca-text-muted, #94a3b8);
+      font-size: 0.9rem;
+    }
+
     .cozyalert-toast-container.toast-top { top: 0; left: 50%; transform: translateX(-50%); align-items: center; }
     .cozyalert-toast-container.toast-bottom { bottom: 0; left: 50%; transform: translateX(-50%); align-items: center; flex-direction: column-reverse; }
     .cozyalert-toast-container.toast-center { top: 50%; left: 50%; transform: translate(-50%, -50%); align-items: center; justify-content: center; }

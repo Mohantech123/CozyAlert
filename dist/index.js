@@ -164,7 +164,136 @@ var injectStyles = () => {
     .cozyalert-toast-container.toast-top-right { top: 0; right: 1rem; align-items: flex-end; }
     .cozyalert-toast-container.toast-top-left { top: 0; left: 1rem; align-items: flex-start; }
     .cozyalert-toast-container.toast-bottom-right { bottom: 0; right: 1rem; align-items: flex-end; flex-direction: column-reverse; }
-    .cozyalert-toast-container.toast-bottom-left { bottom: 0; left: 1rem; align-items: flex-start; flex-direction: column-reverse; }
+    .cozyalert-toast-container.toast-bottom-left { bottom: 1rem; left: 1rem; }
+
+    /* List Component Styles */
+    .cozyalert-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    .cozyalert-list-search-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    .cozyalert-list-search-wrapper .cozyalert-input {
+      padding-left: 2.5rem;
+    }
+    .cozyalert-list-search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--ca-text-muted, #94a3b8);
+      pointer-events: none;
+    }
+    .cozyalert-list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 300px;
+      overflow-y: auto;
+      border-radius: 8px;
+    }
+    .cozyalert-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--ca-border, #e2e8f0);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .theme-cyberpunk .cozyalert-list-item, .theme-ocean .cozyalert-list-item, .theme-dracula .cozyalert-list-item, .theme-sunset .cozyalert-list-item, .theme-retro .cozyalert-list-item, .theme-forest .cozyalert-list-item, .theme-highcontrast .cozyalert-list-item, .theme-glass .cozyalert-list-item {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .cozyalert-list-item:hover {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: var(--ca-confirm-bg, #3b82f6);
+    }
+    .theme-cyberpunk .cozyalert-list-item:hover, .theme-ocean .cozyalert-list-item:hover, .theme-dracula .cozyalert-list-item:hover, .theme-sunset .cozyalert-list-item:hover, .theme-retro .cozyalert-list-item:hover, .theme-forest .cozyalert-list-item:hover, .theme-highcontrast .cozyalert-list-item:hover, .theme-glass .cozyalert-list-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .cozyalert-list-item.selected {
+      border-color: var(--ca-confirm-bg, #3b82f6);
+      background: var(--ca-confirm-bg, #3b82f6);
+      color: white;
+    }
+    .cozyalert-list-item.selected .cozyalert-list-item-icon svg {
+      color: white;
+    }
+    .cozyalert-list-item-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cozyalert-list-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--ca-text-muted, #94a3b8);
+    }
+    .cozyalert-list-item.selected .cozyalert-list-item-icon {
+      color: white;
+    }
+    .cozyalert-list-item-label {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .cozyalert-list-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cozyalert-list-action {
+      background: none;
+      border: none;
+      padding: 0.4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      color: var(--ca-text-muted, #94a3b8);
+    }
+    .cozyalert-list-item.selected .cozyalert-list-action {
+      color: rgba(255,255,255,0.7);
+    }
+    .cozyalert-list-action:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    .theme-cyberpunk .cozyalert-list-action:hover, .theme-ocean .cozyalert-list-action:hover, .theme-dracula .cozyalert-list-action:hover, .theme-sunset .cozyalert-list-action:hover, .theme-retro .cozyalert-list-action:hover, .theme-forest .cozyalert-list-action:hover, .theme-highcontrast .cozyalert-list-action:hover, .theme-glass .cozyalert-list-action:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .cozyalert-list-action.edit:hover {
+      color: #3b82f6;
+    }
+    .cozyalert-list-action.delete:hover {
+      color: #ef4444;
+    }
+    .cozyalert-list-item.selected .cozyalert-list-action.edit:hover, .cozyalert-list-item.selected .cozyalert-list-action.delete:hover {
+      color: white;
+      background: rgba(255,255,255,0.2);
+    }
+    .cozyalert-list-action svg {
+      width: 1rem;
+      height: 1rem;
+    }
+    .cozyalert-list-empty {
+      padding: 1rem;
+      text-align: center;
+      color: var(--ca-text-muted, #94a3b8);
+      font-size: 0.9rem;
+    }
+
     .cozyalert-toast-container.toast-top { top: 0; left: 50%; transform: translateX(-50%); align-items: center; }
     .cozyalert-toast-container.toast-bottom { bottom: 0; left: 50%; transform: translateX(-50%); align-items: center; flex-direction: column-reverse; }
     .cozyalert-toast-container.toast-center { top: 50%; left: 50%; transform: translate(-50%, -50%); align-items: center; justify-content: center; }
@@ -506,6 +635,21 @@ var getCloudUploadSvg = () => {
 var getCloseSvg = () => {
   return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+  </svg>`;
+};
+var getSearchSvg = () => {
+  return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+  </svg>`;
+};
+var getEditSvg = () => {
+  return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+  </svg>`;
+};
+var getDeleteSvg = () => {
+  return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
   </svg>`;
 };
 
@@ -1407,6 +1551,8 @@ var createAlertDom = (options, resolve) => {
         formValues[field.id] = false;
       } else if (field.type === "file") {
         formValues[field.id] = null;
+      } else if (field.type === "list") {
+        formValues[field.id] = null;
       } else {
         formValues[field.id] = "";
       }
@@ -1482,6 +1628,103 @@ var createAlertDom = (options, resolve) => {
         dropzone.appendChild(hiddenInput);
         inputEl = dropzone;
         group.appendChild(dropzone);
+      } else if (field.type === "list") {
+        if (field.label) {
+          const label = document.createElement("label");
+          label.className = "cozyalert-label";
+          label.innerText = field.label;
+          group.appendChild(label);
+        }
+        const listContainer = document.createElement("div");
+        listContainer.className = "cozyalert-list-container";
+        let searchInput = null;
+        const conf = field.listConfig;
+        if (conf?.searchable) {
+          const searchWrapper = document.createElement("div");
+          searchWrapper.className = "cozyalert-list-search-wrapper";
+          searchInput = document.createElement("input");
+          searchInput.type = "text";
+          searchInput.className = "cozyalert-input cozyalert-list-search";
+          searchInput.placeholder = conf.searchPlaceholder || "Search...";
+          const searchIcon = document.createElement("div");
+          searchIcon.className = "cozyalert-list-search-icon";
+          searchIcon.innerHTML = getSearchSvg();
+          searchWrapper.appendChild(searchInput);
+          searchWrapper.appendChild(searchIcon);
+          listContainer.appendChild(searchWrapper);
+        }
+        const itemsWrapper = document.createElement("div");
+        itemsWrapper.className = "cozyalert-list-items";
+        const renderItems = (filterText = "") => {
+          itemsWrapper.innerHTML = "";
+          const items = conf?.items || [];
+          const filtered = items.filter((item) => item.label.toLowerCase().includes(filterText.toLowerCase()));
+          if (filtered.length === 0) {
+            const empty = document.createElement("div");
+            empty.className = "cozyalert-list-empty";
+            empty.innerText = "No items found";
+            itemsWrapper.appendChild(empty);
+            return;
+          }
+          filtered.forEach((item) => {
+            const itemEl = document.createElement("div");
+            itemEl.className = "cozyalert-list-item";
+            const contentEl = document.createElement("div");
+            contentEl.className = "cozyalert-list-item-content";
+            if (item.icon) {
+              const iconEl = document.createElement("span");
+              iconEl.className = "cozyalert-list-item-icon";
+              iconEl.innerHTML = item.icon;
+              contentEl.appendChild(iconEl);
+            }
+            const labelEl = document.createElement("span");
+            labelEl.className = "cozyalert-list-item-label";
+            labelEl.innerText = item.label;
+            contentEl.appendChild(labelEl);
+            itemEl.appendChild(contentEl);
+            itemEl.onclick = (e) => {
+              if (e.target.closest(".cozyalert-list-action")) return;
+              formValues[field.id] = item.id;
+              Array.from(itemsWrapper.children).forEach((c) => c.classList.remove("selected"));
+              itemEl.classList.add("selected");
+              clearError();
+              if (conf?.onAction) conf.onAction("select", item);
+            };
+            if (item.actions && item.actions.length > 0) {
+              const actionsEl = document.createElement("div");
+              actionsEl.className = "cozyalert-list-actions";
+              if (item.actions.includes("edit")) {
+                const editBtn = document.createElement("button");
+                editBtn.className = "cozyalert-list-action edit";
+                editBtn.innerHTML = getEditSvg();
+                editBtn.onclick = (e) => {
+                  e.stopPropagation();
+                  if (conf?.onAction) conf.onAction("edit", item);
+                };
+                actionsEl.appendChild(editBtn);
+              }
+              if (item.actions.includes("delete")) {
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "cozyalert-list-action delete";
+                deleteBtn.innerHTML = getDeleteSvg();
+                deleteBtn.onclick = (e) => {
+                  e.stopPropagation();
+                  if (conf?.onAction) conf.onAction("delete", item);
+                };
+                actionsEl.appendChild(deleteBtn);
+              }
+              itemEl.appendChild(actionsEl);
+            }
+            itemsWrapper.appendChild(itemEl);
+          });
+        };
+        renderItems();
+        if (searchInput) {
+          searchInput.oninput = (e) => renderItems(e.target.value);
+        }
+        listContainer.appendChild(itemsWrapper);
+        inputEl = listContainer;
+        group.appendChild(listContainer);
       } else {
         if (field.label) {
           const label = document.createElement("label");
