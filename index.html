@@ -454,7 +454,8 @@
       <div class="card">
         <h3>5. Advanced Components</h3>
         <div class="btn-group">
-          <button class="btn btn-primary" onclick="manageCampuses()">Interactive List (CRUD Flow)</button>
+          <button class="btn btn-primary" onclick="manageCampuses()">Static CRUD Example (Campuses)</button>
+          <button class="btn btn-primary" style="background: linear-gradient(45deg, #8b5cf6, #ec4899);" onclick="startDynamicCRUD()">Dynamic CRUD Builder (New Card)</button>
         </div>
       </div>
 
@@ -596,6 +597,103 @@
         }
         manageCampuses();
       }
+    }
+
+    async function startDynamicCRUD() {
+      // 1. Get entity details from the user
+      const setupRes = await Alert.fire({
+        title: 'Create Dynamic CRUD List',
+        text: 'What kind of data do you want to manage?',
+        size: 'sm',
+        fields: [
+          { id: 'entityName', type: 'text', label: 'Entity Name (Plural)', placeholder: 'e.g. Users, Books, Cars', required: true },
+          { id: 'entitySingular', type: 'text', label: 'Entity Name (Singular)', placeholder: 'e.g. User, Book, Car', required: true },
+          { id: 'icon', type: 'text', label: 'Emoji Icon', placeholder: 'e.g. 👤, 📚, 🚗', required: true, defaultValue: '📦' }
+        ],
+        showCancelButton: true,
+        confirmButtonText: 'Generate App!',
+        confirmButtonColor: '#8b5cf6'
+      });
+
+      if (!setupRes.isConfirmed) return;
+
+      const { entityName, entitySingular, icon } = setupRes.value;
+      
+      // 2. Initialize empty array
+      let dynamicItems = [];
+
+      // 3. Define the recursive CRUD manager for this dynamic entity
+      async function manageDynamicEntity() {
+        const res = await Alert.fire({
+          title: `Search ${entityName.toLowerCase()}`,
+          size: 'sm',
+          showCancelButton: true,
+          cancelButtonText: 'Close',
+          confirmButtonText: `+ Add New ${entitySingular}`,
+          confirmButtonColor: '#8b5cf6',
+          fields: [{
+            id: 'item',
+            type: 'list',
+            listConfig: {
+              searchable: true,
+              searchPlaceholder: `Search ${entityName.toLowerCase()}...`,
+              items: dynamicItems.map(item => ({
+                ...item,
+                actions: ['edit', 'delete']
+              })),
+              onAction: async (action, item) => {
+                if (action === 'delete') {
+                  const conf = await Alert.confirm(`Delete ${entitySingular}?`, `Are you sure you want to delete ${item.label}?`, 'Delete', '#ef4444');
+                  if (conf.isConfirmed) {
+                    dynamicItems = dynamicItems.filter(i => i.id !== item.id);
+                    manageDynamicEntity();
+                  }
+                } else if (action === 'edit') {
+                  const editRes = await Alert.fire({
+                    title: `Edit ${entitySingular}`,
+                    size: 'sm',
+                    fields: [
+                      { id: 'name', type: 'text', label: 'Name', defaultValue: item.label, required: true }
+                    ],
+                    showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    confirmButtonColor: '#8b5cf6'
+                  });
+                  if (editRes.isConfirmed) {
+                    const idx = dynamicItems.findIndex(i => i.id === item.id);
+                    if (idx > -1) dynamicItems[idx].label = editRes.value.name;
+                    manageDynamicEntity();
+                  }
+                }
+              }
+            }
+          }]
+        });
+
+        if (res.isConfirmed) {
+          const addRes = await Alert.fire({
+            title: `Add New ${entitySingular}`,
+            size: 'sm',
+            fields: [
+              { id: 'name', type: 'text', placeholder: `Enter ${entitySingular.toLowerCase()} name`, required: true }
+            ],
+            showCancelButton: true,
+            confirmButtonText: 'Add',
+            confirmButtonColor: '#8b5cf6'
+          });
+          if (addRes.isConfirmed) {
+            dynamicItems.push({
+              id: Date.now(),
+              label: addRes.value.name,
+              icon: icon
+            });
+          }
+          manageDynamicEntity();
+        }
+      }
+
+      // 4. Launch the manager!
+      manageDynamicEntity();
     }
 
     window.addEventListener('DOMContentLoaded', () => {
