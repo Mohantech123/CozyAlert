@@ -16,6 +16,8 @@ interface FormField {
     accept?: string;
     pattern?: RegExp | string;
     validationMessage?: string;
+    readonly?: boolean;
+    onClick?: (e: Event) => void;
     datePickerConfig?: DatePickerConfig;
     timePickerConfig?: TimePickerConfig;
     listConfig?: ListConfig;

@@ -459,6 +459,14 @@
         </div>
       </div>
 
+      <!-- 6. Advanced Workflow -->
+      <div class="card">
+        <h3>6. Advanced Workflow</h3>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="addVenueFlow()">Select Box CRUD Flow (New!)</button>
+        </div>
+      </div>
+
     </div>
   </main>
 
@@ -596,6 +604,103 @@
           });
         }
         manageCampuses();
+      }
+    }
+
+    async function addVenueFlow(initialCampusId = null) {
+      let selectedCampus = campuses.find(c => c.id === initialCampusId) || campuses[0];
+      
+      const res = await Alert.fire({
+        title: 'Select Venue',
+        size: 'md',
+        showCancelButton: true,
+        cancelButtonText: 'Cancel',
+        confirmButtonText: 'Add New Venue',
+        confirmButtonColor: '#4f46e5',
+        fields: [
+          { id: 'name', type: 'text', label: 'Venue Name *', placeholder: 'Enter venue name' },
+          { 
+            id: 'campus', 
+            type: 'text', 
+            label: 'Campus * (Click to select/manage)', 
+            defaultValue: selectedCampus ? selectedCampus.label : 'Select Campus...',
+            readonly: true,
+            onClick: async (e) => {
+              e.preventDefault();
+              Alert.closeAll();
+              await openCampusSelector();
+            }
+          },
+          { id: 'capacity', type: 'number', label: 'Capacity *', placeholder: 'e.g. 100' },
+          { id: 'location', type: 'text', label: 'Location *', placeholder: 'Enter location detail' },
+          { id: 'description', type: 'textarea', label: 'Description (Optional)', placeholder: 'Add any extra details...' }
+        ]
+      });
+
+      if (res.isConfirmed) {
+        Alert.success('Venue Created!', `Venue: ${res.value.name}<br>Campus: ${selectedCampus.label}`);
+      }
+    }
+
+    async function openCampusSelector() {
+      const res = await Alert.fire({
+        title: 'Search campus',
+        size: 'sm',
+        showCancelButton: true,
+        cancelButtonText: 'Cancel',
+        confirmButtonText: '+ Add New Campus',
+        confirmButtonColor: '#4f46e5',
+        fields: [{
+          id: 'campus',
+          type: 'list',
+          listConfig: {
+            searchable: true,
+            searchPlaceholder: 'Search capacity',
+            items: campuses.map(c => ({
+              ...c,
+              actions: ['edit', 'delete']
+            })),
+            onAction: async (action, item) => {
+              if (action === 'select') {
+                Alert.closeAll();
+                addVenueFlow(item.id);
+              } else if (action === 'delete') {
+                const conf = await Alert.confirm('Delete Campus?', `Delete ${item.label}?`, 'Delete', '#ef4444');
+                if (conf.isConfirmed) {
+                  campuses = campuses.filter(c => c.id !== item.id);
+                  Alert.closeAll();
+                  openCampusSelector();
+                }
+              } else if (action === 'edit') {
+                Alert.closeAll();
+                const editRes = await Alert.fire({
+                  title: 'Edit Campus', size: 'sm', fields: [{ id: 'name', type: 'text', defaultValue: item.label, required: true }], showCancelButton: true, confirmButtonText: 'Save'
+                });
+                if (editRes.isConfirmed) {
+                  const idx = campuses.findIndex(c => c.id === item.id);
+                  if (idx > -1) campuses[idx].label = editRes.value.name;
+                }
+                openCampusSelector();
+              }
+            }
+          }
+        }]
+      });
+
+      if (res.isConfirmed) {
+        const addRes = await Alert.fire({
+          title: 'Add New Campus', size: 'sm', fields: [{ id: 'name', type: 'text', placeholder: 'Enter capacity', required: true }], showCancelButton: true, confirmButtonText: 'Add'
+        });
+        if (addRes.isConfirmed) {
+          const newCampus = { id: Date.now(), label: addRes.value.name, icon: '🏛️' };
+          campuses.push(newCampus);
+          Alert.closeAll();
+          addVenueFlow(newCampus.id);
+        } else {
+          openCampusSelector();
+        }
+      } else if (res.isDismissed) {
+        addVenueFlow();
       }
     }
 

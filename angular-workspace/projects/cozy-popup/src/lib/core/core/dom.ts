@@ -498,6 +498,15 @@ export const createAlertDom = (
           input.placeholder = field.placeholder || '';
           input.value = field.defaultValue || '';
           
+          if (field.readonly) {
+            input.readOnly = true;
+            input.style.cursor = 'pointer';
+          }
+          if (field.onClick) {
+            input.onclick = field.onClick;
+            input.style.cursor = 'pointer';
+          }
+
           if (['date', 'datetime', 'daterange', 'month', 'year'].includes(field.type)) {
             input.type = 'text'; // Prevent native picker
             input.readOnly = true; // Prevent keyboard typing to force popup
