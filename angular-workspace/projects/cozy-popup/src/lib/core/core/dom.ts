@@ -522,7 +522,12 @@ export const createAlertDom = (
           }
 
           input.oninput = (e) => {
-            formValues[field.id] = (e.target as HTMLInputElement).value;
+            const el = e.target as HTMLInputElement;
+            let val: any = el.dataset['rawValue'] || el.value;
+            if (val && typeof val === 'string' && val.startsWith('[') && val.endsWith(']')) {
+              try { val = JSON.parse(val); } catch (e) {}
+            }
+            formValues[field.id] = val;
             clearError();
           };
           inputEl = input;

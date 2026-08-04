@@ -737,14 +737,18 @@ var CozyDatePicker = class {
   updateInputValue() {
     if (this.config.mode === "single" && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: "numeric", month: "short", day: "numeric" });
+      this.input.dataset["rawValue"] = this.selectedDates[0].toISOString();
     } else if (this.config.mode === "range" && this.rangeStart && this.rangeEnd) {
       const s = this.formatLocal(this.rangeStart, { year: "numeric", month: "short", day: "numeric" });
       const e = this.formatLocal(this.rangeEnd, { year: "numeric", month: "short", day: "numeric" });
       this.input.value = `${s} - ${e}`;
+      this.input.dataset["rawValue"] = JSON.stringify([this.rangeStart.toISOString(), this.rangeEnd.toISOString()]);
     } else if (this.config.mode === "month" && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: "numeric", month: "long" });
+      this.input.dataset["rawValue"] = this.selectedDates[0].toISOString();
     } else if (this.config.mode === "year" && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: "numeric" });
+      this.input.dataset["rawValue"] = this.selectedDates[0].toISOString();
     }
     this.input.dispatchEvent(new Event("input", { bubbles: true }));
   }
@@ -1074,13 +1078,19 @@ var CozyTimePicker = class {
   updateInputValue() {
     if (this.config.bookingSlots && this.config.bookingSlots.length > 0) {
       this.input.value = this.selectedSlot || "";
+      this.input.dataset["rawValue"] = this.selectedSlot || "";
     } else {
       const h = this.currentHour.toString().padStart(2, "0");
       const m = this.currentMinute.toString().padStart(2, "0");
       if (this.config.format === "24h") {
         this.input.value = `${h}:${m}`;
+        this.input.dataset["rawValue"] = `${h}:${m}`;
       } else {
         this.input.value = `${h}:${m} ${this.currentPeriod}`;
+        let rawH = this.currentHour;
+        if (this.currentPeriod === "PM" && rawH < 12) rawH += 12;
+        if (this.currentPeriod === "AM" && rawH === 12) rawH = 0;
+        this.input.dataset["rawValue"] = `${rawH.toString().padStart(2, "0")}:${m}`;
       }
     }
     this.input.dispatchEvent(new Event("input", { bubbles: true }));
@@ -1795,7 +1805,15 @@ var createAlertDom = (options, resolve) => {
             input.style.paddingRight = "2.5rem";
           }
           input.oninput = (e) => {
-            formValues[field.id] = e.target.value;
+            const el = e.target;
+            let val = el.dataset["rawValue"] || el.value;
+            if (val && typeof val === "string" && val.startsWith("[") && val.endsWith("]")) {
+              try {
+                val = JSON.parse(val);
+              } catch (e2) {
+              }
+            }
+            formValues[field.id] = val;
             clearError();
           };
           inputEl = input;

@@ -97,14 +97,18 @@ export class CozyDatePicker {
   private updateInputValue() {
     if (this.config.mode === 'single' && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: 'numeric', month: 'short', day: 'numeric' });
+      this.input.dataset['rawValue'] = this.selectedDates[0].toISOString();
     } else if (this.config.mode === 'range' && this.rangeStart && this.rangeEnd) {
       const s = this.formatLocal(this.rangeStart, { year: 'numeric', month: 'short', day: 'numeric' });
       const e = this.formatLocal(this.rangeEnd, { year: 'numeric', month: 'short', day: 'numeric' });
       this.input.value = `${s} - ${e}`;
+      this.input.dataset['rawValue'] = JSON.stringify([this.rangeStart.toISOString(), this.rangeEnd.toISOString()]);
     } else if (this.config.mode === 'month' && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: 'numeric', month: 'long' });
+      this.input.dataset['rawValue'] = this.selectedDates[0].toISOString();
     } else if (this.config.mode === 'year' && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: 'numeric' });
+      this.input.dataset['rawValue'] = this.selectedDates[0].toISOString();
     }
     
     // Dispatch native input event so form tracking picks it up reliably

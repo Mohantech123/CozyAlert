@@ -66,13 +66,19 @@ export class CozyTimePicker {
   private updateInputValue() {
     if (this.config.bookingSlots && this.config.bookingSlots.length > 0) {
       this.input.value = this.selectedSlot || '';
+      this.input.dataset['rawValue'] = this.selectedSlot || '';
     } else {
       const h = this.currentHour.toString().padStart(2, '0');
       const m = this.currentMinute.toString().padStart(2, '0');
       if (this.config.format === '24h') {
         this.input.value = `${h}:${m}`;
+        this.input.dataset['rawValue'] = `${h}:${m}`;
       } else {
         this.input.value = `${h}:${m} ${this.currentPeriod}`;
+        let rawH = this.currentHour;
+        if (this.currentPeriod === 'PM' && rawH < 12) rawH += 12;
+        if (this.currentPeriod === 'AM' && rawH === 12) rawH = 0;
+        this.input.dataset['rawValue'] = `${rawH.toString().padStart(2, '0')}:${m}`;
       }
     }
     
