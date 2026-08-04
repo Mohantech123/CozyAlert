@@ -63,6 +63,25 @@ export class CozyTimePicker {
     this.popup.classList.remove('active');
   }
 
+  private getFormattedRawValue(h: string, m: string) {
+    if (!this.config.isLocalize) return `${h}:${m}`;
+    
+    const date = new Date();
+    date.setHours(parseInt(h, 10));
+    date.setMinutes(parseInt(m, 10));
+    date.setSeconds(0);
+
+    const tzo = -date.getTimezoneOffset(),
+          dif = tzo >= 0 ? '+' : '-',
+          pad = (num: number) => (num < 10 ? '0' : '') + num;
+
+    return pad(date.getHours()) +
+        ':' + pad(date.getMinutes()) +
+        ':' + pad(date.getSeconds()) +
+        dif + pad(Math.floor(Math.abs(tzo) / 60)) +
+        ':' + pad(Math.abs(tzo) % 60);
+  }
+
   private updateInputValue() {
     if (this.config.bookingSlots && this.config.bookingSlots.length > 0) {
       this.input.value = this.selectedSlot || '';
@@ -72,13 +91,13 @@ export class CozyTimePicker {
       const m = this.currentMinute.toString().padStart(2, '0');
       if (this.config.format === '24h') {
         this.input.value = `${h}:${m}`;
-        this.input.dataset['rawValue'] = `${h}:${m}`;
+        this.input.dataset['rawValue'] = this.getFormattedRawValue(h, m);
       } else {
         this.input.value = `${h}:${m} ${this.currentPeriod}`;
         let rawH = this.currentHour;
         if (this.currentPeriod === 'PM' && rawH < 12) rawH += 12;
         if (this.currentPeriod === 'AM' && rawH === 12) rawH = 0;
-        this.input.dataset['rawValue'] = `${rawH.toString().padStart(2, '0')}:${m}`;
+        this.input.dataset['rawValue'] = this.getFormattedRawValue(rawH.toString().padStart(2, '0'), m);
       }
     }
     

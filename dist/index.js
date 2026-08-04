@@ -734,21 +734,26 @@ var CozyDatePicker = class {
       ...options
     }).format(date);
   }
+  getFormattedRawValue(date) {
+    if (!this.config.isLocalize) return date.toISOString();
+    const tzo = -date.getTimezoneOffset(), dif = tzo >= 0 ? "+" : "-", pad = (num) => (num < 10 ? "0" : "") + num;
+    return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate()) + "T" + pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) + dif + pad(Math.floor(Math.abs(tzo) / 60)) + ":" + pad(Math.abs(tzo) % 60);
+  }
   updateInputValue() {
     if (this.config.mode === "single" && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: "numeric", month: "short", day: "numeric" });
-      this.input.dataset["rawValue"] = this.selectedDates[0].toISOString();
+      this.input.dataset["rawValue"] = this.getFormattedRawValue(this.selectedDates[0]);
     } else if (this.config.mode === "range" && this.rangeStart && this.rangeEnd) {
       const s = this.formatLocal(this.rangeStart, { year: "numeric", month: "short", day: "numeric" });
       const e = this.formatLocal(this.rangeEnd, { year: "numeric", month: "short", day: "numeric" });
       this.input.value = `${s} - ${e}`;
-      this.input.dataset["rawValue"] = JSON.stringify([this.rangeStart.toISOString(), this.rangeEnd.toISOString()]);
+      this.input.dataset["rawValue"] = JSON.stringify([this.getFormattedRawValue(this.rangeStart), this.getFormattedRawValue(this.rangeEnd)]);
     } else if (this.config.mode === "month" && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: "numeric", month: "long" });
-      this.input.dataset["rawValue"] = this.selectedDates[0].toISOString();
+      this.input.dataset["rawValue"] = this.getFormattedRawValue(this.selectedDates[0]);
     } else if (this.config.mode === "year" && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: "numeric" });
-      this.input.dataset["rawValue"] = this.selectedDates[0].toISOString();
+      this.input.dataset["rawValue"] = this.getFormattedRawValue(this.selectedDates[0]);
     }
     this.input.dispatchEvent(new Event("input", { bubbles: true }));
   }
@@ -1075,6 +1080,15 @@ var CozyTimePicker = class {
   close() {
     this.popup.classList.remove("active");
   }
+  getFormattedRawValue(h, m) {
+    if (!this.config.isLocalize) return `${h}:${m}`;
+    const date = /* @__PURE__ */ new Date();
+    date.setHours(parseInt(h, 10));
+    date.setMinutes(parseInt(m, 10));
+    date.setSeconds(0);
+    const tzo = -date.getTimezoneOffset(), dif = tzo >= 0 ? "+" : "-", pad = (num) => (num < 10 ? "0" : "") + num;
+    return pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) + dif + pad(Math.floor(Math.abs(tzo) / 60)) + ":" + pad(Math.abs(tzo) % 60);
+  }
   updateInputValue() {
     if (this.config.bookingSlots && this.config.bookingSlots.length > 0) {
       this.input.value = this.selectedSlot || "";
@@ -1084,13 +1098,13 @@ var CozyTimePicker = class {
       const m = this.currentMinute.toString().padStart(2, "0");
       if (this.config.format === "24h") {
         this.input.value = `${h}:${m}`;
-        this.input.dataset["rawValue"] = `${h}:${m}`;
+        this.input.dataset["rawValue"] = this.getFormattedRawValue(h, m);
       } else {
         this.input.value = `${h}:${m} ${this.currentPeriod}`;
         let rawH = this.currentHour;
         if (this.currentPeriod === "PM" && rawH < 12) rawH += 12;
         if (this.currentPeriod === "AM" && rawH === 12) rawH = 0;
-        this.input.dataset["rawValue"] = `${rawH.toString().padStart(2, "0")}:${m}`;
+        this.input.dataset["rawValue"] = this.getFormattedRawValue(rawH.toString().padStart(2, "0"), m);
       }
     }
     this.input.dispatchEvent(new Event("input", { bubbles: true }));

@@ -94,21 +94,38 @@ export class CozyDatePicker {
     }).format(date);
   }
 
+  private getFormattedRawValue(date: Date) {
+    if (!this.config.isLocalize) return date.toISOString();
+    
+    const tzo = -date.getTimezoneOffset(),
+          dif = tzo >= 0 ? '+' : '-',
+          pad = (num: number) => (num < 10 ? '0' : '') + num;
+
+    return date.getFullYear() +
+        '-' + pad(date.getMonth() + 1) +
+        '-' + pad(date.getDate()) +
+        'T' + pad(date.getHours()) +
+        ':' + pad(date.getMinutes()) +
+        ':' + pad(date.getSeconds()) +
+        dif + pad(Math.floor(Math.abs(tzo) / 60)) +
+        ':' + pad(Math.abs(tzo) % 60);
+  }
+
   private updateInputValue() {
     if (this.config.mode === 'single' && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: 'numeric', month: 'short', day: 'numeric' });
-      this.input.dataset['rawValue'] = this.selectedDates[0].toISOString();
+      this.input.dataset['rawValue'] = this.getFormattedRawValue(this.selectedDates[0]);
     } else if (this.config.mode === 'range' && this.rangeStart && this.rangeEnd) {
       const s = this.formatLocal(this.rangeStart, { year: 'numeric', month: 'short', day: 'numeric' });
       const e = this.formatLocal(this.rangeEnd, { year: 'numeric', month: 'short', day: 'numeric' });
       this.input.value = `${s} - ${e}`;
-      this.input.dataset['rawValue'] = JSON.stringify([this.rangeStart.toISOString(), this.rangeEnd.toISOString()]);
+      this.input.dataset['rawValue'] = JSON.stringify([this.getFormattedRawValue(this.rangeStart), this.getFormattedRawValue(this.rangeEnd)]);
     } else if (this.config.mode === 'month' && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: 'numeric', month: 'long' });
-      this.input.dataset['rawValue'] = this.selectedDates[0].toISOString();
+      this.input.dataset['rawValue'] = this.getFormattedRawValue(this.selectedDates[0]);
     } else if (this.config.mode === 'year' && this.selectedDates.length > 0) {
       this.input.value = this.formatLocal(this.selectedDates[0], { year: 'numeric' });
-      this.input.dataset['rawValue'] = this.selectedDates[0].toISOString();
+      this.input.dataset['rawValue'] = this.getFormattedRawValue(this.selectedDates[0]);
     }
     
     // Dispatch native input event so form tracking picks it up reliably

@@ -53,6 +53,7 @@ export interface DatePickerConfig {
   events?: { date: string | Date; type: 'holiday' | 'exam' | 'meeting' | 'birthday' | 'deadline'; color?: string }[];
   inline?: boolean;
   mobileLayout?: boolean;
+  isLocalize?: boolean;
 }
 
 export interface TimePickerConfig {
@@ -61,6 +62,7 @@ export interface TimePickerConfig {
   enableSeconds?: boolean;
   bookingSlots?: string[]; // e.g. ['09:00 AM', '09:30 AM']
   mobileLayout?: boolean;
+  isLocalize?: boolean;
 }
 
 export interface AlertResult {

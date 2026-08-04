@@ -48,6 +48,7 @@ interface DatePickerConfig {
     }[];
     inline?: boolean;
     mobileLayout?: boolean;
+    isLocalize?: boolean;
 }
 interface TimePickerConfig {
     format?: '12h' | '24h';
@@ -55,6 +56,7 @@ interface TimePickerConfig {
     enableSeconds?: boolean;
     bookingSlots?: string[];
     mobileLayout?: boolean;
+    isLocalize?: boolean;
 }
 interface AlertResult {
     isConfirmed: boolean;
